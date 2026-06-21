@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MoveData" format=3 uid="uid://dirc6wphlypqx"]
+
+[ext_resource type="Script" uid="uid://bf28cscow6pn7" path="res://features/mon/move_data.gd" id="1_v5su5"]
+
+[resource]
+script = ExtResource("1_v5su5")
+display_name = "Aqua Jet"
+element = 2
+metadata/_custom_type_script = "uid://bf28cscow6pn7"

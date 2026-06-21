@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MonSpecies" format=3 uid="uid://bj5qdqxpv300f"]
+
+[ext_resource type="PackedScene" uid="uid://cpv6dhq5wivwv" path="res://assets/vendor/kenney_cube_pets/animal-bunny.glb" id="1_quajd"]
+[ext_resource type="Script" uid="uid://bf28cscow6pn7" path="res://features/mon/move_data.gd" id="2_25jfe"]
+[ext_resource type="Script" uid="uid://blem6o3mlwxg5" path="res://features/mon/mon_species.gd" id="2_f62is"]
+[ext_resource type="Resource" uid="uid://c1tpehkplxihf" path="res://data/moves/vine_whip.tres" id="3_p7olk"]
+[ext_resource type="Resource" uid="uid://bx0tqxqsdnigw" path="res://data/moves/tackle.tres" id="4_rj6jw"]
+
+[resource]
+script = ExtResource("2_f62is")
+display_name = "Leafhop"
+max_hp = 32
+defense = 12
+model = ExtResource("1_quajd")
+element = 3
+moves = Array[ExtResource("2_25jfe")]([ExtResource("3_p7olk"), ExtResource("4_rj6jw")])
+metadata/_custom_type_script = "uid://blem6o3mlwxg5"
