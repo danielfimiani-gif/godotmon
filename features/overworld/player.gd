@@ -43,4 +43,4 @@ func _on_grass_exited(area: Area3D) -> void:
 
 func _check_encounter() -> void:
 	if in_grass and randf() < ENCOUNTER_CHANCE:
-		print("!Un Mon salvaje apareció!")
+		GameState.start_wild_encounter()

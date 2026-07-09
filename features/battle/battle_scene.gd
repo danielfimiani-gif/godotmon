@@ -1,7 +1,5 @@
 extends Node3D
 
-@export var player_species: MonSpecies
-@export var enemy_species: MonSpecies
 @onready var player_slot: Marker3D = $PlayerSlot
 @onready var enemy_slot: Marker3D = $EnemySlot
 
@@ -18,10 +16,10 @@ var player: Mon
 var enemy: Mon
 
 func _ready() -> void:
-	player = Mon.create(player_species)
-	enemy = Mon.create(enemy_species)
-	_spawn(player_species, player_slot)
-	_spawn(enemy_species, enemy_slot)
+	player = GameState.party[0]
+	enemy = Mon.create(GameState.wild_species)
+	_spawn(player.species, player_slot)
+	_spawn(enemy.species, enemy_slot)
 	_build_move_buttons()
 	capture_button.pressed.connect(_on_capture_pressed)
 	flee_button.pressed.connect(_on_flee_pressed)
@@ -43,11 +41,13 @@ func _on_move_pressed(move: MoveData) -> void:
 	await _do_turn(player, move, enemy)
 	if enemy.is_fainted():
 		message.text = "!%s se debilitó! Ganaste" % enemy.species.display_name
+		_end_battle()
 		return
 	
 	var enemy_move: MoveData = _enemy_best_move()
 	await _do_turn(enemy, enemy_move, player)
 	if player.is_fainted():
+		_end_battle()
 		message.text = "!%s se debilitó Perdiste" % player.species.display_name
 		return
 	_set_buttons_enabled(true)
@@ -90,6 +90,7 @@ func _on_capture_pressed() -> void:
 	if Capture.attempt(enemy):
 		message.text = "!Capturaste a %s!" % enemy.species.display_name
 		GameState.add_mon(enemy)
+		_end_battle()
 		return
 
 	message.text = "!%s se escapó" % enemy.species.display_name
@@ -97,6 +98,7 @@ func _on_capture_pressed() -> void:
 	await _do_turn(enemy, _enemy_best_move(), player)
 	if player.is_fainted():
 		message.text = "!%s se debilitó Perdiste" % player.species.display_name
+		_end_battle()
 		return
 	_set_buttons_enabled(true)
 
@@ -104,6 +106,7 @@ func _on_flee_pressed() -> void:
 	_set_buttons_enabled(false)
 	message.text = "Huiste de la batalla..."
 	await get_tree().create_timer(0.8).timeout
+	_end_battle()
 
 func _enemy_best_move() -> MoveData:
 	var best: MoveData = enemy.species.moves[0]
@@ -114,3 +117,7 @@ func _enemy_best_move() -> MoveData:
 			best_dmg = d
 			best = m
 	return best
+
+func _end_battle() -> void:
+	await get_tree().create_timer(1.2).timeout
+	get_tree().change_scene_to_file("res://features/overworld/overworld.tscn")
