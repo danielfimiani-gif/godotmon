@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TrainerData" format=3 uid="uid://duthnrq8fxb5d"]
+
+[ext_resource type="Script" uid="uid://dqkbdi8r2bxu7" path="res://features/gym/trainer_data.gd" id="1_cbvnn"]
+[ext_resource type="Script" uid="uid://blem6o3mlwxg5" path="res://features/mon/mon_species.gd" id="2_vhhy2"]
+[ext_resource type="Resource" uid="uid://xembp4crpfd5" path="res://data/mon/finsplash.tres" id="3_vhhy2"]
+
+[resource]
+script = ExtResource("1_cbvnn")
+display_name = "Marina Lider de Agua"
+team = Array[ExtResource("2_vhhy2")]([ExtResource("3_vhhy2")])
+metadata/_custom_type_script = "uid://dqkbdi8r2bxu7"

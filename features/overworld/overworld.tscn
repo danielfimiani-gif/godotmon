@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b7q20xw1v46xh"]
 
+[ext_resource type="Script" uid="uid://cil1ormeefnys" path="res://features/overworld/overwold.gd" id="1_cbrhj"]
 [ext_resource type="PackedScene" uid="uid://jnsdfipm83m5" path="res://features/overworld/player.tscn" id="1_mtrc0"]
 [ext_resource type="PackedScene" uid="uid://u8l3kxjl0h5i" path="res://features/overworld/tree.tscn" id="2_tree"]
 [ext_resource type="PackedScene" uid="uid://k8qkmsn5hnon" path="res://assets/vendor/kenney_nature_kit/tree_pineDefaultA.glb" id="3_pine"]
@@ -11,788 +12,919 @@
 [ext_resource type="PackedScene" uid="uid://c1giefaxlxiqo" path="res://assets/vendor/kenney_nature_kit/rock_smallA.glb" id="9_rockS"]
 [ext_resource type="PackedScene" uid="uid://dw74yyqx7suth" path="res://assets/vendor/kenney_nature_kit/ground_grass.glb" id="10_ground"]
 [ext_resource type="PackedScene" uid="uid://dfk53ubby2cds" path="res://assets/vendor/kenney_nature_kit/tree_default.glb" id="11_tdef"]
+[ext_resource type="PackedScene" uid="uid://c53mt0jkqr4cm" path="res://assets/vendor/kenney_nature_kit/tree_oak.glb" id="12_oak"]
+[ext_resource type="PackedScene" uid="uid://du1tq2o7wwr6r" path="res://assets/vendor/kenney_nature_kit/tree_fat.glb" id="13_fat"]
+[ext_resource type="PackedScene" uid="uid://dodayloex13ys" path="res://assets/vendor/kenney_nature_kit/tree_detailed.glb" id="14_det"]
+[ext_resource type="PackedScene" uid="uid://bisiwfajjl1mn" path="res://assets/vendor/kenney_nature_kit/tree_cone.glb" id="15_cone"]
+[ext_resource type="PackedScene" uid="uid://bmfmeuqr3rk7p" path="res://assets/vendor/kenney_nature_kit/stump_round.glb" id="16_stumpR"]
+[ext_resource type="PackedScene" uid="uid://dcgileaj1kc0v" path="res://assets/vendor/kenney_nature_kit/log_large.glb" id="17_log"]
+[ext_resource type="PackedScene" uid="uid://cgcahn4224jm2" path="res://assets/vendor/kenney_nature_kit/sign.glb" id="18_sign"]
+[ext_resource type="Shader" uid="uid://dbykrib4tooku" path="res://assets/shaders/edge_detection.gdshader" id="19_tx1mx"]
+[ext_resource type="PackedScene" uid="uid://cbhu74if5er8g" path="res://features/encounters/trainer.tscn" id="21_73n0e"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_b0pos"]
 
+[sub_resource type="ProceduralSkyMaterial" id="Sky_mat"]
+
+[sub_resource type="Sky" id="Sky_res"]
+sky_material = SubResource("Sky_mat")
+
+[sub_resource type="Environment" id="Env_res"]
+background_mode = 2
+sky = SubResource("Sky_res")
+ambient_light_source = 3
+
+[sub_resource type="QuadMesh" id="QuadMesh_bcbap"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cbrhj"]
+render_priority = 0
+shader = ExtResource("19_tx1mx")
+shader_parameter/lightIntensity = 1.25
+shader_parameter/lineAlpha = 0.7
+shader_parameter/useLighting = true
+shader_parameter/lineHighlight = 0.2
+shader_parameter/lineShadow = 0.55
+
 [node name="Overworld" type="Node3D" unique_id=1374471756]
+script = ExtResource("1_cbrhj")
 
 [node name="Ground" type="MeshInstance3D" parent="." unique_id=2058907164]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -0.2, 0)
 mesh = SubResource("PlaneMesh_b0pos")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=516621172]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+transform = Transform3D(0.5246695, -0.60196424, -0.60196424, 0.8513061, 0.37099743, 0.37099743, 0, -0.7071068, 0.7071068, 0, 0, 0)
 
-[node name="Player" parent="." unique_id=965571147 instance=ExtResource("1_mtrc0")]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=498320893]
+environment = SubResource("Env_res")
 
-[node name="Props" type="Node3D" parent="." unique_id=1792930972]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=882859041]
+texture_filter = 1
+use_parent_material = true
+offset_right = 640.0
+offset_bottom = 360.0
+stretch = true
+stretch_shrink = 2
 
-[node name="Tree_1" parent="Props" unique_id=720774264 instance=ExtResource("2_tree")]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1840715357]
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1792930972]
+
+[node name="Tree_1" parent="SubViewportContainer/SubViewport/Props" unique_id=720774264 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, -6)
 model = ExtResource("11_tdef")
 
-[node name="Tree_2" parent="Props" unique_id=331591539 instance=ExtResource("2_tree")]
+[node name="Tree_2" parent="SubViewportContainer/SubViewport/Props" unique_id=331591539 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -4, 0, -6)
 model = ExtResource("3_pine")
 
-[node name="Tree_3" parent="Props" unique_id=996411872 instance=ExtResource("2_tree")]
+[node name="Tree_3" parent="SubViewportContainer/SubViewport/Props" unique_id=996411872 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -2, 0, -6)
 model = ExtResource("11_tdef")
 
-[node name="Tree_4" parent="Props" unique_id=789338130 instance=ExtResource("2_tree")]
+[node name="Tree_4" parent="SubViewportContainer/SubViewport/Props" unique_id=789338130 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0, -6)
 model = ExtResource("3_pine")
 
-[node name="Tree_5" parent="Props" unique_id=2044570654 instance=ExtResource("2_tree")]
+[node name="Tree_5" parent="SubViewportContainer/SubViewport/Props" unique_id=2044570654 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 2, 0, -6)
 model = ExtResource("11_tdef")
 
-[node name="Tree_6" parent="Props" unique_id=2091909369 instance=ExtResource("2_tree")]
+[node name="Tree_6" parent="SubViewportContainer/SubViewport/Props" unique_id=2091909369 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 4, 0, -6)
 model = ExtResource("3_pine")
 
-[node name="Tree_7" parent="Props" unique_id=1932999295 instance=ExtResource("2_tree")]
+[node name="Tree_7" parent="SubViewportContainer/SubViewport/Props" unique_id=1932999295 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 6, 0, -6)
 model = ExtResource("11_tdef")
 
-[node name="Tree_8" parent="Props" unique_id=217525094 instance=ExtResource("2_tree")]
+[node name="Tree_8" parent="SubViewportContainer/SubViewport/Props" unique_id=217525094 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, -4)
 model = ExtResource("3_pine")
 
-[node name="Tree_9" parent="Props" unique_id=524300235 instance=ExtResource("2_tree")]
+[node name="Tree_9" parent="SubViewportContainer/SubViewport/Props" unique_id=524300235 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, -2)
 model = ExtResource("11_tdef")
 
-[node name="Tree_10" parent="Props" unique_id=860106059 instance=ExtResource("2_tree")]
+[node name="Tree_10" parent="SubViewportContainer/SubViewport/Props" unique_id=860106059 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, 0)
 model = ExtResource("3_pine")
 
-[node name="Tree_11" parent="Props" unique_id=1919815366 instance=ExtResource("2_tree")]
+[node name="Tree_11" parent="SubViewportContainer/SubViewport/Props" unique_id=1919815366 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, 2)
 model = ExtResource("11_tdef")
 
-[node name="Tree_12" parent="Props" unique_id=2119435718 instance=ExtResource("2_tree")]
+[node name="Tree_12" parent="SubViewportContainer/SubViewport/Props" unique_id=2119435718 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, 4)
 model = ExtResource("3_pine")
 
-[node name="Tree_13" parent="Props" unique_id=47228878 instance=ExtResource("2_tree")]
+[node name="Tree_13" parent="SubViewportContainer/SubViewport/Props" unique_id=47228878 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, 6)
 model = ExtResource("11_tdef")
 
-[node name="Grass_1" parent="Props" unique_id=11413795 instance=ExtResource("4_grass")]
+[node name="Grass_1" parent="SubViewportContainer/SubViewport/Props" unique_id=11413795 instance=ExtResource("4_grass")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 3, 0, 3)
 
-[node name="Grass_2" parent="Props" unique_id=1873851889 instance=ExtResource("4_grass")]
+[node name="Grass_2" parent="SubViewportContainer/SubViewport/Props" unique_id=1873851889 instance=ExtResource("4_grass")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 4, 0, 3)
 
-[node name="Grass_3" parent="Props" unique_id=897707578 instance=ExtResource("4_grass")]
+[node name="Grass_3" parent="SubViewportContainer/SubViewport/Props" unique_id=897707578 instance=ExtResource("4_grass")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 5, 0, 3)
 
-[node name="Grass_4" parent="Props" unique_id=1874402912 instance=ExtResource("4_grass")]
+[node name="Grass_4" parent="SubViewportContainer/SubViewport/Props" unique_id=1874402912 instance=ExtResource("4_grass")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 3, 0, 4)
 
-[node name="Grass_5" parent="Props" unique_id=1845048311 instance=ExtResource("4_grass")]
+[node name="Grass_5" parent="SubViewportContainer/SubViewport/Props" unique_id=1845048311 instance=ExtResource("4_grass")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 4, 0, 4)
 
-[node name="Grass_6" parent="Props" unique_id=1695598427 instance=ExtResource("4_grass")]
+[node name="Grass_6" parent="SubViewportContainer/SubViewport/Props" unique_id=1695598427 instance=ExtResource("4_grass")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 5, 0, 4)
 
-[node name="Grass_7" parent="Props" unique_id=671526259 instance=ExtResource("4_grass")]
+[node name="Grass_7" parent="SubViewportContainer/SubViewport/Props" unique_id=671526259 instance=ExtResource("4_grass")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 3, 0, 5)
 
-[node name="Grass_8" parent="Props" unique_id=746194984 instance=ExtResource("4_grass")]
+[node name="Grass_8" parent="SubViewportContainer/SubViewport/Props" unique_id=746194984 instance=ExtResource("4_grass")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 4, 0, 5)
 
-[node name="Grass_9" parent="Props" unique_id=1371889322 instance=ExtResource("4_grass")]
+[node name="Grass_9" parent="SubViewportContainer/SubViewport/Props" unique_id=1371889322 instance=ExtResource("4_grass")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 5, 0, 5)
 
-[node name="Bush_1" parent="Props" unique_id=1482303235 instance=ExtResource("5_bush")]
+[node name="Bush_1" parent="SubViewportContainer/SubViewport/Props" unique_id=1482303235 instance=ExtResource("5_bush")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2, 0, -3)
 
-[node name="Flower_1" parent="Props" unique_id=896878787 instance=ExtResource("6_flower")]
+[node name="Flower_1" parent="SubViewportContainer/SubViewport/Props" unique_id=896878787 instance=ExtResource("6_flower")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2, 0, 2)
 
-[node name="Mush_1" parent="Props" unique_id=1448208206 instance=ExtResource("7_mush")]
+[node name="Mush_1" parent="SubViewportContainer/SubViewport/Props" unique_id=1448208206 instance=ExtResource("7_mush")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3, 0, -2)
 
-[node name="RockL_1" parent="Props" unique_id=1248302599 instance=ExtResource("8_rockL")]
+[node name="RockL_1" parent="SubViewportContainer/SubViewport/Props" unique_id=1248302599 instance=ExtResource("8_rockL")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 5, 0, -4)
 
-[node name="RockS_1" parent="Props" unique_id=2052263547 instance=ExtResource("9_rockS")]
+[node name="RockS_1" parent="SubViewportContainer/SubViewport/Props" unique_id=2052263547 instance=ExtResource("9_rockS")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4, 0, 4)
 
-[node name="GroundTiles" type="Node3D" parent="." unique_id=1772791555]
+[node name="TreeS_0" parent="SubViewportContainer/SubViewport/Props" unique_id=834913548 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -4, 0, 6)
+model = ExtResource("12_oak")
 
-[node name="Tile_0" parent="GroundTiles" unique_id=1177589845 instance=ExtResource("10_ground")]
+[node name="TreeS_1" parent="SubViewportContainer/SubViewport/Props" unique_id=477049802 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -2, 0, 6)
+model = ExtResource("13_fat")
+
+[node name="TreeS_2" parent="SubViewportContainer/SubViewport/Props" unique_id=921774861 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0, 6)
+model = ExtResource("14_det")
+
+[node name="TreeS_3" parent="SubViewportContainer/SubViewport/Props" unique_id=1971546846 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 2, 0, 6)
+model = ExtResource("15_cone")
+
+[node name="TreeS_4" parent="SubViewportContainer/SubViewport/Props" unique_id=512849978 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 4, 0, 6)
+model = ExtResource("11_tdef")
+
+[node name="TreeS_5" parent="SubViewportContainer/SubViewport/Props" unique_id=1912293820 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 6, 0, 6)
+model = ExtResource("3_pine")
+
+[node name="TreeE_6" parent="SubViewportContainer/SubViewport/Props" unique_id=1115261242 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 6, 0, -4)
+model = ExtResource("12_oak")
+
+[node name="TreeE_7" parent="SubViewportContainer/SubViewport/Props" unique_id=1247018130 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 6, 0, -2)
+model = ExtResource("13_fat")
+
+[node name="TreeE_8" parent="SubViewportContainer/SubViewport/Props" unique_id=722583062 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 6, 0, 0)
+model = ExtResource("14_det")
+
+[node name="TreeE_9" parent="SubViewportContainer/SubViewport/Props" unique_id=231860892 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 6, 0, 2)
+model = ExtResource("15_cone")
+
+[node name="TreeE_10" parent="SubViewportContainer/SubViewport/Props" unique_id=1426141200 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 6, 0, 4)
+model = ExtResource("11_tdef")
+
+[node name="Stump_1" parent="SubViewportContainer/SubViewport/Props" unique_id=220950630 instance=ExtResource("16_stumpR")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2, 0, -4)
+
+[node name="Log_1" parent="SubViewportContainer/SubViewport/Props" unique_id=375291696 instance=ExtResource("17_log")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 4, 0, -2)
+
+[node name="Sign_1" parent="SubViewportContainer/SubViewport/Props" unique_id=1960249453 instance=ExtResource("18_sign")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 6.5)
+
+[node name="GroundTiles" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1772791555]
+
+[node name="Tile_0" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1177589845 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -7)
 
-[node name="Tile_1" parent="GroundTiles" unique_id=1526681250 instance=ExtResource("10_ground")]
+[node name="Tile_1" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1526681250 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -6)
 
-[node name="Tile_2" parent="GroundTiles" unique_id=488752482 instance=ExtResource("10_ground")]
+[node name="Tile_2" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=488752482 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -5)
 
-[node name="Tile_3" parent="GroundTiles" unique_id=1783067909 instance=ExtResource("10_ground")]
+[node name="Tile_3" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1783067909 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -4)
 
-[node name="Tile_4" parent="GroundTiles" unique_id=176548025 instance=ExtResource("10_ground")]
+[node name="Tile_4" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=176548025 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -3)
 
-[node name="Tile_5" parent="GroundTiles" unique_id=1876144964 instance=ExtResource("10_ground")]
+[node name="Tile_5" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1876144964 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -2)
 
-[node name="Tile_6" parent="GroundTiles" unique_id=4004161 instance=ExtResource("10_ground")]
+[node name="Tile_6" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=4004161 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -1)
 
-[node name="Tile_7" parent="GroundTiles" unique_id=715772878 instance=ExtResource("10_ground")]
+[node name="Tile_7" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=715772878 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0)
 
-[node name="Tile_8" parent="GroundTiles" unique_id=969045576 instance=ExtResource("10_ground")]
+[node name="Tile_8" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=969045576 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 1)
 
-[node name="Tile_9" parent="GroundTiles" unique_id=47145504 instance=ExtResource("10_ground")]
+[node name="Tile_9" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=47145504 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 2)
 
-[node name="Tile_10" parent="GroundTiles" unique_id=633333559 instance=ExtResource("10_ground")]
+[node name="Tile_10" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=633333559 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 3)
 
-[node name="Tile_11" parent="GroundTiles" unique_id=77805996 instance=ExtResource("10_ground")]
+[node name="Tile_11" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=77805996 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 4)
 
-[node name="Tile_12" parent="GroundTiles" unique_id=1001485520 instance=ExtResource("10_ground")]
+[node name="Tile_12" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1001485520 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 5)
 
-[node name="Tile_13" parent="GroundTiles" unique_id=1032013911 instance=ExtResource("10_ground")]
+[node name="Tile_13" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1032013911 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 6)
 
-[node name="Tile_14" parent="GroundTiles" unique_id=126071637 instance=ExtResource("10_ground")]
+[node name="Tile_14" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=126071637 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 7)
 
-[node name="Tile_15" parent="GroundTiles" unique_id=870066875 instance=ExtResource("10_ground")]
+[node name="Tile_15" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=870066875 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -7)
 
-[node name="Tile_16" parent="GroundTiles" unique_id=647572156 instance=ExtResource("10_ground")]
+[node name="Tile_16" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=647572156 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6)
 
-[node name="Tile_17" parent="GroundTiles" unique_id=2008166072 instance=ExtResource("10_ground")]
+[node name="Tile_17" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2008166072 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -5)
 
-[node name="Tile_18" parent="GroundTiles" unique_id=1539139825 instance=ExtResource("10_ground")]
+[node name="Tile_18" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1539139825 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -4)
 
-[node name="Tile_19" parent="GroundTiles" unique_id=1979932143 instance=ExtResource("10_ground")]
+[node name="Tile_19" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1979932143 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -3)
 
-[node name="Tile_20" parent="GroundTiles" unique_id=1248332260 instance=ExtResource("10_ground")]
+[node name="Tile_20" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1248332260 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2)
 
-[node name="Tile_21" parent="GroundTiles" unique_id=589777661 instance=ExtResource("10_ground")]
+[node name="Tile_21" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=589777661 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -1)
 
-[node name="Tile_22" parent="GroundTiles" unique_id=542625797 instance=ExtResource("10_ground")]
+[node name="Tile_22" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=542625797 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 
-[node name="Tile_23" parent="GroundTiles" unique_id=244467732 instance=ExtResource("10_ground")]
+[node name="Tile_23" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=244467732 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 1)
 
-[node name="Tile_24" parent="GroundTiles" unique_id=400000015 instance=ExtResource("10_ground")]
+[node name="Tile_24" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=400000015 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 2)
 
-[node name="Tile_25" parent="GroundTiles" unique_id=511875850 instance=ExtResource("10_ground")]
+[node name="Tile_25" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=511875850 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 3)
 
-[node name="Tile_26" parent="GroundTiles" unique_id=2146494615 instance=ExtResource("10_ground")]
+[node name="Tile_26" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2146494615 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 4)
 
-[node name="Tile_27" parent="GroundTiles" unique_id=47133120 instance=ExtResource("10_ground")]
+[node name="Tile_27" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=47133120 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 5)
 
-[node name="Tile_28" parent="GroundTiles" unique_id=361830926 instance=ExtResource("10_ground")]
+[node name="Tile_28" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=361830926 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
 
-[node name="Tile_29" parent="GroundTiles" unique_id=584759679 instance=ExtResource("10_ground")]
+[node name="Tile_29" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=584759679 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 7)
 
-[node name="Tile_30" parent="GroundTiles" unique_id=2134032259 instance=ExtResource("10_ground")]
+[node name="Tile_30" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2134032259 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -7)
 
-[node name="Tile_31" parent="GroundTiles" unique_id=819275464 instance=ExtResource("10_ground")]
+[node name="Tile_31" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=819275464 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -6)
 
-[node name="Tile_32" parent="GroundTiles" unique_id=251461893 instance=ExtResource("10_ground")]
+[node name="Tile_32" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=251461893 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
 
-[node name="Tile_33" parent="GroundTiles" unique_id=684038408 instance=ExtResource("10_ground")]
+[node name="Tile_33" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=684038408 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4)
 
-[node name="Tile_34" parent="GroundTiles" unique_id=227051369 instance=ExtResource("10_ground")]
+[node name="Tile_34" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=227051369 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3)
 
-[node name="Tile_35" parent="GroundTiles" unique_id=361046358 instance=ExtResource("10_ground")]
+[node name="Tile_35" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=361046358 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2)
 
-[node name="Tile_36" parent="GroundTiles" unique_id=146371337 instance=ExtResource("10_ground")]
+[node name="Tile_36" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=146371337 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
 
-[node name="Tile_37" parent="GroundTiles" unique_id=803880643 instance=ExtResource("10_ground")]
+[node name="Tile_37" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=803880643 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
 
-[node name="Tile_38" parent="GroundTiles" unique_id=345443424 instance=ExtResource("10_ground")]
+[node name="Tile_38" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=345443424 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
 
-[node name="Tile_39" parent="GroundTiles" unique_id=371854723 instance=ExtResource("10_ground")]
+[node name="Tile_39" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=371854723 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 2)
 
-[node name="Tile_40" parent="GroundTiles" unique_id=1432644236 instance=ExtResource("10_ground")]
+[node name="Tile_40" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1432644236 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3)
 
-[node name="Tile_41" parent="GroundTiles" unique_id=1914402209 instance=ExtResource("10_ground")]
+[node name="Tile_41" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1914402209 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 4)
 
-[node name="Tile_42" parent="GroundTiles" unique_id=88687423 instance=ExtResource("10_ground")]
+[node name="Tile_42" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=88687423 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
 
-[node name="Tile_43" parent="GroundTiles" unique_id=1407236528 instance=ExtResource("10_ground")]
+[node name="Tile_43" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1407236528 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 6)
 
-[node name="Tile_44" parent="GroundTiles" unique_id=615833034 instance=ExtResource("10_ground")]
+[node name="Tile_44" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=615833034 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 7)
 
-[node name="Tile_45" parent="GroundTiles" unique_id=841855525 instance=ExtResource("10_ground")]
+[node name="Tile_45" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=841855525 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -7)
 
-[node name="Tile_46" parent="GroundTiles" unique_id=447544459 instance=ExtResource("10_ground")]
+[node name="Tile_46" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=447544459 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6)
 
-[node name="Tile_47" parent="GroundTiles" unique_id=2056311918 instance=ExtResource("10_ground")]
+[node name="Tile_47" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2056311918 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5)
 
-[node name="Tile_48" parent="GroundTiles" unique_id=90590767 instance=ExtResource("10_ground")]
+[node name="Tile_48" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=90590767 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
 
-[node name="Tile_49" parent="GroundTiles" unique_id=1595666934 instance=ExtResource("10_ground")]
+[node name="Tile_49" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1595666934 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -3)
 
-[node name="Tile_50" parent="GroundTiles" unique_id=1810122293 instance=ExtResource("10_ground")]
+[node name="Tile_50" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1810122293 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
 
-[node name="Tile_51" parent="GroundTiles" unique_id=198353049 instance=ExtResource("10_ground")]
+[node name="Tile_51" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=198353049 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1)
 
-[node name="Tile_52" parent="GroundTiles" unique_id=2088472215 instance=ExtResource("10_ground")]
+[node name="Tile_52" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2088472215 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 
-[node name="Tile_53" parent="GroundTiles" unique_id=1040762113 instance=ExtResource("10_ground")]
+[node name="Tile_53" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1040762113 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
 
-[node name="Tile_54" parent="GroundTiles" unique_id=2001161614 instance=ExtResource("10_ground")]
+[node name="Tile_54" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2001161614 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2)
 
-[node name="Tile_55" parent="GroundTiles" unique_id=1291216652 instance=ExtResource("10_ground")]
+[node name="Tile_55" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1291216652 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3)
 
-[node name="Tile_56" parent="GroundTiles" unique_id=505863552 instance=ExtResource("10_ground")]
+[node name="Tile_56" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=505863552 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
 
-[node name="Tile_57" parent="GroundTiles" unique_id=392849044 instance=ExtResource("10_ground")]
+[node name="Tile_57" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=392849044 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 5)
 
-[node name="Tile_58" parent="GroundTiles" unique_id=185179955 instance=ExtResource("10_ground")]
+[node name="Tile_58" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=185179955 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6)
 
-[node name="Tile_59" parent="GroundTiles" unique_id=1838936172 instance=ExtResource("10_ground")]
+[node name="Tile_59" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1838936172 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 7)
 
-[node name="Tile_60" parent="GroundTiles" unique_id=1469266012 instance=ExtResource("10_ground")]
+[node name="Tile_60" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1469266012 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -7)
 
-[node name="Tile_61" parent="GroundTiles" unique_id=735224037 instance=ExtResource("10_ground")]
+[node name="Tile_61" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=735224037 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -6)
 
-[node name="Tile_62" parent="GroundTiles" unique_id=642803048 instance=ExtResource("10_ground")]
+[node name="Tile_62" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=642803048 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -5)
 
-[node name="Tile_63" parent="GroundTiles" unique_id=902793808 instance=ExtResource("10_ground")]
+[node name="Tile_63" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=902793808 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -4)
 
-[node name="Tile_64" parent="GroundTiles" unique_id=1024739449 instance=ExtResource("10_ground")]
+[node name="Tile_64" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1024739449 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
 
-[node name="Tile_65" parent="GroundTiles" unique_id=1410764857 instance=ExtResource("10_ground")]
+[node name="Tile_65" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1410764857 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
 
-[node name="Tile_66" parent="GroundTiles" unique_id=164068858 instance=ExtResource("10_ground")]
+[node name="Tile_66" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=164068858 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1)
 
-[node name="Tile_67" parent="GroundTiles" unique_id=957082233 instance=ExtResource("10_ground")]
+[node name="Tile_67" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=957082233 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 
-[node name="Tile_68" parent="GroundTiles" unique_id=1140705071 instance=ExtResource("10_ground")]
+[node name="Tile_68" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1140705071 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
 
-[node name="Tile_69" parent="GroundTiles" unique_id=598121899 instance=ExtResource("10_ground")]
+[node name="Tile_69" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=598121899 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 2)
 
-[node name="Tile_70" parent="GroundTiles" unique_id=1987767852 instance=ExtResource("10_ground")]
+[node name="Tile_70" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1987767852 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
 
-[node name="Tile_71" parent="GroundTiles" unique_id=988707549 instance=ExtResource("10_ground")]
+[node name="Tile_71" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=988707549 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 4)
 
-[node name="Tile_72" parent="GroundTiles" unique_id=287539802 instance=ExtResource("10_ground")]
+[node name="Tile_72" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=287539802 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 5)
 
-[node name="Tile_73" parent="GroundTiles" unique_id=1552649683 instance=ExtResource("10_ground")]
+[node name="Tile_73" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1552649683 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 6)
 
-[node name="Tile_74" parent="GroundTiles" unique_id=1881896005 instance=ExtResource("10_ground")]
+[node name="Tile_74" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1881896005 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 7)
 
-[node name="Tile_75" parent="GroundTiles" unique_id=1504972482 instance=ExtResource("10_ground")]
+[node name="Tile_75" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1504972482 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -7)
 
-[node name="Tile_76" parent="GroundTiles" unique_id=86643666 instance=ExtResource("10_ground")]
+[node name="Tile_76" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=86643666 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
 
-[node name="Tile_77" parent="GroundTiles" unique_id=1927533882 instance=ExtResource("10_ground")]
+[node name="Tile_77" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1927533882 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -5)
 
-[node name="Tile_78" parent="GroundTiles" unique_id=1810698243 instance=ExtResource("10_ground")]
+[node name="Tile_78" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1810698243 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
 
-[node name="Tile_79" parent="GroundTiles" unique_id=1576343486 instance=ExtResource("10_ground")]
+[node name="Tile_79" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1576343486 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
 
-[node name="Tile_80" parent="GroundTiles" unique_id=912485602 instance=ExtResource("10_ground")]
+[node name="Tile_80" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=912485602 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
 
-[node name="Tile_81" parent="GroundTiles" unique_id=314447716 instance=ExtResource("10_ground")]
+[node name="Tile_81" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=314447716 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
 
-[node name="Tile_82" parent="GroundTiles" unique_id=146825707 instance=ExtResource("10_ground")]
+[node name="Tile_82" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=146825707 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
-[node name="Tile_83" parent="GroundTiles" unique_id=1991322019 instance=ExtResource("10_ground")]
+[node name="Tile_83" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1991322019 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
 
-[node name="Tile_84" parent="GroundTiles" unique_id=753450807 instance=ExtResource("10_ground")]
+[node name="Tile_84" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=753450807 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
 
-[node name="Tile_85" parent="GroundTiles" unique_id=517827296 instance=ExtResource("10_ground")]
+[node name="Tile_85" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=517827296 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3)
 
-[node name="Tile_86" parent="GroundTiles" unique_id=1164586427 instance=ExtResource("10_ground")]
+[node name="Tile_86" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1164586427 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
 
-[node name="Tile_87" parent="GroundTiles" unique_id=162448775 instance=ExtResource("10_ground")]
+[node name="Tile_87" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=162448775 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5)
 
-[node name="Tile_88" parent="GroundTiles" unique_id=1697058720 instance=ExtResource("10_ground")]
+[node name="Tile_88" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1697058720 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6)
 
-[node name="Tile_89" parent="GroundTiles" unique_id=2056601869 instance=ExtResource("10_ground")]
+[node name="Tile_89" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2056601869 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 7)
 
-[node name="Tile_90" parent="GroundTiles" unique_id=1924465107 instance=ExtResource("10_ground")]
+[node name="Tile_90" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1924465107 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -7)
 
-[node name="Tile_91" parent="GroundTiles" unique_id=1828412049 instance=ExtResource("10_ground")]
+[node name="Tile_91" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1828412049 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -6)
 
-[node name="Tile_92" parent="GroundTiles" unique_id=2066677887 instance=ExtResource("10_ground")]
+[node name="Tile_92" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2066677887 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5)
 
-[node name="Tile_93" parent="GroundTiles" unique_id=146889116 instance=ExtResource("10_ground")]
+[node name="Tile_93" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=146889116 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
 
-[node name="Tile_94" parent="GroundTiles" unique_id=1283165380 instance=ExtResource("10_ground")]
+[node name="Tile_94" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1283165380 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3)
 
-[node name="Tile_95" parent="GroundTiles" unique_id=1996530204 instance=ExtResource("10_ground")]
+[node name="Tile_95" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1996530204 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
 
-[node name="Tile_96" parent="GroundTiles" unique_id=2018867860 instance=ExtResource("10_ground")]
+[node name="Tile_96" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2018867860 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 
-[node name="Tile_97" parent="GroundTiles" unique_id=1624926580 instance=ExtResource("10_ground")]
+[node name="Tile_97" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1624926580 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 
-[node name="Tile_98" parent="GroundTiles" unique_id=573462071 instance=ExtResource("10_ground")]
+[node name="Tile_98" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=573462071 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 
-[node name="Tile_99" parent="GroundTiles" unique_id=1486512409 instance=ExtResource("10_ground")]
+[node name="Tile_99" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1486512409 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
 
-[node name="Tile_100" parent="GroundTiles" unique_id=1125057457 instance=ExtResource("10_ground")]
+[node name="Tile_100" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1125057457 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
 
-[node name="Tile_101" parent="GroundTiles" unique_id=1563928820 instance=ExtResource("10_ground")]
+[node name="Tile_101" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1563928820 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
 
-[node name="Tile_102" parent="GroundTiles" unique_id=1875967594 instance=ExtResource("10_ground")]
+[node name="Tile_102" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1875967594 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 5)
 
-[node name="Tile_103" parent="GroundTiles" unique_id=377441623 instance=ExtResource("10_ground")]
+[node name="Tile_103" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=377441623 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 6)
 
-[node name="Tile_104" parent="GroundTiles" unique_id=1134722685 instance=ExtResource("10_ground")]
+[node name="Tile_104" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1134722685 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 7)
 
-[node name="Tile_105" parent="GroundTiles" unique_id=1791373860 instance=ExtResource("10_ground")]
+[node name="Tile_105" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1791373860 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
 
-[node name="Tile_106" parent="GroundTiles" unique_id=932968593 instance=ExtResource("10_ground")]
+[node name="Tile_106" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=932968593 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 
-[node name="Tile_107" parent="GroundTiles" unique_id=141202014 instance=ExtResource("10_ground")]
+[node name="Tile_107" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=141202014 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 
-[node name="Tile_108" parent="GroundTiles" unique_id=405008040 instance=ExtResource("10_ground")]
+[node name="Tile_108" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=405008040 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
-[node name="Tile_109" parent="GroundTiles" unique_id=1304626346 instance=ExtResource("10_ground")]
+[node name="Tile_109" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1304626346 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
 
-[node name="Tile_110" parent="GroundTiles" unique_id=1137244412 instance=ExtResource("10_ground")]
+[node name="Tile_110" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1137244412 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
-[node name="Tile_111" parent="GroundTiles" unique_id=1347853828 instance=ExtResource("10_ground")]
+[node name="Tile_111" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1347853828 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="Tile_112" parent="GroundTiles" unique_id=37195124 instance=ExtResource("10_ground")]
+[node name="Tile_112" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=37195124 instance=ExtResource("10_ground")]
 
-[node name="Tile_113" parent="GroundTiles" unique_id=1478030987 instance=ExtResource("10_ground")]
+[node name="Tile_113" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1478030987 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
-[node name="Tile_114" parent="GroundTiles" unique_id=1784930332 instance=ExtResource("10_ground")]
+[node name="Tile_114" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1784930332 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
-[node name="Tile_115" parent="GroundTiles" unique_id=2072729329 instance=ExtResource("10_ground")]
+[node name="Tile_115" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2072729329 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
-[node name="Tile_116" parent="GroundTiles" unique_id=1498563858 instance=ExtResource("10_ground")]
+[node name="Tile_116" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1498563858 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
-[node name="Tile_117" parent="GroundTiles" unique_id=1018119276 instance=ExtResource("10_ground")]
+[node name="Tile_117" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1018119276 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
-[node name="Tile_118" parent="GroundTiles" unique_id=1684497471 instance=ExtResource("10_ground")]
+[node name="Tile_118" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1684497471 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
-[node name="Tile_119" parent="GroundTiles" unique_id=89253000 instance=ExtResource("10_ground")]
+[node name="Tile_119" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=89253000 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
 
-[node name="Tile_120" parent="GroundTiles" unique_id=1897741469 instance=ExtResource("10_ground")]
+[node name="Tile_120" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1897741469 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -7)
 
-[node name="Tile_121" parent="GroundTiles" unique_id=1693166768 instance=ExtResource("10_ground")]
+[node name="Tile_121" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1693166768 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -6)
 
-[node name="Tile_122" parent="GroundTiles" unique_id=484571565 instance=ExtResource("10_ground")]
+[node name="Tile_122" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=484571565 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)
 
-[node name="Tile_123" parent="GroundTiles" unique_id=576726056 instance=ExtResource("10_ground")]
+[node name="Tile_123" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=576726056 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
 
-[node name="Tile_124" parent="GroundTiles" unique_id=717555353 instance=ExtResource("10_ground")]
+[node name="Tile_124" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=717555353 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
 
-[node name="Tile_125" parent="GroundTiles" unique_id=4407078 instance=ExtResource("10_ground")]
+[node name="Tile_125" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=4407078 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
 
-[node name="Tile_126" parent="GroundTiles" unique_id=1159882646 instance=ExtResource("10_ground")]
+[node name="Tile_126" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1159882646 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 
-[node name="Tile_127" parent="GroundTiles" unique_id=734203410 instance=ExtResource("10_ground")]
+[node name="Tile_127" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=734203410 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
-[node name="Tile_128" parent="GroundTiles" unique_id=678345109 instance=ExtResource("10_ground")]
+[node name="Tile_128" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=678345109 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 
-[node name="Tile_129" parent="GroundTiles" unique_id=619806777 instance=ExtResource("10_ground")]
+[node name="Tile_129" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=619806777 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
 
-[node name="Tile_130" parent="GroundTiles" unique_id=1472514718 instance=ExtResource("10_ground")]
+[node name="Tile_130" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1472514718 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 
-[node name="Tile_131" parent="GroundTiles" unique_id=593923944 instance=ExtResource("10_ground")]
+[node name="Tile_131" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=593923944 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
 
-[node name="Tile_132" parent="GroundTiles" unique_id=2047805072 instance=ExtResource("10_ground")]
+[node name="Tile_132" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2047805072 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
 
-[node name="Tile_133" parent="GroundTiles" unique_id=1137718071 instance=ExtResource("10_ground")]
+[node name="Tile_133" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1137718071 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 
-[node name="Tile_134" parent="GroundTiles" unique_id=1171526218 instance=ExtResource("10_ground")]
+[node name="Tile_134" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1171526218 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 7)
 
-[node name="Tile_135" parent="GroundTiles" unique_id=1540612413 instance=ExtResource("10_ground")]
+[node name="Tile_135" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1540612413 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -7)
 
-[node name="Tile_136" parent="GroundTiles" unique_id=832452287 instance=ExtResource("10_ground")]
+[node name="Tile_136" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=832452287 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
 
-[node name="Tile_137" parent="GroundTiles" unique_id=1705700911 instance=ExtResource("10_ground")]
+[node name="Tile_137" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1705700911 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5)
 
-[node name="Tile_138" parent="GroundTiles" unique_id=1053640257 instance=ExtResource("10_ground")]
+[node name="Tile_138" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1053640257 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
 
-[node name="Tile_139" parent="GroundTiles" unique_id=885980262 instance=ExtResource("10_ground")]
+[node name="Tile_139" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=885980262 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
 
-[node name="Tile_140" parent="GroundTiles" unique_id=1585988562 instance=ExtResource("10_ground")]
+[node name="Tile_140" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1585988562 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
-[node name="Tile_141" parent="GroundTiles" unique_id=1102499271 instance=ExtResource("10_ground")]
+[node name="Tile_141" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1102499271 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 
-[node name="Tile_142" parent="GroundTiles" unique_id=833227931 instance=ExtResource("10_ground")]
+[node name="Tile_142" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=833227931 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
-[node name="Tile_143" parent="GroundTiles" unique_id=262598750 instance=ExtResource("10_ground")]
+[node name="Tile_143" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=262598750 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
 
-[node name="Tile_144" parent="GroundTiles" unique_id=1747902222 instance=ExtResource("10_ground")]
+[node name="Tile_144" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1747902222 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
-[node name="Tile_145" parent="GroundTiles" unique_id=1391390643 instance=ExtResource("10_ground")]
+[node name="Tile_145" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1391390643 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
 
-[node name="Tile_146" parent="GroundTiles" unique_id=1190204722 instance=ExtResource("10_ground")]
+[node name="Tile_146" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1190204722 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
 
-[node name="Tile_147" parent="GroundTiles" unique_id=1559192666 instance=ExtResource("10_ground")]
+[node name="Tile_147" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1559192666 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
 
-[node name="Tile_148" parent="GroundTiles" unique_id=1512897651 instance=ExtResource("10_ground")]
+[node name="Tile_148" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1512897651 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
 
-[node name="Tile_149" parent="GroundTiles" unique_id=937887797 instance=ExtResource("10_ground")]
+[node name="Tile_149" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=937887797 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 7)
 
-[node name="Tile_150" parent="GroundTiles" unique_id=2131967214 instance=ExtResource("10_ground")]
+[node name="Tile_150" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2131967214 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -7)
 
-[node name="Tile_151" parent="GroundTiles" unique_id=1969502882 instance=ExtResource("10_ground")]
+[node name="Tile_151" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1969502882 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -6)
 
-[node name="Tile_152" parent="GroundTiles" unique_id=1051047992 instance=ExtResource("10_ground")]
+[node name="Tile_152" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1051047992 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -5)
 
-[node name="Tile_153" parent="GroundTiles" unique_id=1670999284 instance=ExtResource("10_ground")]
+[node name="Tile_153" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1670999284 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4)
 
-[node name="Tile_154" parent="GroundTiles" unique_id=1476498764 instance=ExtResource("10_ground")]
+[node name="Tile_154" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1476498764 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3)
 
-[node name="Tile_155" parent="GroundTiles" unique_id=499641549 instance=ExtResource("10_ground")]
+[node name="Tile_155" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=499641549 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
 
-[node name="Tile_156" parent="GroundTiles" unique_id=1294698052 instance=ExtResource("10_ground")]
+[node name="Tile_156" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1294698052 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -1)
 
-[node name="Tile_157" parent="GroundTiles" unique_id=750317441 instance=ExtResource("10_ground")]
+[node name="Tile_157" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=750317441 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 
-[node name="Tile_158" parent="GroundTiles" unique_id=1338129126 instance=ExtResource("10_ground")]
+[node name="Tile_158" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1338129126 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
 
-[node name="Tile_159" parent="GroundTiles" unique_id=1209126162 instance=ExtResource("10_ground")]
+[node name="Tile_159" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1209126162 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
 
-[node name="Tile_160" parent="GroundTiles" unique_id=340255926 instance=ExtResource("10_ground")]
+[node name="Tile_160" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=340255926 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
 
-[node name="Tile_161" parent="GroundTiles" unique_id=920698852 instance=ExtResource("10_ground")]
+[node name="Tile_161" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=920698852 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
 
-[node name="Tile_162" parent="GroundTiles" unique_id=1963070202 instance=ExtResource("10_ground")]
+[node name="Tile_162" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1963070202 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5)
 
-[node name="Tile_163" parent="GroundTiles" unique_id=1091945921 instance=ExtResource("10_ground")]
+[node name="Tile_163" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1091945921 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 6)
 
-[node name="Tile_164" parent="GroundTiles" unique_id=981802456 instance=ExtResource("10_ground")]
+[node name="Tile_164" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=981802456 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 7)
 
-[node name="Tile_165" parent="GroundTiles" unique_id=1027410465 instance=ExtResource("10_ground")]
+[node name="Tile_165" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1027410465 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -7)
 
-[node name="Tile_166" parent="GroundTiles" unique_id=1648685801 instance=ExtResource("10_ground")]
+[node name="Tile_166" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1648685801 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6)
 
-[node name="Tile_167" parent="GroundTiles" unique_id=2007292265 instance=ExtResource("10_ground")]
+[node name="Tile_167" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2007292265 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5)
 
-[node name="Tile_168" parent="GroundTiles" unique_id=1327790801 instance=ExtResource("10_ground")]
+[node name="Tile_168" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1327790801 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
 
-[node name="Tile_169" parent="GroundTiles" unique_id=139838291 instance=ExtResource("10_ground")]
+[node name="Tile_169" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=139838291 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -3)
 
-[node name="Tile_170" parent="GroundTiles" unique_id=911558197 instance=ExtResource("10_ground")]
+[node name="Tile_170" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=911558197 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
 
-[node name="Tile_171" parent="GroundTiles" unique_id=888687113 instance=ExtResource("10_ground")]
+[node name="Tile_171" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=888687113 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -1)
 
-[node name="Tile_172" parent="GroundTiles" unique_id=402812344 instance=ExtResource("10_ground")]
+[node name="Tile_172" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=402812344 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
-[node name="Tile_173" parent="GroundTiles" unique_id=503005656 instance=ExtResource("10_ground")]
+[node name="Tile_173" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=503005656 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
 
-[node name="Tile_174" parent="GroundTiles" unique_id=1372808088 instance=ExtResource("10_ground")]
+[node name="Tile_174" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1372808088 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
 
-[node name="Tile_175" parent="GroundTiles" unique_id=1646074709 instance=ExtResource("10_ground")]
+[node name="Tile_175" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1646074709 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
 
-[node name="Tile_176" parent="GroundTiles" unique_id=421817576 instance=ExtResource("10_ground")]
+[node name="Tile_176" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=421817576 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
 
-[node name="Tile_177" parent="GroundTiles" unique_id=1550157 instance=ExtResource("10_ground")]
+[node name="Tile_177" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1550157 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5)
 
-[node name="Tile_178" parent="GroundTiles" unique_id=605172988 instance=ExtResource("10_ground")]
+[node name="Tile_178" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=605172988 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
 
-[node name="Tile_179" parent="GroundTiles" unique_id=1913882673 instance=ExtResource("10_ground")]
+[node name="Tile_179" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1913882673 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 7)
 
-[node name="Tile_180" parent="GroundTiles" unique_id=207987437 instance=ExtResource("10_ground")]
+[node name="Tile_180" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=207987437 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -7)
 
-[node name="Tile_181" parent="GroundTiles" unique_id=1260846366 instance=ExtResource("10_ground")]
+[node name="Tile_181" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1260846366 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -6)
 
-[node name="Tile_182" parent="GroundTiles" unique_id=427018728 instance=ExtResource("10_ground")]
+[node name="Tile_182" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=427018728 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
 
-[node name="Tile_183" parent="GroundTiles" unique_id=2058128069 instance=ExtResource("10_ground")]
+[node name="Tile_183" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2058128069 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -4)
 
-[node name="Tile_184" parent="GroundTiles" unique_id=1667598773 instance=ExtResource("10_ground")]
+[node name="Tile_184" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1667598773 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
 
-[node name="Tile_185" parent="GroundTiles" unique_id=1573669032 instance=ExtResource("10_ground")]
+[node name="Tile_185" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1573669032 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
 
-[node name="Tile_186" parent="GroundTiles" unique_id=1040412934 instance=ExtResource("10_ground")]
+[node name="Tile_186" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1040412934 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
 
-[node name="Tile_187" parent="GroundTiles" unique_id=755035010 instance=ExtResource("10_ground")]
+[node name="Tile_187" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=755035010 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 
-[node name="Tile_188" parent="GroundTiles" unique_id=24579229 instance=ExtResource("10_ground")]
+[node name="Tile_188" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=24579229 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
 
-[node name="Tile_189" parent="GroundTiles" unique_id=1051228168 instance=ExtResource("10_ground")]
+[node name="Tile_189" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1051228168 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
 
-[node name="Tile_190" parent="GroundTiles" unique_id=934021449 instance=ExtResource("10_ground")]
+[node name="Tile_190" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=934021449 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
 
-[node name="Tile_191" parent="GroundTiles" unique_id=164857957 instance=ExtResource("10_ground")]
+[node name="Tile_191" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=164857957 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
 
-[node name="Tile_192" parent="GroundTiles" unique_id=2076574354 instance=ExtResource("10_ground")]
+[node name="Tile_192" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2076574354 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
 
-[node name="Tile_193" parent="GroundTiles" unique_id=469433819 instance=ExtResource("10_ground")]
+[node name="Tile_193" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=469433819 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 6)
 
-[node name="Tile_194" parent="GroundTiles" unique_id=647438263 instance=ExtResource("10_ground")]
+[node name="Tile_194" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=647438263 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 7)
 
-[node name="Tile_195" parent="GroundTiles" unique_id=339049535 instance=ExtResource("10_ground")]
+[node name="Tile_195" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=339049535 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -7)
 
-[node name="Tile_196" parent="GroundTiles" unique_id=568424262 instance=ExtResource("10_ground")]
+[node name="Tile_196" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=568424262 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
 
-[node name="Tile_197" parent="GroundTiles" unique_id=798512190 instance=ExtResource("10_ground")]
+[node name="Tile_197" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=798512190 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -5)
 
-[node name="Tile_198" parent="GroundTiles" unique_id=1714393572 instance=ExtResource("10_ground")]
+[node name="Tile_198" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1714393572 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
 
-[node name="Tile_199" parent="GroundTiles" unique_id=1661547866 instance=ExtResource("10_ground")]
+[node name="Tile_199" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1661547866 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -3)
 
-[node name="Tile_200" parent="GroundTiles" unique_id=1510106879 instance=ExtResource("10_ground")]
+[node name="Tile_200" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1510106879 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
 
-[node name="Tile_201" parent="GroundTiles" unique_id=1293115998 instance=ExtResource("10_ground")]
+[node name="Tile_201" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1293115998 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)
 
-[node name="Tile_202" parent="GroundTiles" unique_id=1663166433 instance=ExtResource("10_ground")]
+[node name="Tile_202" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1663166433 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 
-[node name="Tile_203" parent="GroundTiles" unique_id=1667875040 instance=ExtResource("10_ground")]
+[node name="Tile_203" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1667875040 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
 
-[node name="Tile_204" parent="GroundTiles" unique_id=1462249580 instance=ExtResource("10_ground")]
+[node name="Tile_204" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1462249580 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
 
-[node name="Tile_205" parent="GroundTiles" unique_id=1797501637 instance=ExtResource("10_ground")]
+[node name="Tile_205" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1797501637 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
 
-[node name="Tile_206" parent="GroundTiles" unique_id=357556968 instance=ExtResource("10_ground")]
+[node name="Tile_206" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=357556968 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
 
-[node name="Tile_207" parent="GroundTiles" unique_id=955350386 instance=ExtResource("10_ground")]
+[node name="Tile_207" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=955350386 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
 
-[node name="Tile_208" parent="GroundTiles" unique_id=1055862583 instance=ExtResource("10_ground")]
+[node name="Tile_208" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1055862583 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
 
-[node name="Tile_209" parent="GroundTiles" unique_id=1175253031 instance=ExtResource("10_ground")]
+[node name="Tile_209" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1175253031 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 7)
 
-[node name="Tile_210" parent="GroundTiles" unique_id=1405344081 instance=ExtResource("10_ground")]
+[node name="Tile_210" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1405344081 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -7)
 
-[node name="Tile_211" parent="GroundTiles" unique_id=390950931 instance=ExtResource("10_ground")]
+[node name="Tile_211" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=390950931 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -6)
 
-[node name="Tile_212" parent="GroundTiles" unique_id=108763168 instance=ExtResource("10_ground")]
+[node name="Tile_212" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=108763168 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -5)
 
-[node name="Tile_213" parent="GroundTiles" unique_id=586776071 instance=ExtResource("10_ground")]
+[node name="Tile_213" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=586776071 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -4)
 
-[node name="Tile_214" parent="GroundTiles" unique_id=952531798 instance=ExtResource("10_ground")]
+[node name="Tile_214" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=952531798 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -3)
 
-[node name="Tile_215" parent="GroundTiles" unique_id=1820710026 instance=ExtResource("10_ground")]
+[node name="Tile_215" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1820710026 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -2)
 
-[node name="Tile_216" parent="GroundTiles" unique_id=394494510 instance=ExtResource("10_ground")]
+[node name="Tile_216" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=394494510 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -1)
 
-[node name="Tile_217" parent="GroundTiles" unique_id=1603271614 instance=ExtResource("10_ground")]
+[node name="Tile_217" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=1603271614 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
 
-[node name="Tile_218" parent="GroundTiles" unique_id=75083220 instance=ExtResource("10_ground")]
+[node name="Tile_218" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=75083220 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1)
 
-[node name="Tile_219" parent="GroundTiles" unique_id=226731874 instance=ExtResource("10_ground")]
+[node name="Tile_219" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=226731874 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
 
-[node name="Tile_220" parent="GroundTiles" unique_id=52224098 instance=ExtResource("10_ground")]
+[node name="Tile_220" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=52224098 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 3)
 
-[node name="Tile_221" parent="GroundTiles" unique_id=304225578 instance=ExtResource("10_ground")]
+[node name="Tile_221" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=304225578 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
 
-[node name="Tile_222" parent="GroundTiles" unique_id=275172232 instance=ExtResource("10_ground")]
+[node name="Tile_222" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=275172232 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
 
-[node name="Tile_223" parent="GroundTiles" unique_id=2003385233 instance=ExtResource("10_ground")]
+[node name="Tile_223" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=2003385233 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 6)
 
-[node name="Tile_224" parent="GroundTiles" unique_id=720479350 instance=ExtResource("10_ground")]
+[node name="Tile_224" parent="SubViewportContainer/SubViewport/GroundTiles" unique_id=720479350 instance=ExtResource("10_ground")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 7)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=794311375]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 3, 3)
+cull_mask = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera3D" unique_id=1578190928]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_bcbap")
+surface_material_override/0 = SubResource("ShaderMaterial_cbrhj")
+
+[node name="SpriteViewport" type="SubViewportContainer" parent="." unique_id=584639721]
+texture_filter = 1
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SpriteViewport" unique_id=1965521890]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="SpriteCamera" type="Camera3D" parent="SpriteViewport/SubViewport" unique_id=807741701]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 3, 3)
+cull_mask = 2
+
+[node name="Player" parent="." unique_id=965571147 instance=ExtResource("1_mtrc0")]
+
+[node name="Trainer" parent="." unique_id=780319206 instance=ExtResource("21_73n0e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2003064, 0, 3.0452747)

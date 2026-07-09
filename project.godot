@@ -19,10 +19,18 @@ config/icon="res://icon.svg"
 
 GameState="*uid://cdse84ao8pj2p"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
 [file_customization]
 
 folder_colors={
-"res://assets/": "red"
+"res://assets/": "red",
+"res://data/": "blue"
 }
 
 [global_group]
@@ -36,5 +44,3 @@ tall_grass="Group for grass_ecounters"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"

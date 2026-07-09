@@ -14,10 +14,16 @@ extends Node3D
 
 var player: Mon
 var enemy: Mon
+var enemy_index := 0
 
 func _ready() -> void:
 	player = GameState.party[0]
-	enemy = Mon.create(GameState.wild_species)
+	if GameState.trainer:
+		enemy = Mon.create(GameState.trainer.team[0])
+		capture_button.hide()
+		flee_button.hide()
+	else:
+		enemy = Mon.create(GameState.wild_species)
 	_spawn(player.species, player_slot)
 	_spawn(enemy.species, enemy_slot)
 	_build_move_buttons()
@@ -40,7 +46,15 @@ func _on_move_pressed(move: MoveData) -> void:
 	_set_buttons_enabled(false)
 	await _do_turn(player, move, enemy)
 	if enemy.is_fainted():
-		message.text = "!%s se debilitó! Ganaste" % enemy.species.display_name
+		if GameState.trainer and enemy_index + 1 < GameState.trainer.team.size():
+			enemy_index += 1
+			enemy = Mon.create(GameState.trainer.team[enemy_index])
+			_spawn_enemy()
+			_refresh_ui()
+			message.text = "!%s saca a %s" % [GameState.trainer.display_name, GameState.trainer.team[enemy_index].display_name]
+			_set_buttons_enabled(true)
+			return
+		message.text = "!Ganaste!"
 		_end_battle()
 		return
 	
@@ -121,3 +135,8 @@ func _enemy_best_move() -> MoveData:
 func _end_battle() -> void:
 	await get_tree().create_timer(1.2).timeout
 	get_tree().change_scene_to_file("res://features/overworld/overworld.tscn")
+
+func _spawn_enemy() -> void:
+	for c in enemy_slot.get_children():
+		c.queue_free()
+	enemy_slot.add_child(enemy.species.model.instantiate())
