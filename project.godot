@@ -19,6 +19,16 @@ config/icon="res://icon.svg"
 
 GameState="*uid://cdse84ao8pj2p"
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "red"
+}
+
+[global_group]
+
+tall_grass="Group for grass_ecounters"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
