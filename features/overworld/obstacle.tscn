@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://u8l3kxjl0h5i"]
 
-[ext_resource type="Script" uid="uid://c3dkmuo4opols" path="res://features/overworld/tree.gd" id="1_820ps"]
+[ext_resource type="Script" uid="uid://c3dkmuo4opols" path="res://features/overworld/obstacle.gd" id="1_820ps"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_820ps"]
 size = Vector3(0.68518066, 1.6044922, 0.7044678)
