@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var grass_detector: Area3D = $GrassDetector
-
+@onready var ray: RayCast3D = $ObstacleRay
 const TILE := 1.0
 const MOVE_TIME := 0.15
 const ENCOUNTER_CHANCE := 0.2
@@ -21,7 +21,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_down"): dir = Vector3.BACK
 	elif event.is_action_pressed("ui_left"): dir = Vector3.LEFT
 	elif event.is_action_pressed("ui_right"): dir = Vector3.RIGHT
-	if dir != Vector3.ZERO:
+	if dir != Vector3.ZERO and _can_move(dir):
 		_step(dir)
 
 func _step(dir: Vector3) -> void:
@@ -44,3 +44,8 @@ func _on_grass_exited(area: Area3D) -> void:
 func _check_encounter() -> void:
 	if in_grass and randf() < ENCOUNTER_CHANCE:
 		GameState.start_wild_encounter()
+
+func _can_move(dir: Vector3) -> bool:
+	ray.target_position = dir * TILE
+	ray.force_raycast_update()
+	return not ray.is_colliding()

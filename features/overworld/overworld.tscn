@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b7q20xw1v46xh"]
 
 [ext_resource type="PackedScene" uid="uid://jnsdfipm83m5" path="res://features/overworld/player.tscn" id="1_mtrc0"]
-[ext_resource type="PackedScene" uid="uid://dfk53ubby2cds" path="res://assets/vendor/kenney_nature_kit/tree_default.glb" id="2_tree"]
+[ext_resource type="PackedScene" uid="uid://u8l3kxjl0h5i" path="res://features/overworld/tree.tscn" id="2_tree"]
 [ext_resource type="PackedScene" uid="uid://k8qkmsn5hnon" path="res://assets/vendor/kenney_nature_kit/tree_pineDefaultA.glb" id="3_pine"]
 [ext_resource type="PackedScene" uid="uid://21k3wyqvjhu2" path="res://features/overworld/tall_grass.tscn" id="4_grass"]
 [ext_resource type="PackedScene" uid="uid://b7qkdgsb6rlr7" path="res://assets/vendor/kenney_nature_kit/plant_bush.glb" id="5_bush"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://q3bb7kmwxn11" path="res://assets/vendor/kenney_nature_kit/rock_largeA.glb" id="8_rockL"]
 [ext_resource type="PackedScene" uid="uid://c1giefaxlxiqo" path="res://assets/vendor/kenney_nature_kit/rock_smallA.glb" id="9_rockS"]
 [ext_resource type="PackedScene" uid="uid://dw74yyqx7suth" path="res://assets/vendor/kenney_nature_kit/ground_grass.glb" id="10_ground"]
+[ext_resource type="PackedScene" uid="uid://dfk53ubby2cds" path="res://assets/vendor/kenney_nature_kit/tree_default.glb" id="11_tdef"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_b0pos"]
 
@@ -26,44 +27,57 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 
 [node name="Props" type="Node3D" parent="." unique_id=1792930972]
 
-[node name="Tree_1" parent="Props" unique_id=43831247 instance=ExtResource("2_tree")]
+[node name="Tree_1" parent="Props" unique_id=720774264 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, -6)
+model = ExtResource("11_tdef")
 
-[node name="Tree_2" parent="Props" unique_id=1031128430 instance=ExtResource("3_pine")]
+[node name="Tree_2" parent="Props" unique_id=331591539 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -4, 0, -6)
+model = ExtResource("3_pine")
 
-[node name="Tree_3" parent="Props" unique_id=1138989273 instance=ExtResource("2_tree")]
+[node name="Tree_3" parent="Props" unique_id=996411872 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -2, 0, -6)
+model = ExtResource("11_tdef")
 
-[node name="Tree_4" parent="Props" unique_id=480211533 instance=ExtResource("3_pine")]
+[node name="Tree_4" parent="Props" unique_id=789338130 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0, -6)
+model = ExtResource("3_pine")
 
-[node name="Tree_5" parent="Props" unique_id=1854238925 instance=ExtResource("2_tree")]
+[node name="Tree_5" parent="Props" unique_id=2044570654 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 2, 0, -6)
+model = ExtResource("11_tdef")
 
-[node name="Tree_6" parent="Props" unique_id=1355587287 instance=ExtResource("3_pine")]
+[node name="Tree_6" parent="Props" unique_id=2091909369 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 4, 0, -6)
+model = ExtResource("3_pine")
 
-[node name="Tree_7" parent="Props" unique_id=1413673242 instance=ExtResource("2_tree")]
+[node name="Tree_7" parent="Props" unique_id=1932999295 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 6, 0, -6)
+model = ExtResource("11_tdef")
 
-[node name="Tree_8" parent="Props" unique_id=1948220856 instance=ExtResource("3_pine")]
+[node name="Tree_8" parent="Props" unique_id=217525094 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, -4)
+model = ExtResource("3_pine")
 
-[node name="Tree_9" parent="Props" unique_id=584514926 instance=ExtResource("2_tree")]
+[node name="Tree_9" parent="Props" unique_id=524300235 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, -2)
+model = ExtResource("11_tdef")
 
-[node name="Tree_10" parent="Props" unique_id=541030847 instance=ExtResource("3_pine")]
+[node name="Tree_10" parent="Props" unique_id=860106059 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, 0)
+model = ExtResource("3_pine")
 
-[node name="Tree_11" parent="Props" unique_id=536993977 instance=ExtResource("2_tree")]
+[node name="Tree_11" parent="Props" unique_id=1919815366 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, 2)
+model = ExtResource("11_tdef")
 
-[node name="Tree_12" parent="Props" unique_id=990237865 instance=ExtResource("3_pine")]
+[node name="Tree_12" parent="Props" unique_id=2119435718 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, 4)
+model = ExtResource("3_pine")
 
-[node name="Tree_13" parent="Props" unique_id=1054694458 instance=ExtResource("2_tree")]
+[node name="Tree_13" parent="Props" unique_id=47228878 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, 6)
+model = ExtResource("11_tdef")
 
 [node name="Grass_1" parent="Props" unique_id=11413795 instance=ExtResource("4_grass")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 3, 0, 3)
