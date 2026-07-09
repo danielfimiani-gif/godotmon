@@ -89,6 +89,7 @@ func _on_capture_pressed() -> void:
 
 	if Capture.attempt(enemy):
 		message.text = "!Capturaste a %s!" % enemy.species.display_name
+		GameState.add_mon(enemy)
 		return
 
 	message.text = "!%s se escapó" % enemy.species.display_name
