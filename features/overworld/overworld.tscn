@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b7q20xw1v46xh"]
+
+[ext_resource type="Texture2D" uid="uid://c3i37nlvkojsk" path="res://assets/vendor/screen_smith_trainers/Townspeople_Animations.png" id="1_36ftp"]
+[ext_resource type="Script" uid="uid://b7u45k6dvv7w4" path="res://features/overworld/player.gd" id="1_261h0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_b0pos"]
+
+[node name="Overworld" type="Node3D" unique_id=218999913]
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=2061436757]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("PlaneMesh_b0pos")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=186992813]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+
+[node name="Player" type="Node3D" parent="." unique_id=475090959]
+script = ExtResource("1_261h0")
+
+[node name="Sprite3D" type="Sprite3D" parent="Player" unique_id=575789428]
+offset = Vector2(0, 10.05)
+pixel_size = 0.05
+billboard = 2
+texture_filter = 0
+texture = ExtResource("1_36ftp")
+region_enabled = true
+region_rect = Rect2(20.642962, 108.72905, 14.582762, 20.4897)
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=2091379764]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 3, 3)
