@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://kem5akn17ohk" path="res://features/overworld/buildings/building.gd" id="1_ol1pi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ol1pi"]
+size = Vector3(0.15527344, 0.3017578, 0.58691406)
 
 [node name="Building" type="StaticBody3D" unique_id=736169726]
 script = ExtResource("1_ol1pi")

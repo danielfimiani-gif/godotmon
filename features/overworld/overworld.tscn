@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cil1ormeefnys" path="res://features/overworld/overwold.gd" id="1_cbrhj"]
 [ext_resource type="PackedScene" uid="uid://jnsdfipm83m5" path="res://features/player/player.tscn" id="1_mtrc0"]
+[ext_resource type="PackedScene" uid="uid://c4ywpiilgt7n" path="res://features/overworld/buildings/building_center.tscn" id="2_qusvl"]
 [ext_resource type="PackedScene" uid="uid://u8l3kxjl0h5i" path="res://features/overworld/props/obstacle.tscn" id="2_tree"]
 [ext_resource type="PackedScene" uid="uid://k8qkmsn5hnon" path="res://assets/vendor/kenney_nature_kit/tree_pineDefaultA.glb" id="3_pine"]
-[ext_resource type="PackedScene" uid="uid://d5kfj4vq16xq" path="res://assets/vendor/kenney_city_kit/building-type-t.glb" id="3_xpiub"]
+[ext_resource type="PackedScene" uid="uid://bvnhqp0frrott" path="res://features/overworld/interiors/interior_center.tscn" id="3_v1fpt"]
+[ext_resource type="PackedScene" uid="uid://dlq2aiffkginx" path="res://features/overworld/buildings/building_gym.tscn" id="3_xpiub"]
 [ext_resource type="PackedScene" uid="uid://21k3wyqvjhu2" path="res://features/overworld/props/tall_grass.tscn" id="4_grass"]
 [ext_resource type="PackedScene" uid="uid://b7qkdgsb6rlr7" path="res://assets/vendor/kenney_nature_kit/plant_bush.glb" id="5_bush"]
 [ext_resource type="PackedScene" uid="uid://ctctustfq0o62" path="res://assets/vendor/kenney_nature_kit/flower_redA.glb" id="6_flower"]
@@ -20,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://bmfmeuqr3rk7p" path="res://assets/vendor/kenney_nature_kit/stump_round.glb" id="16_stumpR"]
 [ext_resource type="PackedScene" uid="uid://dcgileaj1kc0v" path="res://assets/vendor/kenney_nature_kit/log_large.glb" id="17_log"]
 [ext_resource type="PackedScene" uid="uid://cgcahn4224jm2" path="res://assets/vendor/kenney_nature_kit/sign.glb" id="18_sign"]
-[ext_resource type="PackedScene" uid="uid://cnfiqxhjgq86h" path="res://assets/vendor/kenney_city_kit/building-type-p.glb" id="19_qusvl"]
 [ext_resource type="PackedScene" uid="uid://cbhu74if5er8g" path="res://features/encounters/trainer.tscn" id="21_73n0e"]
 [ext_resource type="PackedScene" uid="uid://cwvo4mulpqjqq" path="res://assets/vendor/kenney_nature_kit/cliff_block_stone.glb" id="22_cliff"]
 [ext_resource type="PackedScene" uid="uid://4kbwwhkbshuu" path="res://assets/vendor/kenney_nature_kit/bridge_center_wood.glb" id="23_bridge"]
@@ -194,11 +195,12 @@ render_target_update_mode = 4
 
 [node name="Buildings" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1128777463]
 
-[node name="building-type-p2" parent="SubViewportContainer/SubViewport/Buildings" unique_id=5283709 instance=ExtResource("19_qusvl")]
-transform = Transform3D(-3, 1.3500073e-14, 4.5298742e-07, 0, 3, -8.9406946e-08, -4.5298742e-07, -8.9406946e-08, -3, 17.780138, -4.7683716e-07, -3.489049)
+[node name="Center" parent="SubViewportContainer/SubViewport/Buildings" unique_id=736169726 instance=ExtResource("2_qusvl")]
+transform = Transform3D(-3, 0, -2.6226832e-07, 0, 3, 0, 2.6226832e-07, 0, -3, 18.15863, 4.7683716e-07, -3.5449438)
+interior = ExtResource("3_v1fpt")
 
-[node name="building-type-t2" parent="SubViewportContainer/SubViewport/Buildings" unique_id=1165647081 instance=ExtResource("3_xpiub")]
-transform = Transform3D(-3, 0, 2.6226832e-07, 0, 3, 0, -2.6226832e-07, 0, -3, 25.484503, 0, -3.5671382)
+[node name="Gym" parent="SubViewportContainer/SubViewport/Buildings" unique_id=816974788 instance=ExtResource("3_xpiub")]
+transform = Transform3D(-3, 0, -2.6226832e-07, 0, 3, 0, 2.6226832e-07, 0, -3, 24.956228, 0, -3.330524)
 
 [node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1792930972]
 

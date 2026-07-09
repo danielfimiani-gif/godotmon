@@ -11,4 +11,4 @@ func _ready() -> void:
 
 func _on_door_entered(_area: Area3D) -> void:
 	if interior:
-		get_tree().change_scene_to_packed(interior)
+		get_tree().change_scene_to_packed.call_deferred(interior)
