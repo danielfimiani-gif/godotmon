@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dlq2aiffkginx"]
+
+[ext_resource type="PackedScene" uid="uid://dix4larnli0b0" path="res://features/overworld/buildings/building_base.tscn" id="1_oonfy"]
+[ext_resource type="PackedScene" uid="uid://d5kfj4vq16xq" path="res://assets/vendor/kenney_city_kit/building-type-t.glb" id="2_oonfy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oiisg"]
+size = Vector3(0.54559326, 0.47558594, 1.358429)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yd64m"]
+size = Vector3(0.5130615, 0.47558594, 1.3406448)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oonfy"]
+size = Vector3(0.33984375, 0.47558594, 1.0941505)
+
+[node name="Building" unique_id=736169726 instance=ExtResource("1_oonfy")]
+
+[node name="building-type-t2" parent="." index="0" unique_id=1165647081 instance=ExtResource("2_oonfy")]
+
+[node name="CollisionShape3D" parent="DoorTigger" parent_id_path=PackedInt32Array(2108286450) index="0" unique_id=395139835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008754998, 0.14398941, -0.2685396)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2" unique_id=1556387207]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3742968, 0.21566474, -0.01950401)
+shape = SubResource("BoxShape3D_oiisg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="3" unique_id=1644654837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35827583, 0.21566474, 0.0040288568)
+shape = SubResource("BoxShape3D_yd64m")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." index="4" unique_id=708819245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06907347, 0.21566474, 0.127276)
+shape = SubResource("BoxShape3D_oonfy")

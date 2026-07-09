@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://jnsdfipm83m5"]
 
-[ext_resource type="Script" uid="uid://b7u45k6dvv7w4" path="res://features/overworld/player.gd" id="1_h1hfe"]
+[ext_resource type="Script" uid="uid://b7u45k6dvv7w4" path="res://features/player/player.gd" id="1_h1hfe"]
 [ext_resource type="Texture2D" uid="uid://c3i37nlvkojsk" path="res://assets/vendor/screen_smith_trainers/Townspeople_Animations.png" id="2_uhbth"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h1hfe"]
