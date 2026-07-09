@@ -12,6 +12,7 @@ extends Node3D
 @onready var message: Label = $UI/MessageLabel
 @onready var moves_box: GridContainer = $UI/MovesPanel
 @onready var capture_button: Button = $UI/CaptureButton
+@onready var flee_button: Button = $UI/FleeButton
 
 var player: Mon
 var enemy: Mon
@@ -23,6 +24,7 @@ func _ready() -> void:
 	_spawn(enemy_species, enemy_slot)
 	_build_move_buttons()
 	capture_button.pressed.connect(_on_capture_pressed)
+	flee_button.pressed.connect(_on_flee_pressed)
 	_refresh_ui()
 	message.text = "!%s salvaje apareció!" % enemy.species.display_name
 
@@ -43,7 +45,7 @@ func _on_move_pressed(move: MoveData) -> void:
 		message.text = "!%s se debilitó! Ganaste" % enemy.species.display_name
 		return
 	
-	var enemy_move: MoveData = enemy.species.moves[0]
+	var enemy_move: MoveData = _enemy_best_move()
 	await _do_turn(enemy, enemy_move, player)
 	if player.is_fainted():
 		message.text = "!%s se debilitó Perdiste" % player.species.display_name
@@ -67,6 +69,8 @@ func _do_turn(attacker: Mon, move: MoveData, defender: Mon) -> void:
 func _set_buttons_enabled(enabled: bool) -> void:
 	for b in moves_box.get_children():
 		b.disabled = not enabled
+	capture_button.disabled = not enabled
+	flee_button.disabled = not enabled
 
 func _refresh_ui() -> void:
 	player_name.text = player.species.display_name
@@ -89,8 +93,23 @@ func _on_capture_pressed() -> void:
 
 	message.text = "!%s se escapó" % enemy.species.display_name
 	await get_tree().create_timer(0.8).timeout
-	await _do_turn(enemy, enemy.species.moves[0], player)
+	await _do_turn(enemy, _enemy_best_move(), player)
 	if player.is_fainted():
 		message.text = "!%s se debilitó Perdiste" % player.species.display_name
 		return
 	_set_buttons_enabled(true)
+
+func _on_flee_pressed() -> void:
+	_set_buttons_enabled(false)
+	message.text = "Huiste de la batalla..."
+	await get_tree().create_timer(0.8).timeout
+
+func _enemy_best_move() -> MoveData:
+	var best: MoveData = enemy.species.moves[0]
+	var best_dmg := 0
+	for m in enemy.species.moves:
+		var d := Damage.calculate(enemy.species, m, player.species)
+		if d > best_dmg:
+			best_dmg = d
+			best = m
+	return best
