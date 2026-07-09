@@ -11,6 +11,7 @@ extends Node3D
 @onready var enemy_hp: ProgressBar = $UI/EnemyPanel/EnemyBox/EnemyHP
 @onready var message: Label = $UI/MessageLabel
 @onready var moves_box: GridContainer = $UI/MovesPanel
+@onready var capture_button: Button = $UI/CaptureButton
 
 var player: Mon
 var enemy: Mon
@@ -21,6 +22,7 @@ func _ready() -> void:
 	_spawn(player_species, player_slot)
 	_spawn(enemy_species, enemy_slot)
 	_build_move_buttons()
+	capture_button.pressed.connect(_on_capture_pressed)
 	_refresh_ui()
 	message.text = "!%s salvaje apareció!" % enemy.species.display_name
 
@@ -36,21 +38,31 @@ func _build_move_buttons() -> void:
 
 func _on_move_pressed(move: MoveData) -> void:
 	_set_buttons_enabled(false)
-	var dmg = Battle.use_move(player, move, enemy)
-	_refresh_ui()
+	await _do_turn(player, move, enemy)
 	if enemy.is_fainted():
-		message.text = "!%s se debilitó! Ganaste " % enemy.species.display_name
+		message.text = "!%s se debilitó! Ganaste" % enemy.species.display_name
 		return
 	
 	var enemy_move: MoveData = enemy.species.moves[0]
-	var edmg := Battle.use_move(enemy, enemy_move, player)
-	_refresh_ui()
+	await _do_turn(enemy, enemy_move, player)
 	if player.is_fainted():
-		message.text = "!%s se debilitó! Perdiste" % player.species.display_name
+		message.text = "!%s se debilitó Perdiste" % player.species.display_name
 		return
-
-	message.text = "%s: %d dmg | %s: %d dmg" % [move.display_name, dmg, enemy_move.display_name, edmg]
 	_set_buttons_enabled(true)
+
+func _do_turn(attacker: Mon, move: MoveData, defender: Mon) -> void:
+	message.text = "%s usó %s" % [attacker.species.display_name, move.display_name]
+	await get_tree().create_timer(0.8).timeout
+
+	var dmg := Battle.use_move(attacker, move, defender)
+	var eff := ElementType.effectiveness(move.element, defender.species.element)
+	_refresh_ui()
+
+	var note := ""
+	if eff > 1.0: note = "  !Es muy eficaz!"
+	elif eff < 1.0: note = "   No es muy eficaz..."
+	message.text = "%s recibió %d de daño.%s" % [defender.species.display_name, dmg, note]
+	await get_tree().create_timer(0.8).timeout
 
 func _set_buttons_enabled(enabled: bool) -> void:
 	for b in moves_box.get_children():
@@ -65,3 +77,20 @@ func _refresh_ui() -> void:
 func _set_hp_bar(bar: ProgressBar, mon: Mon) -> void:
 	bar.max_value = mon.species.max_hp
 	bar.value = mon.current_hp
+
+func _on_capture_pressed() -> void:
+	_set_buttons_enabled(false)
+	message.text = "Lanzaste una Esfera..."
+	await get_tree().create_timer(0.8).timeout
+
+	if Capture.attempt(enemy):
+		message.text = "!Capturaste a %s!" % enemy.species.display_name
+		return
+
+	message.text = "!%s se escapó" % enemy.species.display_name
+	await get_tree().create_timer(0.8).timeout
+	await _do_turn(enemy, enemy.species.moves[0], player)
+	if player.is_fainted():
+		message.text = "!%s se debilitó Perdiste" % player.species.display_name
+		return
+	_set_buttons_enabled(true)
