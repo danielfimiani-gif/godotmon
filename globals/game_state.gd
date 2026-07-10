@@ -23,8 +23,8 @@ func start_wild_encounter() -> void:
 		load("res://data/mon/leafhop.tres")
 	]
 	wild_species = pool.pick_random()
-	get_tree().change_scene_to_file("res://features/battle/battle.tscn")
+	get_tree().change_scene_to_file.call_deferred("res://features/battle/battle.tscn")
 
 func start_trainer_battle(t: TrainerData) -> void:
 	trainer = t
-	get_tree().change_scene_to_file("res://features/battle/battle.tscn")
+	get_tree().change_scene_to_file.call_deferred("res://features/battle/battle.tscn")

@@ -46,7 +46,7 @@ shader_parameter/lineShadow = 0.55
 size = Vector3(2, 1, 1.5)
 
 [sub_resource type="BoxShape3D" id="Box_exit"]
-size = Vector3(2, 1, 1)
+size = Vector3(0.9157715, 1, 0.625)
 
 [node name="InteriorCenter" type="Node3D" unique_id=206730582]
 script = ExtResource("1_voa51")
@@ -487,6 +487,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2.5)
 script = ExtResource("17_x7hxh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NurseTrigger" unique_id=1443518856]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7358494)
 shape = SubResource("Box_nurse")
 
 [node name="ExitDoor" type="Area3D" parent="." unique_id=712929597]
@@ -494,4 +495,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.999064, 0.5, 4.368464)
 script = ExtResource("18_3p5u5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExitDoor" unique_id=1934317311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1875)
 shape = SubResource("Box_exit")

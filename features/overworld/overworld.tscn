@@ -196,7 +196,7 @@ render_target_update_mode = 4
 [node name="Buildings" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1128777463]
 
 [node name="Center" parent="SubViewportContainer/SubViewport/Buildings" unique_id=736169726 instance=ExtResource("2_qusvl")]
-transform = Transform3D(-3, 0, -2.6226832e-07, 0, 3, 0, 2.6226832e-07, 0, -3, 18.15863, 4.7683716e-07, -3.5449438)
+transform = Transform3D(-3, 0, -2.6226832e-07, 0, 3, 0, 2.6226832e-07, 0, -3, 18.15863, 4.7683716e-07, -3.5697825)
 interior = ExtResource("3_v1fpt")
 
 [node name="Gym" parent="SubViewportContainer/SubViewport/Buildings" unique_id=816974788 instance=ExtResource("3_xpiub")]

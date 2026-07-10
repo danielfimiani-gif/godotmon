@@ -1,0 +1,735 @@
+[gd_scene format=3 uid="uid://cclpyoxwuws63"]
+
+[ext_resource type="Script" uid="uid://cil1ormeefnys" path="res://features/overworld/overwold.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://jnsdfipm83m5" path="res://features/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://dw74yyqx7suth" path="res://assets/vendor/kenney_nature_kit/ground_grass.glb" id="3_floor"]
+[ext_resource type="PackedScene" uid="uid://bm2pn81vuxmbu" path="res://assets/vendor/kenney_center/wall.glb" id="4_wall"]
+[ext_resource type="PackedScene" uid="uid://oh57cu2s6kpt" path="res://assets/vendor/kenney_center/wall-door-rotate.glb" id="5_door"]
+[ext_resource type="Shader" uid="uid://dbykrib4tooku" path="res://assets/shaders/edge_detection.gdshader" id="6_shader"]
+[ext_resource type="PackedScene" uid="uid://c8ttox4guh30k" path="res://assets/vendor/kenney_center/column.glb" id="7_col"]
+[ext_resource type="PackedScene" uid="uid://b7qkdgsb6rlr7" path="res://assets/vendor/kenney_nature_kit/plant_bush.glb" id="8_bush"]
+[ext_resource type="PackedScene" uid="uid://5qa3h3vlveyi" path="res://assets/vendor/kenney_nature_kit/fence_simpleCenter.glb" id="9_fence"]
+[ext_resource type="PackedScene" uid="uid://q3bb7kmwxn11" path="res://assets/vendor/kenney_nature_kit/rock_largeA.glb" id="10_rockL"]
+[ext_resource type="PackedScene" uid="uid://c1giefaxlxiqo" path="res://assets/vendor/kenney_nature_kit/rock_smallA.glb" id="11_rockS"]
+[ext_resource type="PackedScene" uid="uid://ctctustfq0o62" path="res://assets/vendor/kenney_nature_kit/flower_redA.glb" id="12_flower"]
+[ext_resource type="PackedScene" uid="uid://cbhu74if5er8g" path="res://features/encounters/trainer.tscn" id="13_marina"]
+[ext_resource type="Script" uid="uid://cpttj7knnm883" path="res://features/overworld/interiors/exit_door.gd" id="14_exit"]
+[ext_resource type="PackedScene" uid="uid://caotn34rtjrbm" path="res://assets/vendor/kenney_nature_kit/ground_riverStraight.glb" id="15_river"]
+[ext_resource type="PackedScene" uid="uid://u8l3kxjl0h5i" path="res://features/overworld/props/obstacle.tscn" id="16_obstacle"]
+
+[sub_resource type="ProceduralSkyMaterial" id="Sky_mat"]
+
+[sub_resource type="Sky" id="Sky_res"]
+sky_material = SubResource("Sky_mat")
+
+[sub_resource type="Environment" id="Env_res"]
+background_mode = 2
+sky = SubResource("Sky_res")
+ambient_light_source = 3
+
+[sub_resource type="QuadMesh" id="Quad"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMat"]
+render_priority = 0
+shader = ExtResource("6_shader")
+shader_parameter/lightIntensity = 1.25
+shader_parameter/lineAlpha = 0.7
+shader_parameter/useLighting = true
+shader_parameter/lineHighlight = 0.2
+shader_parameter/lineShadow = 0.55
+
+[sub_resource type="BoxShape3D" id="Box_exit"]
+size = Vector3(2, 1, 1)
+
+[node name="InteriorGymAqua" type="Node3D" unique_id=1780391464]
+script = ExtResource("1_script")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=942537896]
+transform = Transform3D(0.5246695, -0.60196424, -0.60196424, 0.8513061, 0.37099743, 0.37099743, 0, -0.7071068, 0.7071068, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1791164667]
+environment = SubResource("Env_res")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=49843310]
+texture_filter = 1
+use_parent_material = true
+offset_right = 640.0
+offset_bottom = 360.0
+stretch = true
+stretch_shrink = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=514488031]
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="Floor" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1265365]
+
+[node name="F_0_0" parent="SubViewportContainer/SubViewport/Floor" unique_id=1531516008 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+
+[node name="F_0_1" parent="SubViewportContainer/SubViewport/Floor" unique_id=1930822831 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4)
+
+[node name="F_0_2" parent="SubViewportContainer/SubViewport/Floor" unique_id=1364605240 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3)
+
+[node name="F_0_3" parent="SubViewportContainer/SubViewport/Floor" unique_id=1089417716 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2)
+
+[node name="F_0_4" parent="SubViewportContainer/SubViewport/Floor" unique_id=1749152563 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
+
+[node name="F_0_5" parent="SubViewportContainer/SubViewport/Floor" unique_id=829671037 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="F_0_6" parent="SubViewportContainer/SubViewport/Floor" unique_id=569354691 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
+
+[node name="F_0_7" parent="SubViewportContainer/SubViewport/Floor" unique_id=1125095553 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 2)
+
+[node name="F_0_8" parent="SubViewportContainer/SubViewport/Floor" unique_id=1900765364 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3)
+
+[node name="F_0_9" parent="SubViewportContainer/SubViewport/Floor" unique_id=1898235236 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 4)
+
+[node name="F_0_10" parent="SubViewportContainer/SubViewport/Floor" unique_id=1229503084 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+
+[node name="F_1_0" parent="SubViewportContainer/SubViewport/Floor" unique_id=1047678657 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5)
+
+[node name="F_1_1" parent="SubViewportContainer/SubViewport/Floor" unique_id=1512281933 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="F_1_2" parent="SubViewportContainer/SubViewport/Floor" unique_id=551051811 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -3)
+
+[node name="F_1_3" parent="SubViewportContainer/SubViewport/Floor" unique_id=530729072 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
+
+[node name="F_1_4" parent="SubViewportContainer/SubViewport/Floor" unique_id=2141699847 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1)
+
+[node name="F_1_5" parent="SubViewportContainer/SubViewport/Floor" unique_id=889319225 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="F_1_6" parent="SubViewportContainer/SubViewport/Floor" unique_id=1990419570 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
+
+[node name="F_1_7" parent="SubViewportContainer/SubViewport/Floor" unique_id=366183409 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2)
+
+[node name="F_1_8" parent="SubViewportContainer/SubViewport/Floor" unique_id=1867112393 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3)
+
+[node name="F_1_9" parent="SubViewportContainer/SubViewport/Floor" unique_id=1781163811 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
+
+[node name="F_1_10" parent="SubViewportContainer/SubViewport/Floor" unique_id=862722156 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 5)
+
+[node name="F_2_0" parent="SubViewportContainer/SubViewport/Floor" unique_id=613134518 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -5)
+
+[node name="F_2_1" parent="SubViewportContainer/SubViewport/Floor" unique_id=1935223866 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -4)
+
+[node name="F_2_2" parent="SubViewportContainer/SubViewport/Floor" unique_id=948650195 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
+
+[node name="F_2_3" parent="SubViewportContainer/SubViewport/Floor" unique_id=553601793 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
+
+[node name="F_2_4" parent="SubViewportContainer/SubViewport/Floor" unique_id=1404313486 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1)
+
+[node name="F_2_5" parent="SubViewportContainer/SubViewport/Floor" unique_id=1526243982 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+
+[node name="F_2_6" parent="SubViewportContainer/SubViewport/Floor" unique_id=951943449 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
+
+[node name="F_2_7" parent="SubViewportContainer/SubViewport/Floor" unique_id=951834077 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 2)
+
+[node name="F_2_8" parent="SubViewportContainer/SubViewport/Floor" unique_id=1433454380 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
+
+[node name="F_2_9" parent="SubViewportContainer/SubViewport/Floor" unique_id=465830632 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 4)
+
+[node name="F_2_10" parent="SubViewportContainer/SubViewport/Floor" unique_id=18205853 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 5)
+
+[node name="F_3_0" parent="SubViewportContainer/SubViewport/Floor" unique_id=776730594 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -5)
+
+[node name="F_3_1" parent="SubViewportContainer/SubViewport/Floor" unique_id=1982954065 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
+
+[node name="F_3_2" parent="SubViewportContainer/SubViewport/Floor" unique_id=1739252915 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
+
+[node name="F_3_3" parent="SubViewportContainer/SubViewport/Floor" unique_id=2080131996 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="F_3_4" parent="SubViewportContainer/SubViewport/Floor" unique_id=304544695 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
+
+[node name="F_3_5" parent="SubViewportContainer/SubViewport/Floor" unique_id=1657401795 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="F_3_6" parent="SubViewportContainer/SubViewport/Floor" unique_id=584113625 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
+
+[node name="F_3_7" parent="SubViewportContainer/SubViewport/Floor" unique_id=538265605 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="F_3_8" parent="SubViewportContainer/SubViewport/Floor" unique_id=230596579 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3)
+
+[node name="F_3_9" parent="SubViewportContainer/SubViewport/Floor" unique_id=204989328 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
+
+[node name="F_3_10" parent="SubViewportContainer/SubViewport/Floor" unique_id=1010061919 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5)
+
+[node name="F_4_0" parent="SubViewportContainer/SubViewport/Floor" unique_id=698200546 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5)
+
+[node name="F_4_1" parent="SubViewportContainer/SubViewport/Floor" unique_id=1428951925 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
+
+[node name="F_4_2" parent="SubViewportContainer/SubViewport/Floor" unique_id=1887059082 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3)
+
+[node name="F_4_3" parent="SubViewportContainer/SubViewport/Floor" unique_id=1281285522 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+
+[node name="F_4_4" parent="SubViewportContainer/SubViewport/Floor" unique_id=2087259619 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+
+[node name="F_4_5" parent="SubViewportContainer/SubViewport/Floor" unique_id=1009844807 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="F_4_6" parent="SubViewportContainer/SubViewport/Floor" unique_id=676184379 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="F_4_7" parent="SubViewportContainer/SubViewport/Floor" unique_id=2133162490 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+
+[node name="F_4_8" parent="SubViewportContainer/SubViewport/Floor" unique_id=1605386628 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+
+[node name="F_4_9" parent="SubViewportContainer/SubViewport/Floor" unique_id=1800109724 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
+
+[node name="F_4_10" parent="SubViewportContainer/SubViewport/Floor" unique_id=1579441350 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 5)
+
+[node name="F_5_0" parent="SubViewportContainer/SubViewport/Floor" unique_id=1516935799 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="F_5_1" parent="SubViewportContainer/SubViewport/Floor" unique_id=490280439 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="F_5_2" parent="SubViewportContainer/SubViewport/Floor" unique_id=742072408 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="F_5_3" parent="SubViewportContainer/SubViewport/Floor" unique_id=1050965702 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="F_5_4" parent="SubViewportContainer/SubViewport/Floor" unique_id=792948014 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="F_5_5" parent="SubViewportContainer/SubViewport/Floor" unique_id=1949636971 instance=ExtResource("3_floor")]
+
+[node name="F_5_6" parent="SubViewportContainer/SubViewport/Floor" unique_id=1044517604 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="F_5_7" parent="SubViewportContainer/SubViewport/Floor" unique_id=1275169330 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="F_5_8" parent="SubViewportContainer/SubViewport/Floor" unique_id=1387983498 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="F_5_9" parent="SubViewportContainer/SubViewport/Floor" unique_id=1858639295 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="F_5_10" parent="SubViewportContainer/SubViewport/Floor" unique_id=1391294658 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="F_6_0" parent="SubViewportContainer/SubViewport/Floor" unique_id=1117980392 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)
+
+[node name="F_6_1" parent="SubViewportContainer/SubViewport/Floor" unique_id=779519410 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
+
+[node name="F_6_2" parent="SubViewportContainer/SubViewport/Floor" unique_id=23188526 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
+
+[node name="F_6_3" parent="SubViewportContainer/SubViewport/Floor" unique_id=1566472414 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+
+[node name="F_6_4" parent="SubViewportContainer/SubViewport/Floor" unique_id=466169053 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+
+[node name="F_6_5" parent="SubViewportContainer/SubViewport/Floor" unique_id=300453487 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="F_6_6" parent="SubViewportContainer/SubViewport/Floor" unique_id=106588714 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="F_6_7" parent="SubViewportContainer/SubViewport/Floor" unique_id=2092108292 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+
+[node name="F_6_8" parent="SubViewportContainer/SubViewport/Floor" unique_id=674800397 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+
+[node name="F_6_9" parent="SubViewportContainer/SubViewport/Floor" unique_id=261105426 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
+
+[node name="F_6_10" parent="SubViewportContainer/SubViewport/Floor" unique_id=1471343904 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
+
+[node name="F_7_0" parent="SubViewportContainer/SubViewport/Floor" unique_id=1678282998 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5)
+
+[node name="F_7_1" parent="SubViewportContainer/SubViewport/Floor" unique_id=606279324 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+
+[node name="F_7_2" parent="SubViewportContainer/SubViewport/Floor" unique_id=1094422634 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
+
+[node name="F_7_3" parent="SubViewportContainer/SubViewport/Floor" unique_id=311089584 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="F_7_4" parent="SubViewportContainer/SubViewport/Floor" unique_id=900006572 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+
+[node name="F_7_5" parent="SubViewportContainer/SubViewport/Floor" unique_id=139241230 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="F_7_6" parent="SubViewportContainer/SubViewport/Floor" unique_id=391018308 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+
+[node name="F_7_7" parent="SubViewportContainer/SubViewport/Floor" unique_id=191514324 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="F_7_8" parent="SubViewportContainer/SubViewport/Floor" unique_id=1351007738 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
+
+[node name="F_7_9" parent="SubViewportContainer/SubViewport/Floor" unique_id=1275776874 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+
+[node name="F_7_10" parent="SubViewportContainer/SubViewport/Floor" unique_id=79389579 instance=ExtResource("3_floor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
+
+[node name="F_8_0" parent="SubViewportContainer/SubViewport/Floor" unique_id=1763666770 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -5)
+
+[node name="F_8_1" parent="SubViewportContainer/SubViewport/Floor" unique_id=729985964 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4)
+
+[node name="F_8_2" parent="SubViewportContainer/SubViewport/Floor" unique_id=92771267 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3)
+
+[node name="F_8_3" parent="SubViewportContainer/SubViewport/Floor" unique_id=60786056 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
+
+[node name="F_8_4" parent="SubViewportContainer/SubViewport/Floor" unique_id=285135653 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -1)
+
+[node name="F_8_5" parent="SubViewportContainer/SubViewport/Floor" unique_id=1410745667 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="F_8_6" parent="SubViewportContainer/SubViewport/Floor" unique_id=550000150 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+
+[node name="F_8_7" parent="SubViewportContainer/SubViewport/Floor" unique_id=877297281 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+
+[node name="F_8_8" parent="SubViewportContainer/SubViewport/Floor" unique_id=1566675276 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+
+[node name="F_8_9" parent="SubViewportContainer/SubViewport/Floor" unique_id=1069936354 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
+
+[node name="F_8_10" parent="SubViewportContainer/SubViewport/Floor" unique_id=1516996197 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5)
+
+[node name="F_9_0" parent="SubViewportContainer/SubViewport/Floor" unique_id=2037744934 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5)
+
+[node name="F_9_1" parent="SubViewportContainer/SubViewport/Floor" unique_id=677874607 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="F_9_2" parent="SubViewportContainer/SubViewport/Floor" unique_id=803158214 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -3)
+
+[node name="F_9_3" parent="SubViewportContainer/SubViewport/Floor" unique_id=1631026272 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+
+[node name="F_9_4" parent="SubViewportContainer/SubViewport/Floor" unique_id=1744297920 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -1)
+
+[node name="F_9_5" parent="SubViewportContainer/SubViewport/Floor" unique_id=1160983560 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="F_9_6" parent="SubViewportContainer/SubViewport/Floor" unique_id=1237126207 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
+
+[node name="F_9_7" parent="SubViewportContainer/SubViewport/Floor" unique_id=64095060 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+
+[node name="F_9_8" parent="SubViewportContainer/SubViewport/Floor" unique_id=2117003958 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
+
+[node name="F_9_9" parent="SubViewportContainer/SubViewport/Floor" unique_id=622515182 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="F_9_10" parent="SubViewportContainer/SubViewport/Floor" unique_id=773205560 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5)
+
+[node name="F_10_0" parent="SubViewportContainer/SubViewport/Floor" unique_id=843404001 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
+
+[node name="F_10_1" parent="SubViewportContainer/SubViewport/Floor" unique_id=1564261892 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -4)
+
+[node name="F_10_2" parent="SubViewportContainer/SubViewport/Floor" unique_id=2017508600 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
+
+[node name="F_10_3" parent="SubViewportContainer/SubViewport/Floor" unique_id=1143839194 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
+
+[node name="F_10_4" parent="SubViewportContainer/SubViewport/Floor" unique_id=35624427 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
+
+[node name="F_10_5" parent="SubViewportContainer/SubViewport/Floor" unique_id=1028476932 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="F_10_6" parent="SubViewportContainer/SubViewport/Floor" unique_id=546192952 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+
+[node name="F_10_7" parent="SubViewportContainer/SubViewport/Floor" unique_id=1277734787 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
+
+[node name="F_10_8" parent="SubViewportContainer/SubViewport/Floor" unique_id=828282202 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
+
+[node name="F_10_9" parent="SubViewportContainer/SubViewport/Floor" unique_id=368987590 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
+
+[node name="F_10_10" parent="SubViewportContainer/SubViewport/Floor" unique_id=1697497692 instance=ExtResource("15_river")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+
+[node name="Walls" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=605797147]
+
+[node name="W_0" parent="SubViewportContainer/SubViewport/Walls" unique_id=1537662177 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5.8)
+
+[node name="W_1" parent="SubViewportContainer/SubViewport/Walls" unique_id=1551374766 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5.8)
+
+[node name="W_2" parent="SubViewportContainer/SubViewport/Walls" unique_id=1367853910 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -5.8)
+
+[node name="W_3" parent="SubViewportContainer/SubViewport/Walls" unique_id=1729950286 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -5.8)
+
+[node name="W_4" parent="SubViewportContainer/SubViewport/Walls" unique_id=1415502652 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5.8)
+
+[node name="W_5" parent="SubViewportContainer/SubViewport/Walls" unique_id=1035660473 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.8)
+
+[node name="W_6" parent="SubViewportContainer/SubViewport/Walls" unique_id=1166504270 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5.8)
+
+[node name="W_7" parent="SubViewportContainer/SubViewport/Walls" unique_id=453462346 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5.8)
+
+[node name="W_8" parent="SubViewportContainer/SubViewport/Walls" unique_id=913542500 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -5.8)
+
+[node name="W_9" parent="SubViewportContainer/SubViewport/Walls" unique_id=232955757 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5.8)
+
+[node name="W_10" parent="SubViewportContainer/SubViewport/Walls" unique_id=1528085896 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5.8)
+
+[node name="W_11" parent="SubViewportContainer/SubViewport/Walls" unique_id=490405232 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5.8)
+
+[node name="W_12" parent="SubViewportContainer/SubViewport/Walls" unique_id=1856718289 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 5.8)
+
+[node name="W_13" parent="SubViewportContainer/SubViewport/Walls" unique_id=1190836011 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 5.8)
+
+[node name="W_14" parent="SubViewportContainer/SubViewport/Walls" unique_id=679743923 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5.8)
+
+[node name="W_15" parent="SubViewportContainer/SubViewport/Walls" unique_id=1859285753 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 5.8)
+
+[node name="Door" parent="SubViewportContainer/SubViewport/Walls" unique_id=1968989240 instance=ExtResource("5_door")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.8)
+
+[node name="W_16" parent="SubViewportContainer/SubViewport/Walls" unique_id=382917953 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5.8)
+
+[node name="W_17" parent="SubViewportContainer/SubViewport/Walls" unique_id=244090682 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5.8)
+
+[node name="W_18" parent="SubViewportContainer/SubViewport/Walls" unique_id=1534798372 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5.8)
+
+[node name="W_19" parent="SubViewportContainer/SubViewport/Walls" unique_id=2145136827 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5.8)
+
+[node name="W_20" parent="SubViewportContainer/SubViewport/Walls" unique_id=716459048 instance=ExtResource("4_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5.8)
+
+[node name="W_21" parent="SubViewportContainer/SubViewport/Walls" unique_id=2015019597 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.8, 0, -5)
+
+[node name="W_22" parent="SubViewportContainer/SubViewport/Walls" unique_id=1365014551 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.8, 0, -4)
+
+[node name="W_23" parent="SubViewportContainer/SubViewport/Walls" unique_id=1402667810 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.8, 0, -3)
+
+[node name="W_24" parent="SubViewportContainer/SubViewport/Walls" unique_id=779322085 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.8, 0, -2)
+
+[node name="W_25" parent="SubViewportContainer/SubViewport/Walls" unique_id=1273069738 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.8, 0, -1)
+
+[node name="W_26" parent="SubViewportContainer/SubViewport/Walls" unique_id=1122450966 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.8, 0, 0)
+
+[node name="W_27" parent="SubViewportContainer/SubViewport/Walls" unique_id=1471409571 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.8, 0, 1)
+
+[node name="W_28" parent="SubViewportContainer/SubViewport/Walls" unique_id=1115456877 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.8, 0, 2)
+
+[node name="W_29" parent="SubViewportContainer/SubViewport/Walls" unique_id=857946011 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.8, 0, 3)
+
+[node name="W_30" parent="SubViewportContainer/SubViewport/Walls" unique_id=17164362 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.8, 0, 4)
+
+[node name="W_31" parent="SubViewportContainer/SubViewport/Walls" unique_id=1523375648 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.8, 0, 5)
+
+[node name="W_32" parent="SubViewportContainer/SubViewport/Walls" unique_id=1897691326 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.8, 0, -5)
+
+[node name="W_33" parent="SubViewportContainer/SubViewport/Walls" unique_id=707701497 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.8, 0, -4)
+
+[node name="W_34" parent="SubViewportContainer/SubViewport/Walls" unique_id=1420334540 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.8, 0, -3)
+
+[node name="W_35" parent="SubViewportContainer/SubViewport/Walls" unique_id=359754026 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.8, 0, -2)
+
+[node name="W_36" parent="SubViewportContainer/SubViewport/Walls" unique_id=2122096880 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.8, 0, -1)
+
+[node name="W_37" parent="SubViewportContainer/SubViewport/Walls" unique_id=561370897 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.8, 0, 0)
+
+[node name="W_38" parent="SubViewportContainer/SubViewport/Walls" unique_id=216686776 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.8, 0, 1)
+
+[node name="W_39" parent="SubViewportContainer/SubViewport/Walls" unique_id=738913570 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.8, 0, 2)
+
+[node name="W_40" parent="SubViewportContainer/SubViewport/Walls" unique_id=1229331252 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.8, 0, 3)
+
+[node name="W_41" parent="SubViewportContainer/SubViewport/Walls" unique_id=1506309593 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.8, 0, 4)
+
+[node name="W_42" parent="SubViewportContainer/SubViewport/Walls" unique_id=596433521 instance=ExtResource("4_wall")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 5.8, 0, 5)
+
+[node name="Deco" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=910013612]
+
+[node name="FenceL_0" parent="SubViewportContainer/SubViewport/Deco" unique_id=1615279934 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -2.5, 0, -5)
+model = ExtResource("9_fence")
+
+[node name="FenceR_0" parent="SubViewportContainer/SubViewport/Deco" unique_id=1762626871 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.5, 0, -5)
+model = ExtResource("9_fence")
+
+[node name="FenceL_1" parent="SubViewportContainer/SubViewport/Deco" unique_id=1067105255 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -2.5, 0, -4)
+model = ExtResource("9_fence")
+
+[node name="FenceR_1" parent="SubViewportContainer/SubViewport/Deco" unique_id=1489431154 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.5, 0, -4)
+model = ExtResource("9_fence")
+
+[node name="FenceL_2" parent="SubViewportContainer/SubViewport/Deco" unique_id=846367077 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -2.5, 0, -3)
+model = ExtResource("9_fence")
+
+[node name="FenceR_2" parent="SubViewportContainer/SubViewport/Deco" unique_id=692525078 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.5, 0, -3)
+model = ExtResource("9_fence")
+
+[node name="FenceL_3" parent="SubViewportContainer/SubViewport/Deco" unique_id=1739623557 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -2.5, 0, -2)
+model = ExtResource("9_fence")
+
+[node name="FenceR_3" parent="SubViewportContainer/SubViewport/Deco" unique_id=1125293089 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.5, 0, -2)
+model = ExtResource("9_fence")
+
+[node name="FenceL_4" parent="SubViewportContainer/SubViewport/Deco" unique_id=1519400327 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -2.5, 0, -1)
+model = ExtResource("9_fence")
+
+[node name="FenceR_4" parent="SubViewportContainer/SubViewport/Deco" unique_id=1792774881 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.5, 0, -1)
+model = ExtResource("9_fence")
+
+[node name="FenceL_5" parent="SubViewportContainer/SubViewport/Deco" unique_id=616974417 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -2.5, 0, 0)
+model = ExtResource("9_fence")
+
+[node name="FenceR_5" parent="SubViewportContainer/SubViewport/Deco" unique_id=2021194817 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.5, 0, 0)
+model = ExtResource("9_fence")
+
+[node name="FenceL_6" parent="SubViewportContainer/SubViewport/Deco" unique_id=1216613006 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -2.5, 0, 1)
+model = ExtResource("9_fence")
+
+[node name="FenceR_6" parent="SubViewportContainer/SubViewport/Deco" unique_id=365980768 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.5, 0, 1)
+model = ExtResource("9_fence")
+
+[node name="FenceL_7" parent="SubViewportContainer/SubViewport/Deco" unique_id=1632773998 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -2.5, 0, 2)
+model = ExtResource("9_fence")
+
+[node name="FenceR_7" parent="SubViewportContainer/SubViewport/Deco" unique_id=1411118380 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.5, 0, 2)
+model = ExtResource("9_fence")
+
+[node name="FenceL_8" parent="SubViewportContainer/SubViewport/Deco" unique_id=677836218 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -2.5, 0, 3)
+model = ExtResource("9_fence")
+
+[node name="FenceR_8" parent="SubViewportContainer/SubViewport/Deco" unique_id=1947638794 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.5, 0, 3)
+model = ExtResource("9_fence")
+
+[node name="FenceL_9" parent="SubViewportContainer/SubViewport/Deco" unique_id=990746986 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -2.5, 0, 4)
+model = ExtResource("9_fence")
+
+[node name="FenceR_9" parent="SubViewportContainer/SubViewport/Deco" unique_id=856424655 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.5, 0, 4)
+model = ExtResource("9_fence")
+
+[node name="FenceL_10" parent="SubViewportContainer/SubViewport/Deco" unique_id=1257825719 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -2.5, 0, 5)
+model = ExtResource("9_fence")
+
+[node name="FenceR_10" parent="SubViewportContainer/SubViewport/Deco" unique_id=894044974 instance=ExtResource("16_obstacle")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.5, 0, 5)
+model = ExtResource("9_fence")
+
+[node name="Col_0" parent="SubViewportContainer/SubViewport/Deco" unique_id=1696261385 instance=ExtResource("7_col")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
+
+[node name="Col_1" parent="SubViewportContainer/SubViewport/Deco" unique_id=270256243 instance=ExtResource("7_col")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+
+[node name="Col_2" parent="SubViewportContainer/SubViewport/Deco" unique_id=504192709 instance=ExtResource("7_col")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
+
+[node name="Col_3" parent="SubViewportContainer/SubViewport/Deco" unique_id=1022616506 instance=ExtResource("7_col")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
+
+[node name="RockL_1" parent="SubViewportContainer/SubViewport/Deco" unique_id=1682012420 instance=ExtResource("10_rockL")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
+
+[node name="RockL_2" parent="SubViewportContainer/SubViewport/Deco" unique_id=1563549007 instance=ExtResource("10_rockL")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+
+[node name="RockS_1" parent="SubViewportContainer/SubViewport/Deco" unique_id=2037201955 instance=ExtResource("11_rockS")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 3)
+
+[node name="RockS_2" parent="SubViewportContainer/SubViewport/Deco" unique_id=1111722159 instance=ExtResource("11_rockS")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -3)
+
+[node name="RockS_3" parent="SubViewportContainer/SubViewport/Deco" unique_id=467151112 instance=ExtResource("11_rockS")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 0)
+
+[node name="RockS_4" parent="SubViewportContainer/SubViewport/Deco" unique_id=485544580 instance=ExtResource("11_rockS")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 1)
+
+[node name="Bush_1" parent="SubViewportContainer/SubViewport/Deco" unique_id=1550062254 instance=ExtResource("8_bush")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -4.5)
+
+[node name="Bush_2" parent="SubViewportContainer/SubViewport/Deco" unique_id=1018270368 instance=ExtResource("8_bush")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -4.5)
+
+[node name="Flower_1" parent="SubViewportContainer/SubViewport/Deco" unique_id=2068333622 instance=ExtResource("12_flower")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, -4.5)
+
+[node name="Flower_2" parent="SubViewportContainer/SubViewport/Deco" unique_id=1178300650 instance=ExtResource("12_flower")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, -4.5)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=322724835]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 3, 3)
+cull_mask = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera3D" unique_id=1946105174]
+extra_cull_margin = 16384.0
+mesh = SubResource("Quad")
+surface_material_override/0 = SubResource("ShaderMat")
+
+[node name="SpriteViewport" type="SubViewportContainer" parent="." unique_id=1636389096]
+texture_filter = 1
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SpriteViewport" unique_id=486254156]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="SpriteCamera" type="Camera3D" parent="SpriteViewport/SubViewport" unique_id=1379683142]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 3, 3)
+cull_mask = 2
+
+[node name="Player" parent="." unique_id=1703129572 instance=ExtResource("2_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="Marina" parent="." unique_id=483202355 instance=ExtResource("13_marina")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="ExitDoor" type="Area3D" parent="." unique_id=863365898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 5)
+script = ExtResource("14_exit")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExitDoor" unique_id=29411967]
+shape = SubResource("Box_exit")

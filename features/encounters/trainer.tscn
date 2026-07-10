@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://duthnrq8fxb5d" path="res://data/trainers/marina_aqua.tres" id="2_kibj2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sws2l"]
-size = Vector3(2.0605469, 1, 2.1582031)
+size = Vector3(1.0039063, 1, 1.1152344)
 
 [node name="Trainer" type="Area3D" unique_id=780319206]
 script = ExtResource("1_3dahb")

@@ -17,7 +17,7 @@ size = Vector3(0.42834473, 0.47558594, 0.8193512)
 [node name="building-type-p2" parent="." index="0" unique_id=5283709 instance=ExtResource("2_yd64m")]
 
 [node name="CollisionShape3D" parent="DoorTigger" parent_id_path=PackedInt32Array(2108286450) index="0" unique_id=395139835]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.40568435, 0.14398941, -0.05702734)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.40568435, 0.14398941, -0.023091793)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2" unique_id=1556387207]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017570019, 0.21566474, 0.0010190606)
