@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MoveData" format=3]
+
+[ext_resource type="Script" uid="uid://bf28cscow6pn7" path="res://features/mon/move_data.gd" id="1_md"]
+
+[resource]
+script = ExtResource("1_md")
+display_name = "Cabeza de Hierro"
+element = 11
+power = 80
+metadata/_custom_type_script = "uid://bf28cscow6pn7"

@@ -52,6 +52,7 @@ func _on_move_pressed(move: MoveData) -> void:
 	_set_buttons_enabled(false)
 	await _do_turn(player, move, enemy)
 	if enemy.is_fainted():
+		player.gain_xp(enemy.level * 15)
 		if GameState.trainer and enemy_index + 1 < GameState.trainer.team.size():
 			enemy_index += 1
 			enemy = Mon.create(GameState.trainer.team[enemy_index])

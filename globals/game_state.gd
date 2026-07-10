@@ -6,10 +6,12 @@ var trainer: TrainerData
 var world_manager: Node
 var return_world_path: String = ""
 var return_pos: Vector3 = Vector3.ZERO
+var wild_pool: Array[MonSpecies] = []
 
 func _ready() -> void:
 	if party.is_empty():
 		add_mon(Mon.create(load("res://data/mon/emberkit.tres")))
+	_build_wild_pool()
 
 func add_mon(mon: Mon) -> void:
 	party.append(mon)
@@ -22,11 +24,7 @@ func heal_all() -> void:
 func start_wild_encounter() -> void:
 	trainer = null
 	_save_return()
-	var pool := [
-		load("res://data/mon/finsplash.tres"),
-		load("res://data/mon/leafhop.tres")
-	]
-	wild_species = pool.pick_random()
+	wild_species = wild_pool.pick_random()
 	get_tree().change_scene_to_file.call_deferred("res://features/battle/battle.tscn")
 
 func start_trainer_battle(t: TrainerData) -> void:
@@ -42,3 +40,13 @@ func _save_return() -> void:
 	if world_manager:
 		return_world_path = world_manager.current_world_path
 		return_pos = world_manager.player.global_position
+
+func _build_wild_pool() -> void:
+	var dir := DirAccess.open("res://data/mon")
+	if dir == null:
+		return
+	for f in dir.get_files():
+		if f.ends_with(".tres"):
+			var sp: MonSpecies = load("res://data/mon/" + f)
+			for _i in sp.spawn_weight:
+				wild_pool.append(sp)
