@@ -8,6 +8,7 @@ const ENCOUNTER_CHANCE := 0.2
 
 var moving := false
 var in_grass := false
+var move_tween: Tween
 
 func _ready() -> void:
 	grass_detector.area_entered.connect(_on_grass_entered)
@@ -27,9 +28,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _step(dir: Vector3) -> void:
 	moving = true
 	var target := position + dir * TILE
-	var tween := create_tween()
-	tween.tween_property(self, "position", target, MOVE_TIME)
-	await tween.finished
+	move_tween = create_tween()
+	move_tween.tween_property(self, "position", target, MOVE_TIME)
+	await move_tween.finished
 	moving = false
 	_check_encounter()
 
@@ -49,3 +50,9 @@ func _can_move(dir: Vector3) -> bool:
 	ray.target_position = dir * TILE
 	ray.force_raycast_update()
 	return not ray.is_colliding()
+
+func teleport(pos: Vector3) -> void:
+	if move_tween and move_tween.is_valid():
+		move_tween.kill()
+	moving = false
+	position = pos

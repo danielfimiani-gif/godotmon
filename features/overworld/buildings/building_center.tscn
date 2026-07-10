@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c4ywpiilgt7n"]
 
 [ext_resource type="PackedScene" uid="uid://dix4larnli0b0" path="res://features/overworld/buildings/building_base.tscn" id="1_oiisg"]
+[ext_resource type="PackedScene" uid="uid://he7vbra3d44i" path="res://features/overworld/interiors/interior_center_world.tscn" id="2_gof8x"]
 [ext_resource type="PackedScene" uid="uid://cnfiqxhjgq86h" path="res://assets/vendor/kenney_city_kit/building-type-p.glb" id="2_yd64m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oiisg"]
@@ -13,6 +14,8 @@ size = Vector3(0.122558594, 0.47558594, 0.8257446)
 size = Vector3(0.42834473, 0.47558594, 0.8193512)
 
 [node name="Building" unique_id=736169726 instance=ExtResource("1_oiisg")]
+interior = ExtResource("2_gof8x")
+spawn = Vector3(0, 0, 3)
 
 [node name="building-type-p2" parent="." index="0" unique_id=5283709 instance=ExtResource("2_yd64m")]
 

@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://cmqurwn327ax3"]
+
+[ext_resource type="Script" uid="uid://b8xpok4gknghf" path="res://features/game/game.gd" id="1_game"]
+[ext_resource type="PackedScene" uid="uid://bafa6agnvq4sf" path="res://features/overworld/overworld_world.tscn" id="2_03bmb"]
+[ext_resource type="PackedScene" uid="uid://jnsdfipm83m5" path="res://features/player/player.tscn" id="2_player"]
+[ext_resource type="Shader" uid="uid://dbykrib4tooku" path="res://assets/shaders/edge_detection.gdshader" id="3_shader"]
+
+[sub_resource type="ProceduralSkyMaterial" id="Sky_mat"]
+
+[sub_resource type="Sky" id="Sky_res"]
+sky_material = SubResource("Sky_mat")
+
+[sub_resource type="Environment" id="Env_res"]
+background_mode = 2
+sky = SubResource("Sky_res")
+ambient_light_source = 3
+
+[sub_resource type="QuadMesh" id="Quad"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMat"]
+render_priority = 0
+shader = ExtResource("3_shader")
+shader_parameter/lightIntensity = 1.25
+shader_parameter/lineAlpha = 0.7
+shader_parameter/useLighting = true
+shader_parameter/lineHighlight = 0.2
+shader_parameter/lineShadow = 0.55
+
+[node name="Game" type="Node3D" unique_id=1039367764]
+script = ExtResource("1_game")
+initial_world = ExtResource("2_03bmb")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1055363759]
+transform = Transform3D(0.5246695, -0.60196424, -0.60196424, 0.8513061, 0.37099743, 0.37099743, 0, -0.7071068, 0.7071068, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=936460966]
+environment = SubResource("Env_res")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=344783995]
+texture_filter = 1
+use_parent_material = true
+offset_right = 640.0
+offset_bottom = 360.0
+stretch = true
+stretch_shrink = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=621478989]
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="WorldMount" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1997195947]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=31870449]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 3, 3)
+cull_mask = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera3D" unique_id=1828808232]
+extra_cull_margin = 16384.0
+mesh = SubResource("Quad")
+surface_material_override/0 = SubResource("ShaderMat")
+
+[node name="SpriteViewport" type="SubViewportContainer" parent="." unique_id=802392505]
+texture_filter = 1
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SpriteViewport" unique_id=1836958334]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="SpriteCamera" type="Camera3D" parent="SpriteViewport/SubViewport" unique_id=478701805]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 3, 3)
+cull_mask = 2
+
+[node name="Player" parent="." unique_id=1308123210 instance=ExtResource("2_player")]

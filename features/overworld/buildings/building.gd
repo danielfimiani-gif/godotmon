@@ -4,6 +4,7 @@ extends StaticBody3D
 @onready var door_trigger: Area3D = $DoorTigger
 
 @export var interior: PackedScene
+@export var spawn := Vector3.ZERO
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
@@ -11,4 +12,4 @@ func _ready() -> void:
 
 func _on_door_entered(_area: Area3D) -> void:
 	if interior:
-		get_tree().change_scene_to_packed.call_deferred(interior)
+		GameState.goto(interior, spawn)

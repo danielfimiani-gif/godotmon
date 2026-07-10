@@ -134,7 +134,7 @@ func _enemy_best_move() -> MoveData:
 
 func _end_battle() -> void:
 	await get_tree().create_timer(1.2).timeout
-	get_tree().change_scene_to_file("res://features/overworld/overworld.tscn")
+	get_tree().change_scene_to_file("res://features/game/game.tscn")
 
 func _spawn_enemy() -> void:
 	for c in enemy_slot.get_children():

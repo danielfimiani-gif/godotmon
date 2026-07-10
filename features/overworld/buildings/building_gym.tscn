@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dlq2aiffkginx"]
 
 [ext_resource type="PackedScene" uid="uid://dix4larnli0b0" path="res://features/overworld/buildings/building_base.tscn" id="1_oonfy"]
+[ext_resource type="PackedScene" path="res://features/overworld/interiors/interior_gym_aqua_world.tscn" id="2_o76ev"]
 [ext_resource type="PackedScene" uid="uid://d5kfj4vq16xq" path="res://assets/vendor/kenney_city_kit/building-type-t.glb" id="2_oonfy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oiisg"]
@@ -13,6 +14,8 @@ size = Vector3(0.5130615, 0.47558594, 1.3406448)
 size = Vector3(0.33984375, 0.47558594, 1.0941505)
 
 [node name="Building" unique_id=736169726 instance=ExtResource("1_oonfy")]
+interior = ExtResource("2_o76ev")
+spawn = Vector3(0, 0, 3)
 
 [node name="building-type-t2" parent="." index="0" unique_id=1165647081 instance=ExtResource("2_oonfy")]
 
