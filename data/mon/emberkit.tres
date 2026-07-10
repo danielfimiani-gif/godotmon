@@ -9,10 +9,10 @@
 [resource]
 script = ExtResource("2_n6aap")
 display_name = "Emberkit"
-max_hp = 28
-attack = 13
-defense = 9
 sprite = ExtResource("5_av74k")
 element = 1
 moves = Array[ExtResource("2_av74k")]([ExtResource("3_hvcn0"), ExtResource("4_v4q6y")])
+base_hp = 28
+base_attack = 13
+base_defense = 9
 metadata/_custom_type_script = "uid://blem6o3mlwxg5"

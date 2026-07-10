@@ -99,7 +99,7 @@ func _refresh_ui() -> void:
 	_set_hp_bar(enemy_hp, enemy)
 
 func _set_hp_bar(bar: ProgressBar, mon: Mon) -> void:
-	bar.max_value = mon.species.max_hp
+	bar.max_value = mon.max_hp()
 	bar.value = mon.current_hp
 
 func _on_capture_pressed() -> void:
@@ -132,7 +132,7 @@ func _enemy_best_move() -> MoveData:
 	var best: MoveData = enemy.species.moves[0]
 	var best_dmg := 0
 	for m in enemy.species.moves:
-		var d := Damage.calculate(enemy.species, m, player.species)
+		var d := Damage.calculate(enemy, m, player)
 		if d > best_dmg:
 			best_dmg = d
 			best = m

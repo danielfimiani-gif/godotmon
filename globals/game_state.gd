@@ -17,7 +17,7 @@ func add_mon(mon: Mon) -> void:
 
 func heal_all() -> void:
 	for mon in party:
-		mon.current_hp = mon.species.max_hp
+		mon.current_hp = mon.max_hp()
 
 func start_wild_encounter() -> void:
 	trainer = null

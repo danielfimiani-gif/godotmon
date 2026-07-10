@@ -9,10 +9,10 @@
 [resource]
 script = ExtResource("2_smmpq")
 display_name = "Finsplash"
-max_hp = 30
-attack = 11
-defense = 11
 sprite = ExtResource("5_y3jq4")
 element = 2
 moves = Array[ExtResource("2_y3jq4")]([ExtResource("3_pqkwo"), ExtResource("4_2tkc5")])
+base_hp = 28
+base_attack = 13
+base_defense = 9
 metadata/_custom_type_script = "uid://blem6o3mlwxg5"

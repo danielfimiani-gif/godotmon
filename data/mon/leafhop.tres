@@ -9,9 +9,10 @@
 [resource]
 script = ExtResource("2_f62is")
 display_name = "Leafhop"
-max_hp = 32
-defense = 12
 sprite = ExtResource("5_25jfe")
 element = 3
 moves = Array[ExtResource("2_25jfe")]([ExtResource("3_p7olk"), ExtResource("4_rj6jw")])
+base_hp = 28
+base_attack = 13
+base_defense = 9
 metadata/_custom_type_script = "uid://blem6o3mlwxg5"
