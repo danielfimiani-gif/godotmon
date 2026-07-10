@@ -30,12 +30,18 @@ window/stretch/scale_mode="integer"
 
 folder_colors={
 "res://assets/": "red",
-"res://data/": "blue"
+"res://data/": "blue",
+"res://features/": "pink"
 }
 
 [global_group]
 
 tall_grass="Group for grass_ecounters"
+
+[gui]
+
+theme/custom="res://features/ui/theme.tres"
+theme/custom_font="uid://cfog7fw3cjk4h"
 
 [physics]
 

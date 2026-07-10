@@ -1,13 +1,9 @@
 [gd_scene format=3 uid="uid://b5rqs5xqq5aou"]
 
 [ext_resource type="Script" uid="uid://dtekithn07smn" path="res://features/battle/battle_scene.gd" id="1_vnnc8"]
-[ext_resource type="Resource" uid="uid://ovf0stjwq1sv" path="res://data/mon/emberkit.tres" id="2_dilvp"]
-[ext_resource type="Resource" uid="uid://bj5qdqxpv300f" path="res://data/mon/leafhop.tres" id="3_2yora"]
 
 [node name="Battle" type="Node3D" unique_id=1573720529]
 script = ExtResource("1_vnnc8")
-player_species = ExtResource("2_dilvp")
-enemy_species = ExtResource("3_2yora")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=35735949]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1.5, 4)
@@ -15,10 +11,10 @@ transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.965
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=624051561]
 
 [node name="PlayerSlot" type="Marker3D" parent="." unique_id=372734494]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0, 1)
 
 [node name="EnemySlot" type="Marker3D" parent="." unique_id=1438848249]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.8, -2)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1359750063]
 
@@ -54,6 +50,16 @@ layout_mode = 2
 
 [node name="PlayerHP" type="ProgressBar" parent="UI/PlayerPanel/PlayerBox" unique_id=700793948]
 layout_mode = 2
+show_percentage = false
+
+[node name="PlayerHPText" type="Label" parent="UI/PlayerPanel/PlayerBox"]
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="PlayerEXP" type="ProgressBar" parent="UI/PlayerPanel/PlayerBox"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+show_percentage = false
 
 [node name="MessageLabel" type="Label" parent="UI" unique_id=110976445]
 anchors_preset = 10

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqkbdi8r2bxu7" path="res://features/gym/trainer_data.gd" id="1_cbvnn"]
 [ext_resource type="Script" uid="uid://blem6o3mlwxg5" path="res://features/mon/mon_species.gd" id="2_vhhy2"]
-[ext_resource type="Resource" uid="uid://xembp4crpfd5" path="res://data/mon/finsplash.tres" id="3_vhhy2"]
+[ext_resource type="Resource" uid="uid://bve5tefa7a1b1" path="res://data/mon/finsplash.tres" id="3_vhhy2"]
 
 [resource]
 script = ExtResource("1_cbvnn")

@@ -1,10 +1,8 @@
-[gd_resource type="Resource" script_class="MoveData" format=3]
+[gd_resource type="Resource" script_class="MoveData" format=3 uid="uid://t4erf6dh4f5d"]
 
 [ext_resource type="Script" uid="uid://bf28cscow6pn7" path="res://features/mon/move_data.gd" id="1_md"]
 
 [resource]
 script = ExtResource("1_md")
 display_name = "Ataque Rápido"
-element = 0
-power = 40
 metadata/_custom_type_script = "uid://bf28cscow6pn7"

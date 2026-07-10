@@ -5,6 +5,8 @@ extends Node3D
 
 @onready var player_name: Label = $UI/PlayerPanel/PlayerBox/PlayerName
 @onready var player_hp: ProgressBar = $UI/PlayerPanel/PlayerBox/PlayerHP
+@onready var player_hp_text: Label = $UI/PlayerPanel/PlayerBox/PlayerHPText
+@onready var player_exp: ProgressBar = $UI/PlayerPanel/PlayerBox/PlayerEXP
 @onready var enemy_name: Label = $UI/EnemyPanel/EnemyBox/EnemyName
 @onready var enemy_hp: ProgressBar = $UI/EnemyPanel/EnemyBox/EnemyHP
 @onready var message: Label = $UI/MessageLabel
@@ -29,7 +31,11 @@ func _ready() -> void:
 	_build_move_buttons()
 	capture_button.pressed.connect(_on_capture_pressed)
 	flee_button.pressed.connect(_on_flee_pressed)
+	_style_exp_bar()
 	_refresh_ui()
+	_sync_hp(player, false)
+	_sync_hp(enemy, false)
+	_sync_exp(false)
 	message.text = "!%s salvaje apareció!" % enemy.species.display_name
 
 func _spawn(species: MonSpecies, slot: Marker3D) -> void:
@@ -52,17 +58,24 @@ func _on_move_pressed(move: MoveData) -> void:
 	_set_buttons_enabled(false)
 	await _do_turn(player, move, enemy)
 	if enemy.is_fainted():
+		message.text = "¡%s se debilitó!" % enemy.species.display_name
+		await get_tree().create_timer(0.8).timeout
 		player.gain_xp(enemy.level * 15)
+		message.text = "%s ganó %d de experiencia." % [player.species.display_name, enemy.level * 15]
+		await _sync_exp(true)          # la barra de EXP sube animada
+		_refresh_ui()                   # por si subió de nivel (Lv nuevo)
+		_sync_hp(player, false)
 		if GameState.trainer and enemy_index + 1 < GameState.trainer.team.size():
 			enemy_index += 1
 			enemy = Mon.create(GameState.trainer.team[enemy_index])
 			_spawn_enemy()
 			_refresh_ui()
+			_sync_hp(enemy, false)
 			message.text = "!%s saca a %s" % [GameState.trainer.display_name, GameState.trainer.team[enemy_index].display_name]
 			_set_buttons_enabled(true)
 			return
-		message.text = "!Ganaste!"
-		_end_battle()
+		message.text = "¡Ganaste!"
+		_end_battle()                   # recién ahora vuelve al overworld
 		return
 	
 	var enemy_move: MoveData = _enemy_best_move()
@@ -85,7 +98,8 @@ func _do_turn(attacker: Mon, move: MoveData, defender: Mon) -> void:
 	if eff > 1.0: note = "  !Es muy eficaz!"
 	elif eff < 1.0: note = "   No es muy eficaz..."
 	message.text = "%s recibió %d de daño.%s" % [defender.species.display_name, dmg, note]
-	await get_tree().create_timer(0.8).timeout
+	await _sync_hp(defender, true)          # la barra de HP baja de a poco
+	await get_tree().create_timer(0.4).timeout
 
 func _set_buttons_enabled(enabled: bool) -> void:
 	for b in moves_box.get_children():
@@ -94,14 +108,47 @@ func _set_buttons_enabled(enabled: bool) -> void:
 	flee_button.disabled = not enabled
 
 func _refresh_ui() -> void:
-	player_name.text = player.species.display_name
-	enemy_name.text = enemy.species.display_name
-	_set_hp_bar(player_hp, player)
-	_set_hp_bar(enemy_hp, enemy)
+	player_name.text = "%s  Lv%d" % [player.species.display_name, player.level]
+	enemy_name.text = "%s  Lv%d" % [enemy.species.display_name, enemy.level]
 
-func _set_hp_bar(bar: ProgressBar, mon: Mon) -> void:
-	bar.max_value = mon.max_hp()
-	bar.value = mon.current_hp
+## Barra de HP de un mon. animate=true la baja/sube con tween.
+func _sync_hp(mon: Mon, animate: bool) -> void:
+	var bar := player_hp if mon == player else enemy_hp
+	var maxv := mon.max_hp()
+	bar.max_value = maxv
+	var target := float(mon.current_hp)
+	if animate:
+		var tw := create_tween()
+		tw.tween_method(_apply_hp.bind(bar, maxv, mon), bar.value, target, 0.4)
+		await tw.finished
+	else:
+		_apply_hp(target, bar, maxv, mon)
+
+func _apply_hp(v: float, bar: ProgressBar, maxv: float, mon: Mon) -> void:
+	bar.value = v
+	var ratio := v / maxv
+	# verde > 50% > amarillo > 20% > rojo (como Esmeralda)
+	var color := Color("48d048") if ratio > 0.5 else Color("f8b820") if ratio > 0.2 else Color("f85838")
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = color
+	bar.add_theme_stylebox_override("fill", sb)
+	if mon == player:
+		player_hp_text.text = "%d/%d" % [ceili(v), maxv]
+
+## Barra de EXP. animate=true la sube con tween.
+func _sync_exp(animate: bool) -> void:
+	player_exp.max_value = player.xp_to_next()
+	if animate:
+		var tw := create_tween()
+		tw.tween_property(player_exp, "value", float(player.xp), 0.6)
+		await tw.finished
+	else:
+		player_exp.value = player.xp
+
+func _style_exp_bar() -> void:
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color("f8d030")
+	player_exp.add_theme_stylebox_override("fill", sb)
 
 func _on_capture_pressed() -> void:
 	_set_buttons_enabled(false)
