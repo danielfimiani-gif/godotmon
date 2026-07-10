@@ -33,8 +33,14 @@ func _ready() -> void:
 	message.text = "!%s salvaje apareció!" % enemy.species.display_name
 
 func _spawn(species: MonSpecies, slot: Marker3D) -> void:
-	slot.add_child(species.model.instantiate())
-
+	var spr := Sprite3D.new()
+	spr.texture = species.sprite
+	spr.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
+	spr.texture_filter= BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	spr.alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
+	spr.pixel_size = 0.05
+	slot.add_child(spr)
+	
 func _build_move_buttons() -> void:
 	for move in player.species.moves:
 		var b := Button.new()
@@ -139,4 +145,4 @@ func _end_battle() -> void:
 func _spawn_enemy() -> void:
 	for c in enemy_slot.get_children():
 		c.queue_free()
-	enemy_slot.add_child(enemy.species.model.instantiate())
+	_spawn(enemy.species, enemy_slot)

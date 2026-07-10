@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="MonSpecies" format=3 uid="uid://xembp4crpfd5"]
 
-[ext_resource type="PackedScene" uid="uid://cmeuliuxqgquu" path="res://assets/vendor/kenney_cube_pets/animal-fish.glb" id="1_4vh2j"]
 [ext_resource type="Script" uid="uid://blem6o3mlwxg5" path="res://features/mon/mon_species.gd" id="2_smmpq"]
 [ext_resource type="Script" uid="uid://bf28cscow6pn7" path="res://features/mon/move_data.gd" id="2_y3jq4"]
 [ext_resource type="Resource" uid="uid://dirc6wphlypqx" path="res://data/moves/aqua_jet.tres" id="3_pqkwo"]
 [ext_resource type="Resource" uid="uid://bx0tqxqsdnigw" path="res://data/moves/tackle.tres" id="4_2tkc5"]
+[ext_resource type="Texture2D" path="res://assets/vendor/mons/atlas/openmon_r0_c0.tres" id="5_y3jq4"]
 
 [resource]
 script = ExtResource("2_smmpq")
@@ -12,7 +12,7 @@ display_name = "Finsplash"
 max_hp = 30
 attack = 11
 defense = 11
-model = ExtResource("1_4vh2j")
+sprite = ExtResource("5_y3jq4")
 element = 2
 moves = Array[ExtResource("2_y3jq4")]([ExtResource("3_pqkwo"), ExtResource("4_2tkc5")])
 metadata/_custom_type_script = "uid://blem6o3mlwxg5"
