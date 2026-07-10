@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="godotmon"
-run/main_scene="uid://b5rqs5xqq5aou"
+run/main_scene="uid://cmqurwn327ax3"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://bm2pn81vuxmbu" path="res://assets/vendor/kenney_center/wall.glb" id="2_wall"]
 [ext_resource type="PackedScene" uid="uid://oh57cu2s6kpt" path="res://assets/vendor/kenney_center/wall-door-rotate.glb" id="3_door"]
 [ext_resource type="PackedScene" uid="uid://dfui5w4ao81eq" path="res://assets/vendor/kenney_center/cash-register.glb" id="4_cash"]
-[ext_resource type="Texture2D" uid="uid://c3i37nlvkojsk" path="res://assets/vendor/screen_smith_trainers/Townspeople_Animations.png" id="5_sprite"]
 [ext_resource type="PackedScene" uid="uid://braxhkhqak2wh" path="res://assets/vendor/kenney_center/arcade-machine.glb" id="6_arcade"]
 [ext_resource type="PackedScene" uid="uid://d374gx218onbc" path="res://assets/vendor/kenney_center/pinball.glb" id="7_pinball"]
 [ext_resource type="PackedScene" uid="uid://chanqm5yhlgfl" path="res://assets/vendor/kenney_center/dance-machine.glb" id="8_dance"]
@@ -15,9 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c8ttox4guh30k" path="res://assets/vendor/kenney_center/column.glb" id="13_col"]
 [ext_resource type="PackedScene" uid="uid://b7qkdgsb6rlr7" path="res://assets/vendor/kenney_nature_kit/plant_bush.glb" id="14_bush"]
 [ext_resource type="Script" uid="uid://cpttj7knnm883" path="res://features/overworld/interiors/exit_door.gd" id="15_1b4on"]
-
-[sub_resource type="BoxShape3D" id="Box_nurse"]
-size = Vector3(2, 1, 1.5)
+[ext_resource type="PackedScene" uid="uid://dxgvcnc8cmiwa" path="res://features/healing/nurse.tscn" id="15_qup7s"]
 
 [sub_resource type="BoxShape3D" id="Box_exit"]
 size = Vector3(2, 1, 1)
@@ -491,24 +488,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -3.7)
 [node name="Bush3" parent="Deco" unique_id=1906268896 instance=ExtResource("14_bush")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -3.7)
 
-[node name="Nurse" type="Sprite3D" parent="." unique_id=850843325]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
-layers = 2
-offset = Vector2(0, 10.05)
-pixel_size = 0.05
-billboard = 2
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("5_sprite")
-region_enabled = true
-region_rect = Rect2(20.642962, 108.72905, 14.582762, 20.4897)
-
-[node name="NurseTrigger" type="Area3D" parent="." unique_id=1128244434]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NurseTrigger" unique_id=759016672]
-shape = SubResource("Box_nurse")
-
 [node name="ExitDoor" type="Area3D" parent="." unique_id=406942757]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 4)
 script = ExtResource("15_1b4on")
@@ -518,3 +497,6 @@ spawn = Vector3(18, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExitDoor" unique_id=1341823353]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.95285463)
 shape = SubResource("Box_exit")
+
+[node name="Nurse" parent="." unique_id=814961486 instance=ExtResource("15_qup7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014819264, 0, -3.32113)

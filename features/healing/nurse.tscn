@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dxgvcnc8cmiwa"]
+
+[ext_resource type="Texture2D" uid="uid://c3i37nlvkojsk" path="res://assets/vendor/screen_smith_trainers/Townspeople_Animations.png" id="1_wjyb2"]
+[ext_resource type="Script" uid="uid://d1krta46cyu6w" path="res://features/healing/nurse.gd" id="1_y6cqm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y6cqm"]
+size = Vector3(1.5019531, 1.5878906, 1.0100098)
+
+[node name="Nurse" type="Area3D" unique_id=814961486]
+script = ExtResource("1_y6cqm")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1210292730]
+layers = 2
+offset = Vector2(0, 10.05)
+pixel_size = 0.05
+texture_filter = 0
+texture = ExtResource("1_wjyb2")
+region_enabled = true
+region_rect = Rect2(181.51869, 316.52176, 14.85965, 20.582)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=271711175]
+shape = SubResource("BoxShape3D_y6cqm")
