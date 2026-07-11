@@ -8,12 +8,14 @@ const CAM_OFFSET := Vector3(0, 3, 3)
 @onready var sprite_camera: Camera3D = $SpriteViewport/SubViewport/SpriteCamera
 
 @export var initial_world: PackedScene
+@export var overworld_music: AudioStream
 
 var current_world: Node3D
 var current_world_path: String = ""
 
 func _ready() -> void:
 	GameState.world_manager = self
+	AudioManager.play_music(overworld_music)
 	if GameState.return_world_path != "":
 		load_world(load(GameState.return_world_path), GameState.return_pos)
 		GameState.return_world_path = ""

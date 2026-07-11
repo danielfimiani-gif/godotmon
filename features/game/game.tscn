@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bafa6agnvq4sf" path="res://features/overworld/overworld_world.tscn" id="2_03bmb"]
 [ext_resource type="PackedScene" uid="uid://jnsdfipm83m5" path="res://features/player/player.tscn" id="2_player"]
 [ext_resource type="Shader" uid="uid://dbykrib4tooku" path="res://assets/shaders/edge_detection.gdshader" id="3_shader"]
+[ext_resource type="AudioStream" uid="uid://ctptlywfxlhf6" path="res://assets/audio/overworld.ogg" id="3_tripy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="Sky_mat"]
 
@@ -31,6 +32,7 @@ shader_parameter/lineShadow = 0.55
 [node name="Game" type="Node3D" unique_id=1039367764]
 script = ExtResource("1_game")
 initial_world = ExtResource("2_03bmb")
+overworld_music = ExtResource("3_tripy")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1055363759]
 transform = Transform3D(0.5246695, -0.60196424, -0.60196424, 0.8513061, 0.37099743, 0.37099743, 0, -0.7071068, 0.7071068, 0, 0, 0)

@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends GridContainer
 class_name Menu
 
 signal selected(index: int)
@@ -33,17 +33,24 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not is_visible_in_tree() or labels.is_empty():
 		return
 	if event.is_action_pressed("ui_down"):
-		index = wrapi(index + 1, 0, labels.size()); _refresh()
-		_refresh()
-		_play_move()
+		_move(columns)      # bajar una fila = +columns
 	elif event.is_action_pressed("ui_up"):
-		index = wrapi(index - 1, 0, labels.size()); _refresh()
-		_refresh()
-		_play_move()
+		_move(-columns)
+	elif event.is_action_pressed("ui_right"):
+		_move(1)
+	elif event.is_action_pressed("ui_left"):
+		_move(-1)
 	elif event.is_action_pressed("ui_accept"):
 		selected.emit(index)
-	elif event.is_action_pressed("ui_cancel"):
-		cancelled.emit()
+	elif event.is_action_pressed("ui_cancel") or _is_back(event):
+		cancelled.emit()   # Escape (ui_cancel) o Backspace → volver atrás
+
+func _move(delta: int) -> void:
+	var new_index := index + delta
+	if new_index >= 0 and new_index < labels.size():
+		index = new_index
+		_refresh()
+		_play_move()
 
 func _refresh() -> void:
 	for i in labels.size():
@@ -52,3 +59,6 @@ func _refresh() -> void:
 func _play_move() -> void:
 	if move_sound:
 		audio.play()
+
+func _is_back(event: InputEvent) -> bool:
+	return event is InputEventKey and event.pressed and event.keycode == KEY_BACKSPACE

@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameState="*uid://cdse84ao8pj2p"
+AudioManager="*res://globals/audio_manager.gd"
+Transition="*res://globals/transition.gd"
 
 [display]
 
