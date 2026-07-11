@@ -1,10 +1,10 @@
 class_name ElementType
 
 enum Type {
-	NORMAL, FIRE, WATER, GRASS,               # 0-3 (existentes, no mover)
-	ELECTRIC, FLYING, BUG, GROUND, ROCK,      # 4-8
-	FIGHTING, POISON, STEEL,                  # 9-11
-	PSYCHIC, GHOST, DARK, FAIRY, ICE, DRAGON  # 12-17
+	NORMAL, FIRE, WATER, GRASS,
+	ELECTRIC, FLYING, BUG, GROUND, ROCK,
+	FIGHTING, POISON, STEEL,
+	PSYCHIC, GHOST, DARK, FAIRY, ICE, DRAGON
 }
 
 const _CHART := {

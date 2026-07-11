@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://he7vbra3d44i"]
 
+[ext_resource type="Script" uid="uid://dn72jjak72cjc" path="res://features/overworld/zone_music.gd" id="1_0fslq"]
 [ext_resource type="PackedScene" uid="uid://dykjskka64cob" path="res://assets/vendor/kenney_center/floor.glb" id="1_floor"]
 [ext_resource type="PackedScene" uid="uid://bm2pn81vuxmbu" path="res://assets/vendor/kenney_center/wall.glb" id="2_wall"]
+[ext_resource type="AudioStream" uid="uid://d2r25x1vcl" path="res://assets/audio/center.ogg" id="2_x7hv5"]
 [ext_resource type="PackedScene" uid="uid://oh57cu2s6kpt" path="res://assets/vendor/kenney_center/wall-door-rotate.glb" id="3_door"]
 [ext_resource type="PackedScene" uid="uid://dfui5w4ao81eq" path="res://assets/vendor/kenney_center/cash-register.glb" id="4_cash"]
 [ext_resource type="PackedScene" uid="uid://braxhkhqak2wh" path="res://assets/vendor/kenney_center/arcade-machine.glb" id="6_arcade"]
@@ -20,6 +22,8 @@
 size = Vector3(2, 1, 1)
 
 [node name="CenterWorld" type="Node3D" unique_id=937367876]
+script = ExtResource("1_0fslq")
+music = ExtResource("2_x7hv5")
 
 [node name="Floor" type="Node3D" parent="." unique_id=1428510490]
 

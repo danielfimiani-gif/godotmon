@@ -25,9 +25,7 @@ func start_wild_encounter() -> void:
 	trainer = null
 	_save_return()
 	wild_species = wild_pool.pick_random()
-	# la música arranca YA, en el overworld, y sobrevive el cambio de escena (autoload)
 	AudioManager.play_music(load("res://assets/audio/battle_wild.ogg"))
-	# el flash del velo ya difiere la ejecución fuera del physics callback → sin call_deferred
 	Transition.change_scene("res://features/battle/battle.tscn")
 
 func start_trainer_battle(t: TrainerData) -> void:
@@ -38,7 +36,7 @@ func start_trainer_battle(t: TrainerData) -> void:
 
 func goto(world: PackedScene, spawn: Vector3) -> void:
 	if world_manager:
-		world_manager.load_world.call_deferred(world, spawn)
+		Transition.change_world(func() -> void: world_manager.load_world(world, spawn))
 
 func _save_return() -> void:
 	if world_manager:

@@ -1,12 +1,7 @@
 extends CanvasLayer
-## Transición de pantalla GLOBAL y persistente (autoload).
-## Cubre el cambio de escena con un BARRIDO DE RELOJ (clock wipe): el velo se
-## cierra girando 360°, cambia la escena, y se abre girando para revelarla.
-## Al ser autoload, sobrevive al cambio de escena → puede tapar la carga.
 
-const CLOSE_TIME := 1.3    # el reloj se cierra (tapa la pantalla)
-const HOLD := 0.35         # aguante tapado antes de cambiar de escena
-const OPEN_TIME := 1.1     # el reloj se abre (revela la escena nueva)
+const MODE_CLOCK := 0
+const MODE_VERTICAL := 1
 const SHADER := preload("res://assets/shaders/clock_wipe.gdshader")
 
 var _veil: ColorRect
@@ -14,7 +9,7 @@ var _mat: ShaderMaterial
 var _busy := false
 
 func _ready() -> void:
-	layer = 128            # arriba de cualquier UI
+	layer = 128
 	_mat = ShaderMaterial.new()
 	_mat.shader = SHADER
 	_mat.set_shader_parameter("progress", 0.0)
@@ -31,17 +26,22 @@ func _fit() -> void:
 	_veil.size = size
 	_mat.set_shader_parameter("aspect", size.x / size.y)
 
-## Cambia de escena con el barrido de reloj:
-## cierra (tapa) → aguanta → carga la escena → abre (revela).
 func change_scene(path: String) -> void:
+	await _play(func() -> void: get_tree().change_scene_to_file(path), MODE_CLOCK, 1.3, 0.35, 1.1)
+
+func change_world(action: Callable) -> void:
+	await _play(action, MODE_VERTICAL, 0.45, 0.1, 0.45)
+
+func _play(action: Callable, mode: int, close_t: float, hold_t: float, open_t: float) -> void:
 	if _busy:
 		return
 	_busy = true
-	await _wipe(1.0, CLOSE_TIME)                        # el reloj se cierra
-	await get_tree().create_timer(HOLD).timeout
-	get_tree().change_scene_to_file(path)
-	await get_tree().process_frame                     # dejar que la nueva escena se instancie
-	await _wipe(0.0, OPEN_TIME)                         # el reloj se abre
+	_mat.set_shader_parameter("mode", mode)
+	await _wipe(1.0, close_t)
+	await get_tree().create_timer(hold_t).timeout
+	action.call()
+	await get_tree().process_frame
+	await _wipe(0.0, open_t)
 	_busy = false
 
 func _wipe(to: float, dur: float) -> void:

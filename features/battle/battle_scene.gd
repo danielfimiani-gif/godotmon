@@ -18,7 +18,7 @@ extends Node3D
 var player: Mon
 var enemy: Mon
 var enemy_index := 0
-var prefer_moves := false   # si ya elegiste PELEAR, el turno arranca en los ataques
+var prefer_moves := false
 
 func _ready() -> void:
 	player = GameState.party[0]
@@ -28,13 +28,11 @@ func _ready() -> void:
 		enemy = Mon.create(GameState.wild_species)
 	_spawn(player.species, player_slot)
 	_spawn(enemy.species, enemy_slot)
-	# en salvajes la 2da opción captura; en gimnasios es la mochila (placeholder)
 	var second := "MOCHILA" if GameState.trainer else "CAPTURAR"
 	command_menu.set_options(["PELEAR", second, "MONS", "HUIR"])
 	command_menu.selected.connect(_on_command_selected)
 	moves_menu.selected.connect(_on_move_selected)
 	moves_menu.cancelled.connect(_show_commands)
-	# los moves no cambian durante la batalla → se setean UNA vez (así el menú recuerda el último)
 	var move_names: Array[String] = []
 	for m in player.species.moves:
 		move_names.append(m.display_name)
@@ -55,11 +53,8 @@ func _spawn(species: MonSpecies, slot: Marker3D) -> void:
 	spr.alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
 	spr.pixel_size = 0.05
 	slot.add_child(spr)
-	_start_float(spr)          # floteo idle constante
+	_start_float(spr)
 
-# ---------- animaciones de sprite ----------
-# Floteo idle: sube y baja suave en loop, para que el sprite "respire".
-# Va sobre el SPRITE (position:y); los impactos van sobre el SLOT → no se pisan.
 func _start_float(spr: Sprite3D) -> void:
 	var base_y := spr.position.y
 	var tw := create_tween().set_loops()
@@ -68,7 +63,6 @@ func _start_float(spr: Sprite3D) -> void:
 	tw.tween_property(spr, "position:y", base_y, 1.2) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-# Embestida: el atacante se lanza hacia el rival (solo en XZ) y vuelve.
 func _lunge(slot: Marker3D, toward: Marker3D) -> void:
 	var origin := slot.position
 	var dir := toward.position - origin
@@ -81,7 +75,6 @@ func _lunge(slot: Marker3D, toward: Marker3D) -> void:
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	await tw.finished
 
-# Sacudón: el que recibe el golpe tiembla un instante (solo en X).
 func _shake(slot: Marker3D) -> void:
 	var origin_x := slot.position.x
 	var tw := create_tween()
@@ -91,9 +84,8 @@ func _shake(slot: Marker3D) -> void:
 	tw.tween_property(slot, "position:x", origin_x, 0.04)
 	await tw.finished
 
-# ---------- menús ----------
 func _show_commands() -> void:
-	message_box.hide()          # el menú REEMPLAZA la barra de mensajes
+	message_box.hide()
 	moves_box.hide()
 	command_box.show()
 
@@ -102,7 +94,6 @@ func _show_moves() -> void:
 	command_box.hide()
 	moves_box.show()
 
-# Al empezar TU turno: si ya elegiste PELEAR alguna vez, va directo a los ataques.
 func _show_turn_menu() -> void:
 	if prefer_moves:
 		_show_moves()
@@ -115,20 +106,20 @@ func _hide_menus() -> void:
 
 func _on_command_selected(idx: int) -> void:
 	match idx:
-		0:  # PELEAR → submenú de moves; a partir de acá el turno arranca acá
+		0:
 			prefer_moves = true
 			_show_moves()
-		1:  # MOCHILA → capturar (solo salvajes)
+		1:
 			if GameState.trainer:
 				await _message("No podés usar eso ahora.")
 				_show_commands()
 			else:
 				_hide_menus()
 				await _do_capture()
-		2:  # MONS
+		2:
 			await _message("¡Todavía no podés cambiar de Mon!")
 			_show_commands()
-		3:  # HUIR
+		3:
 			if GameState.trainer:
 				await _message("¡No podés escapar de un combate de Líder!")
 				_show_commands()
@@ -141,7 +132,6 @@ func _on_move_selected(idx: int) -> void:
 	_hide_menus()
 	await _player_turn(player.species.moves[idx])
 
-# ---------- flujo de turno ----------
 func _player_turn(move: MoveData) -> void:
 	await _do_turn(player, move, enemy)
 	if enemy.is_fainted():
@@ -156,12 +146,25 @@ func _player_turn(move: MoveData) -> void:
 
 func _victory() -> void:
 	await _message("¡%s se debilitó!" % enemy.species.display_name)
+	var final_win := not (GameState.trainer and enemy_index + 1 < GameState.trainer.team.size())
+	if final_win:
+		var jingle := "victory_leader" if GameState.trainer else "victory_wild"
+		AudioManager.play_music(load("res://assets/audio/%s.ogg" % jingle))
+	var before_level := player.level
+	var before_species := player.species
 	player.gain_xp(enemy.level * 15)
-	await message.type_text("%s ganó %d de experiencia." % [player.species.display_name, enemy.level * 15])
-	await _sync_exp(true)          # la barra de EXP sube animada
-	_refresh_ui()                   # por si subió de nivel
+	await message.type_text("%s ganó %d de experiencia." % [before_species.display_name, enemy.level * 15])
+	await _sync_exp(true)
+	_refresh_ui()
 	_sync_hp(player, false)
-	if GameState.trainer and enemy_index + 1 < GameState.trainer.team.size():
+	if player.level > before_level:
+		AudioManager.play_sfx(load("res://assets/audio/level_up.ogg"))
+		await _message("¡%s subió al nivel %d!" % [player.species.display_name, player.level])
+	if player.species != before_species:
+		if final_win:
+			AudioManager.play_music(load("res://assets/audio/evolution.ogg"))
+		await _message("¡%s evolucionó a %s!" % [before_species.display_name, player.species.display_name])
+	if not final_win:
 		enemy_index += 1
 		enemy = Mon.create(GameState.trainer.team[enemy_index])
 		_spawn_enemy()
@@ -171,7 +174,7 @@ func _victory() -> void:
 		_show_turn_menu()
 		return
 	await _message("¡Ganaste!")
-	_end_battle()                   # recién ahora vuelve al overworld
+	_end_battle()
 
 func _do_capture() -> void:
 	await _message("Lanzaste una Esfera...")
@@ -190,29 +193,26 @@ func _do_capture() -> void:
 
 func _do_turn(attacker: Mon, move: MoveData, defender: Mon) -> void:
 	await _message("%s usó %s" % [attacker.species.display_name, move.display_name])
-	# quién es quién en la escena (embestida el atacante, sacudón el defensor)
 	var atk_slot := player_slot if attacker == player else enemy_slot
 	var def_slot := player_slot if defender == player else enemy_slot
-	await _lunge(atk_slot, def_slot)        # embestida
+	await _lunge(atk_slot, def_slot)
 	var dmg := Battle.use_move(attacker, move, defender)
 	var eff := ElementType.effectiveness(move.element, defender.species.element)
 	var note := ""
 	if eff > 1.0: note = "  ¡Es muy eficaz!"
 	elif eff < 1.0: note = "   No es muy eficaz..."
-	_shake(def_slot)                        # sacudón en paralelo con el mensaje de daño
+	_shake(def_slot)
 	await message.type_text("%s recibió %d de daño.%s" % [defender.species.display_name, dmg, note])
-	await _sync_hp(defender, true)          # la barra de HP baja de a poco
+	await _sync_hp(defender, true)
 	await get_tree().create_timer(0.4).timeout
 
-## Muestra un mensaje y espera un toque (después será typewriter).
 func _message(text: String) -> void:
-	command_box.hide()          # la barra REEMPLAZA a los menús
+	command_box.hide()
 	moves_box.hide()
 	message_box.show()
-	await message.type_text(text)          # se escribe letra por letra con el tic
+	await message.type_text(text)
 	await get_tree().create_timer(0.4).timeout
 
-# ---------- UI ----------
 func _refresh_ui() -> void:
 	player_name.text = "%s  Lv%d" % [player.species.display_name, player.level]
 	enemy_name.text = "%s  Lv%d" % [enemy.species.display_name, enemy.level]
@@ -232,7 +232,6 @@ func _sync_hp(mon: Mon, animate: bool) -> void:
 func _apply_hp(v: float, bar: ProgressBar, maxv: float, mon: Mon) -> void:
 	bar.value = v
 	var ratio := v / maxv
-	# verde > 50% > amarillo > 20% > rojo (como Esmeralda)
 	var color := Color("48d048") if ratio > 0.5 else Color("f8b820") if ratio > 0.2 else Color("f85838")
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = color

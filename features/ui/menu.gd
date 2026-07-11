@@ -33,7 +33,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not is_visible_in_tree() or labels.is_empty():
 		return
 	if event.is_action_pressed("ui_down"):
-		_move(columns)      # bajar una fila = +columns
+		_move(columns)
 	elif event.is_action_pressed("ui_up"):
 		_move(-columns)
 	elif event.is_action_pressed("ui_right"):
@@ -43,7 +43,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_accept"):
 		selected.emit(index)
 	elif event.is_action_pressed("ui_cancel") or _is_back(event):
-		cancelled.emit()   # Escape (ui_cancel) o Backspace → volver atrás
+		cancelled.emit()
 
 func _move(delta: int) -> void:
 	var new_index := index + delta

@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bafa6agnvq4sf"]
 
+[ext_resource type="Script" uid="uid://dn72jjak72cjc" path="res://features/overworld/zone_music.gd" id="1_prlvy"]
+[ext_resource type="AudioStream" uid="uid://ctptlywfxlhf6" path="res://assets/audio/overworld.ogg" id="2_8upjf"]
 [ext_resource type="PackedScene" uid="uid://c4ywpiilgt7n" path="res://features/overworld/buildings/building_center.tscn" id="2_qusvl"]
 [ext_resource type="PackedScene" uid="uid://u8l3kxjl0h5i" path="res://features/overworld/props/obstacle.tscn" id="2_tree"]
 [ext_resource type="PackedScene" uid="uid://k8qkmsn5hnon" path="res://assets/vendor/kenney_nature_kit/tree_pineDefaultA.glb" id="3_pine"]
@@ -25,6 +27,8 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_b0pos"]
 
 [node name="OverworldWorld" type="Node3D" unique_id=1374471756]
+script = ExtResource("1_prlvy")
+music = ExtResource("2_8upjf")
 
 [node name="Buildings" type="Node3D" parent="." unique_id=1128777463]
 
