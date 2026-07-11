@@ -46,7 +46,7 @@ func _on_command_selected(idx: int) -> void:
 				hud.hide_menus()
 				await _do_capture()
 		2:
-			await hud.show_message("!Todavia no podes cambiar de Mons")
+			await hud.show_message("¡Todavía no podés cambiar de Mons!")
 			hud.show_commands()
 		3:
 			if GameState.trainer:
