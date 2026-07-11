@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cmnjislbefm14"]
+
+[ext_resource type="Script" uid="uid://b4ppyvyva5l2j" path="res://features/battle/actors/mon_actor.gd" id="1_n27dv"]
+
+[node name="MonActor" type="Node3D" unique_id=908591154]
+script = ExtResource("1_n27dv")

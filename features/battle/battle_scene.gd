@@ -1,7 +1,7 @@
 extends Node3D
 
-@onready var player_slot: Marker3D = $PlayerSlot
-@onready var enemy_slot: Marker3D = $EnemySlot
+@onready var player_actor: MonActor = $PlayerActor
+@onready var enemy_actor: MonActor = $EnemyActor
 @onready var hud: BattleHud = $UI
 
 var player: Mon
@@ -15,8 +15,8 @@ func _ready() -> void:
 		enemy = Mon.create(GameState.trainer.team[0])
 	else:
 		enemy = Mon.create(GameState.wild_species)
-	_spawn(player.species, player_slot)
-	_spawn(enemy.species, enemy_slot)
+	player_actor.spawn(player.species)
+	enemy_actor.spawn(enemy.species)
 	var move_names: Array[String] = []
 	for m in player.species.moves:
 		move_names.append(m.display_name)
@@ -26,45 +26,6 @@ func _ready() -> void:
 	hud.setup(player, enemy, ["PELEAR", second, "MONS", "HUIR"], move_names)
 	await hud.show_message("¡Un %s salvaje apareció!" % enemy.species.display_name)
 	_show_turn_menu()
-
-func _spawn(species: MonSpecies, slot: Marker3D) -> void:
-	var spr := Sprite3D.new()
-	spr.texture = species.sprite
-	spr.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
-	spr.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
-	spr.alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
-	spr.pixel_size = 0.05
-	slot.add_child(spr)
-	_start_float(spr)
-
-func _start_float(spr: Sprite3D) -> void:
-	var base_y := spr.position.y
-	var tw := create_tween().set_loops()
-	tw.tween_property(spr, "position:y", base_y + 0.1, 1.2) \
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tw.tween_property(spr, "position:y", base_y, 1.2) \
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-func _lunge(slot: Marker3D, toward: Marker3D) -> void:
-	var origin := slot.position
-	var dir := toward.position - origin
-	dir.y = 0.0
-	dir = dir.normalized() * 0.4
-	var tw := create_tween()
-	tw.tween_property(slot, "position", origin + dir, 0.1) \
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tw.tween_property(slot, "position", origin, 0.15) \
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	await tw.finished
-
-func _shake(slot: Marker3D) -> void:
-	var origin_x := slot.position.x
-	var tw := create_tween()
-	for i in 6:
-		var dx := 0.06 if i % 2 == 0 else -0.06
-		tw.tween_property(slot, "position:x", origin_x + dx, 0.04)
-	tw.tween_property(slot, "position:x", origin_x, 0.04)
-	await tw.finished
 
 func _show_turn_menu() -> void:
 	if prefer_moves:
@@ -135,7 +96,7 @@ func _victory() -> void:
 	if not final_win:
 		enemy_index += 1
 		enemy = Mon.create(GameState.trainer.team[enemy_index])
-		_spawn_enemy()
+		enemy_actor.respawn(enemy.species)
 		hud.set_enemy(enemy)
 		hud.refresh_names()
 		hud.sync_hp(enemy, false)
@@ -162,15 +123,15 @@ func _do_capture() -> void:
 
 func _do_turn(attacker: Mon, move: MoveData, defender: Mon) -> void:
 	await hud.show_message("%s usó %s" % [attacker.species.display_name, move.display_name])
-	var atk_slot := player_slot if attacker == player else enemy_slot
-	var def_slot := player_slot if defender == player else enemy_slot
-	await _lunge(atk_slot, def_slot)
+	var atk := player_actor if attacker == player else enemy_actor
+	var def := player_actor if defender == player else enemy_actor
+	atk.lunge_at(def)
 	var dmg := Battle.use_move(attacker, move, defender)
 	var eff := ElementType.effectiveness(move.element, defender.species.element)
 	var note := ""
 	if eff > 1.0: note = "  ¡Es muy eficaz!"
 	elif eff < 1.0: note = "   No es muy eficaz..."
-	_shake(def_slot)
+	def.shake()
 	await hud.type_message("%s recibió %d de daño.%s" % [defender.species.display_name, dmg, note])
 	await hud.sync_hp(defender, true)
 	await get_tree().create_timer(0.4).timeout
@@ -188,8 +149,3 @@ func _enemy_best_move() -> MoveData:
 func _end_battle() -> void:
 	await get_tree().create_timer(1.2).timeout
 	Transition.change_scene("res://features/game/game.tscn")
-
-func _spawn_enemy() -> void:
-	for c in enemy_slot.get_children():
-		c.queue_free()
-	_spawn(enemy.species, enemy_slot)
