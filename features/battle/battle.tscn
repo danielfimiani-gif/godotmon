@@ -1,10 +1,7 @@
 [gd_scene format=3 uid="uid://b5rqs5xqq5aou"]
 
 [ext_resource type="Script" uid="uid://dtekithn07smn" path="res://features/battle/battle_scene.gd" id="1_vnnc8"]
-[ext_resource type="Script" uid="uid://bohgcwtfhk5gy" path="res://features/ui/menu.gd" id="2_menu"]
-[ext_resource type="AudioStream" uid="uid://dtmx1hv5hbn6t" path="res://assets/sounds/SFX_RetroSinglev2.wav" id="3_sfx"]
-[ext_resource type="Script" uid="uid://briwsfa7jd2xs" path="res://features/ui/typewriter.gd" id="4_type"]
-[ext_resource type="AudioStream" uid="uid://bbxouwfeeyqnn" path="res://assets/sounds/SFX_RetroSinglev4.wav" id="5_sfx4"]
+[ext_resource type="PackedScene" uid="uid://busgl44y347fv" path="res://features/battle/ui/battle_hud.tscn" id="3_dilvp"]
 [ext_resource type="Texture2D" uid="uid://dj7faje1carfo" path="res://assets/textures/battle_forest.png" id="6_bg"]
 
 [node name="Battle" type="Node3D" unique_id=1573720529]
@@ -27,101 +24,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1884913, 0, 1)
 [node name="EnemySlot" type="Marker3D" parent="." unique_id=1438848249]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3862271, -0.7, -2)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1359750063]
-
-[node name="EnemyPanel" type="PanelContainer" parent="UI" unique_id=1389400441]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="EnemyBox" type="VBoxContainer" parent="UI/EnemyPanel" unique_id=1914999578]
-layout_mode = 2
-
-[node name="EnemyName" type="Label" parent="UI/EnemyPanel/EnemyBox" unique_id=358627572]
-layout_mode = 2
-
-[node name="EnemyHP" type="ProgressBar" parent="UI/EnemyPanel/EnemyBox" unique_id=9096361]
-custom_minimum_size = Vector2(60, 6)
-layout_mode = 2
-show_percentage = false
-
-[node name="PlayerPanel" type="PanelContainer" parent="UI" unique_id=1133677334]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -108.0
-offset_bottom = -56.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="PlayerBox" type="VBoxContainer" parent="UI/PlayerPanel" unique_id=1697289916]
-layout_mode = 2
-
-[node name="PlayerName" type="Label" parent="UI/PlayerPanel/PlayerBox" unique_id=739132029]
-layout_mode = 2
-
-[node name="PlayerHP" type="ProgressBar" parent="UI/PlayerPanel/PlayerBox" unique_id=700793948]
-layout_mode = 2
-show_percentage = false
-
-[node name="PlayerHPText" type="Label" parent="UI/PlayerPanel/PlayerBox" unique_id=383260685]
-layout_mode = 2
-horizontal_alignment = 2
-
-[node name="PlayerEXP" type="ProgressBar" parent="UI/PlayerPanel/PlayerBox" unique_id=628640790]
-custom_minimum_size = Vector2(0, 4)
-layout_mode = 2
-show_percentage = false
-
-[node name="MessageBox" type="PanelContainer" parent="UI" unique_id=464588579]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -52.0
-offset_right = -6.0
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="MessageLabel" type="Label" parent="UI/MessageBox" unique_id=1138123726]
-layout_mode = 2
-vertical_alignment = 1
-script = ExtResource("4_type")
-sound = ExtResource("5_sfx4")
-
-[node name="CommandBox" type="PanelContainer" parent="UI" unique_id=1994460530]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -46.0
-offset_right = 128.0
-offset_bottom = -6.0
-grow_vertical = 0
-
-[node name="CommandMenu" type="GridContainer" parent="UI/CommandBox" unique_id=1934588389]
-layout_mode = 2
-columns = 2
-script = ExtResource("2_menu")
-move_sound = ExtResource("3_sfx")
-
-[node name="MovesBox" type="PanelContainer" parent="UI" unique_id=1669660083]
-visible = false
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -46.0
-offset_right = 160.0
-offset_bottom = -6.0
-grow_vertical = 0
-
-[node name="MovesMenu" type="GridContainer" parent="UI/MovesBox" unique_id=973786154]
-layout_mode = 2
-columns = 2
-script = ExtResource("2_menu")
-move_sound = ExtResource("3_sfx")
+[node name="UI" parent="." unique_id=496048587 instance=ExtResource("3_dilvp")]

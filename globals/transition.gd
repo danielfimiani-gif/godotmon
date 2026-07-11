@@ -23,7 +23,6 @@ func _ready() -> void:
 
 func _fit() -> void:
 	var size := get_viewport().get_visible_rect().size
-	_veil.size = size
 	_mat.set_shader_parameter("aspect", size.x / size.y)
 
 func change_scene(path: String) -> void:

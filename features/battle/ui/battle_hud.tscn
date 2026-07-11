@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://busgl44y347fv"]
+
+[ext_resource type="Script" uid="uid://b8uydb6i3nqc2" path="res://features/battle/ui/battle_hud.gd" id="1_7l317"]
+[ext_resource type="Script" uid="uid://briwsfa7jd2xs" path="res://features/ui/typewriter.gd" id="1_qu8do"]
+[ext_resource type="AudioStream" uid="uid://bbxouwfeeyqnn" path="res://assets/sounds/SFX_RetroSinglev4.wav" id="2_7l317"]
+[ext_resource type="Script" uid="uid://bohgcwtfhk5gy" path="res://features/ui/menu.gd" id="3_1g8v4"]
+[ext_resource type="AudioStream" uid="uid://dtmx1hv5hbn6t" path="res://assets/sounds/SFX_RetroSinglev2.wav" id="4_ega5a"]
+
+[node name="UI" type="CanvasLayer" unique_id=496048587]
+script = ExtResource("1_7l317")
+
+[node name="EnemyPanel" type="PanelContainer" parent="." unique_id=2006884915]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EnemyBox" type="VBoxContainer" parent="EnemyPanel" unique_id=995498353]
+layout_mode = 2
+
+[node name="EnemyName" type="Label" parent="EnemyPanel/EnemyBox" unique_id=683516266]
+layout_mode = 2
+
+[node name="EnemyHP" type="ProgressBar" parent="EnemyPanel/EnemyBox" unique_id=1552207970]
+custom_minimum_size = Vector2(60, 6)
+layout_mode = 2
+show_percentage = false
+
+[node name="PlayerPanel" type="PanelContainer" parent="." unique_id=38697711]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -108.0
+offset_bottom = -56.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PlayerBox" type="VBoxContainer" parent="PlayerPanel" unique_id=1358636151]
+layout_mode = 2
+
+[node name="PlayerName" type="Label" parent="PlayerPanel/PlayerBox" unique_id=1968021666]
+layout_mode = 2
+
+[node name="PlayerHP" type="ProgressBar" parent="PlayerPanel/PlayerBox" unique_id=385638751]
+layout_mode = 2
+show_percentage = false
+
+[node name="PlayerHPText" type="Label" parent="PlayerPanel/PlayerBox" unique_id=1827054528]
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="PlayerEXP" type="ProgressBar" parent="PlayerPanel/PlayerBox" unique_id=1060796107]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+show_percentage = false
+
+[node name="MessageBox" type="PanelContainer" parent="." unique_id=1775270469]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -52.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MessageLabel" type="Label" parent="MessageBox" unique_id=1978119560]
+layout_mode = 2
+vertical_alignment = 1
+script = ExtResource("1_qu8do")
+sound = ExtResource("2_7l317")
+
+[node name="CommandBox" type="PanelContainer" parent="." unique_id=1086314826]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -46.0
+offset_right = 128.0
+offset_bottom = -6.0
+grow_vertical = 0
+
+[node name="CommandMenu" type="GridContainer" parent="CommandBox" unique_id=499407611]
+layout_mode = 2
+columns = 2
+script = ExtResource("3_1g8v4")
+move_sound = ExtResource("4_ega5a")
+
+[node name="MovesBox" type="PanelContainer" parent="." unique_id=879950294]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -46.0
+offset_right = 160.0
+offset_bottom = -6.0
+grow_vertical = 0
+
+[node name="MovesMenu" type="GridContainer" parent="MovesBox" unique_id=421791290]
+layout_mode = 2
+columns = 2
+script = ExtResource("3_1g8v4")
+move_sound = ExtResource("4_ega5a")

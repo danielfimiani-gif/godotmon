@@ -2,18 +2,7 @@ extends Node3D
 
 @onready var player_slot: Marker3D = $PlayerSlot
 @onready var enemy_slot: Marker3D = $EnemySlot
-@onready var player_name: Label = $UI/PlayerPanel/PlayerBox/PlayerName
-@onready var player_hp: ProgressBar = $UI/PlayerPanel/PlayerBox/PlayerHP
-@onready var player_hp_text: Label = $UI/PlayerPanel/PlayerBox/PlayerHPText
-@onready var player_exp: ProgressBar = $UI/PlayerPanel/PlayerBox/PlayerEXP
-@onready var enemy_name: Label = $UI/EnemyPanel/EnemyBox/EnemyName
-@onready var enemy_hp: ProgressBar = $UI/EnemyPanel/EnemyBox/EnemyHP
-@onready var message_box: PanelContainer = $UI/MessageBox
-@onready var message: TypeWriter = $UI/MessageBox/MessageLabel
-@onready var command_box: PanelContainer = $UI/CommandBox
-@onready var command_menu: Menu = $UI/CommandBox/CommandMenu
-@onready var moves_box: PanelContainer = $UI/MovesBox
-@onready var moves_menu: Menu = $UI/MovesBox/MovesMenu
+@onready var hud: BattleHud = $UI
 
 var player: Mon
 var enemy: Mon
@@ -28,21 +17,14 @@ func _ready() -> void:
 		enemy = Mon.create(GameState.wild_species)
 	_spawn(player.species, player_slot)
 	_spawn(enemy.species, enemy_slot)
-	var second := "MOCHILA" if GameState.trainer else "CAPTURAR"
-	command_menu.set_options(["PELEAR", second, "MONS", "HUIR"])
-	command_menu.selected.connect(_on_command_selected)
-	moves_menu.selected.connect(_on_move_selected)
-	moves_menu.cancelled.connect(_show_commands)
 	var move_names: Array[String] = []
 	for m in player.species.moves:
 		move_names.append(m.display_name)
-	moves_menu.set_options(move_names)
-	_style_exp_bar()
-	_refresh_ui()
-	_sync_hp(player, false)
-	_sync_hp(enemy, false)
-	_sync_exp(false)
-	await _message("¡Un %s salvaje apareció!" % enemy.species.display_name)
+	hud.command_selected.connect(_on_command_selected)
+	hud.move_selected.connect(_on_move_selected)
+	var second := "MOCHILA" if GameState.trainer else "CAPTURAR"
+	hud.setup(player, enemy, ["PELEAR", second, "MONS", "HUIR"], move_names)
+	await hud.show_message("¡Un %s salvaje apareció!" % enemy.species.display_name)
 	_show_turn_menu()
 
 func _spawn(species: MonSpecies, slot: Marker3D) -> void:
@@ -84,52 +66,38 @@ func _shake(slot: Marker3D) -> void:
 	tw.tween_property(slot, "position:x", origin_x, 0.04)
 	await tw.finished
 
-func _show_commands() -> void:
-	message_box.hide()
-	moves_box.hide()
-	command_box.show()
-
-func _show_moves() -> void:
-	message_box.hide()
-	command_box.hide()
-	moves_box.show()
-
 func _show_turn_menu() -> void:
 	if prefer_moves:
-		_show_moves()
+		hud.show_moves()
 	else:
-		_show_commands()
-
-func _hide_menus() -> void:
-	command_box.hide()
-	moves_box.hide()
+		hud.show_commands()
 
 func _on_command_selected(idx: int) -> void:
 	match idx:
 		0:
 			prefer_moves = true
-			_show_moves()
+			hud.show_moves()
 		1:
 			if GameState.trainer:
-				await _message("No podés usar eso ahora.")
-				_show_commands()
+				await hud.show_message("No podés usar eso ahora.")
+				hud.show_commands()
 			else:
-				_hide_menus()
+				hud.hide_menus()
 				await _do_capture()
 		2:
-			await _message("¡Todavía no podés cambiar de Mon!")
-			_show_commands()
+			await hud.show_message("!Todavia no podes cambiar de Mons")
+			hud.show_commands()
 		3:
 			if GameState.trainer:
-				await _message("¡No podés escapar de un combate de Líder!")
-				_show_commands()
+				await hud.show_message("¡No podés escapar de un combate de Líder!")
+				hud.show_commands()
 			else:
-				_hide_menus()
-				await _message("Huiste de la batalla...")
+				hud.hide_menus()
+				await hud.show_message("Huiste de la batalla...")
 				_end_battle()
 
 func _on_move_selected(idx: int) -> void:
-	_hide_menus()
+	hud.hide_menus()
 	await _player_turn(player.species.moves[idx])
 
 func _player_turn(move: MoveData) -> void:
@@ -139,13 +107,13 @@ func _player_turn(move: MoveData) -> void:
 		return
 	await _do_turn(enemy, _enemy_best_move(), player)
 	if player.is_fainted():
-		await _message("¡%s se debilitó! Perdiste..." % player.species.display_name)
+		await hud.show_message("¡%s se debilitó! Perdiste..." % player.species.display_name)
 		_end_battle()
 		return
 	_show_turn_menu()
 
 func _victory() -> void:
-	await _message("¡%s se debilitó!" % enemy.species.display_name)
+	await hud.show_message("¡%s se debilitó!" % enemy.species.display_name)
 	var final_win := not (GameState.trainer and enemy_index + 1 < GameState.trainer.team.size())
 	if final_win:
 		var jingle := "victory_leader" if GameState.trainer else "victory_wild"
@@ -153,46 +121,47 @@ func _victory() -> void:
 	var before_level := player.level
 	var before_species := player.species
 	player.gain_xp(enemy.level * 15)
-	await message.type_text("%s ganó %d de experiencia." % [before_species.display_name, enemy.level * 15])
-	await _sync_exp(true)
-	_refresh_ui()
-	_sync_hp(player, false)
+	await hud.type_message("%s ganó %d de experiencia." % [before_species.display_name, enemy.level * 15])
+	await hud.sync_exp(true)
+	hud.refresh_names()
+	hud.sync_hp(player, false)
 	if player.level > before_level:
 		AudioManager.play_sfx(load("res://assets/audio/level_up.ogg"))
-		await _message("¡%s subió al nivel %d!" % [player.species.display_name, player.level])
+		await hud.show_message("¡%s subió al nivel %d!" % [player.species.display_name, player.level])
 	if player.species != before_species:
 		if final_win:
 			AudioManager.play_music(load("res://assets/audio/evolution.ogg"))
-		await _message("¡%s evolucionó a %s!" % [before_species.display_name, player.species.display_name])
+		await hud.show_message("¡%s evolucionó a %s!" % [before_species.display_name, player.species.display_name])
 	if not final_win:
 		enemy_index += 1
 		enemy = Mon.create(GameState.trainer.team[enemy_index])
 		_spawn_enemy()
-		_refresh_ui()
-		_sync_hp(enemy, false)
-		await _message("¡%s saca a %s!" % [GameState.trainer.display_name, GameState.trainer.team[enemy_index].display_name])
+		hud.set_enemy(enemy)
+		hud.refresh_names()
+		hud.sync_hp(enemy, false)
+		await hud.show_message("¡%s saca a %s!" % [GameState.trainer.display_name, GameState.trainer.team[enemy_index].display_name])
 		_show_turn_menu()
 		return
-	await _message("¡Ganaste!")
+	await hud.show_message("¡Ganaste!")
 	_end_battle()
 
 func _do_capture() -> void:
-	await _message("Lanzaste una Esfera...")
+	await hud.show_message("Lanzaste una Esfera...")
 	if Capture.attempt(enemy):
-		await _message("¡Capturaste a %s!" % enemy.species.display_name)
+		await hud.show_message("¡Capturaste a %s!" % enemy.species.display_name)
 		GameState.add_mon(enemy)
 		_end_battle()
 		return
-	await _message("¡%s se escapó!" % enemy.species.display_name)
+	await hud.show_message("¡%s se escapó!" % enemy.species.display_name)
 	await _do_turn(enemy, _enemy_best_move(), player)
 	if player.is_fainted():
-		await _message("¡%s se debilitó! Perdiste..." % player.species.display_name)
+		await hud.show_message("¡%s se debilitó! Perdiste..." % player.species.display_name)
 		_end_battle()
 		return
 	_show_turn_menu()
 
 func _do_turn(attacker: Mon, move: MoveData, defender: Mon) -> void:
-	await _message("%s usó %s" % [attacker.species.display_name, move.display_name])
+	await hud.show_message("%s usó %s" % [attacker.species.display_name, move.display_name])
 	var atk_slot := player_slot if attacker == player else enemy_slot
 	var def_slot := player_slot if defender == player else enemy_slot
 	await _lunge(atk_slot, def_slot)
@@ -202,56 +171,9 @@ func _do_turn(attacker: Mon, move: MoveData, defender: Mon) -> void:
 	if eff > 1.0: note = "  ¡Es muy eficaz!"
 	elif eff < 1.0: note = "   No es muy eficaz..."
 	_shake(def_slot)
-	await message.type_text("%s recibió %d de daño.%s" % [defender.species.display_name, dmg, note])
-	await _sync_hp(defender, true)
+	await hud.type_message("%s recibió %d de daño.%s" % [defender.species.display_name, dmg, note])
+	await hud.sync_hp(defender, true)
 	await get_tree().create_timer(0.4).timeout
-
-func _message(text: String) -> void:
-	command_box.hide()
-	moves_box.hide()
-	message_box.show()
-	await message.type_text(text)
-	await get_tree().create_timer(0.4).timeout
-
-func _refresh_ui() -> void:
-	player_name.text = "%s  Lv%d" % [player.species.display_name, player.level]
-	enemy_name.text = "%s  Lv%d" % [enemy.species.display_name, enemy.level]
-
-func _sync_hp(mon: Mon, animate: bool) -> void:
-	var bar := player_hp if mon == player else enemy_hp
-	var maxv := mon.max_hp()
-	bar.max_value = maxv
-	var target := float(mon.current_hp)
-	if animate:
-		var tw := create_tween()
-		tw.tween_method(_apply_hp.bind(bar, maxv, mon), bar.value, target, 0.4)
-		await tw.finished
-	else:
-		_apply_hp(target, bar, maxv, mon)
-
-func _apply_hp(v: float, bar: ProgressBar, maxv: float, mon: Mon) -> void:
-	bar.value = v
-	var ratio := v / maxv
-	var color := Color("48d048") if ratio > 0.5 else Color("f8b820") if ratio > 0.2 else Color("f85838")
-	var sb := StyleBoxFlat.new()
-	sb.bg_color = color
-	bar.add_theme_stylebox_override("fill", sb)
-	if mon == player:
-		player_hp_text.text = "%d/%d" % [ceili(v), maxv]
-
-func _sync_exp(animate: bool) -> void:
-	player_exp.max_value = player.xp_to_next()
-	if animate:
-		var tw := create_tween()
-		tw.tween_property(player_exp, "value", float(player.xp), 0.6)
-		await tw.finished
-	else:
-		player_exp.value = player.xp
-
-func _style_exp_bar() -> void:
-	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color("f8d030")
-	player_exp.add_theme_stylebox_override("fill", sb)
 
 func _enemy_best_move() -> MoveData:
 	var best: MoveData = enemy.species.moves[0]
