@@ -4,10 +4,10 @@ class_name TypeWriter
 signal finished
 
 @export var chars_per_seconds := 30.0
-@export var sound: AudioStream
 
 var audio: AudioStreamPlayer
 var typing := false
+var sound: AudioStream = load("res://assets/sounds/SFX_RetroSinglev4.wav")
 
 func _ready() -> void:
 	audio = AudioStreamPlayer.new()

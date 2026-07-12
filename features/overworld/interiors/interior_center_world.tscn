@@ -16,7 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://c8ttox4guh30k" path="res://assets/vendor/kenney_center/column.glb" id="13_col"]
 [ext_resource type="PackedScene" uid="uid://b7qkdgsb6rlr7" path="res://assets/vendor/kenney_nature_kit/plant_bush.glb" id="14_bush"]
 [ext_resource type="Script" uid="uid://cpttj7knnm883" path="res://features/overworld/interiors/exit_door.gd" id="15_1b4on"]
-[ext_resource type="PackedScene" uid="uid://dxgvcnc8cmiwa" path="res://features/healing/nurse.tscn" id="15_qup7s"]
+[ext_resource type="PackedScene" uid="uid://qcxv54xpf0et" path="res://features/character/character.tscn" id="17_0fslq"]
+[ext_resource type="Resource" uid="uid://ynylsb0bhovv" path="res://data/characters/nurse/nurse.tres" id="18_x7hv5"]
 
 [sub_resource type="BoxShape3D" id="Box_exit"]
 size = Vector3(2, 1, 1)
@@ -502,5 +503,6 @@ spawn = Vector3(18, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.95285463)
 shape = SubResource("Box_exit")
 
-[node name="Nurse" parent="." unique_id=814961486 instance=ExtResource("15_qup7s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014819264, 0, -3.32113)
+[node name="Character" parent="." unique_id=1186980275 instance=ExtResource("17_0fslq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8634502, 0, -3.8169222)
+data = ExtResource("18_x7hv5")

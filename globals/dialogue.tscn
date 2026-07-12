@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://4vy8nr7mqnn1"]
+
+[ext_resource type="Script" uid="uid://clcr5mqr71awb" path="res://globals/dialogue.gd" id="1_bxj2j"]
+[ext_resource type="Theme" uid="uid://582em6ybfsqc" path="res://features/ui/theme.tres" id="2_eoxbp"]
+[ext_resource type="Script" uid="uid://briwsfa7jd2xs" path="res://features/ui/typewriter.gd" id="2_r7jm6"]
+
+[node name="Dialogue" type="CanvasLayer" unique_id=2027715252]
+script = ExtResource("1_bxj2j")
+
+[node name="Box" type="PanelContainer" parent="." unique_id=938784663]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -35.524994
+offset_bottom = -4.899994
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_eoxbp")
+
+[node name="Text" type="Label" parent="Box" unique_id=1177679608]
+layout_mode = 2
+theme = ExtResource("2_eoxbp")
+autowrap_mode = 3
+script = ExtResource("2_r7jm6")

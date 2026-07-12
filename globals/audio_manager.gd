@@ -49,3 +49,12 @@ func play_sfx(stream: AudioStream) -> void:
 	_sfx_index = (_sfx_index + 1) % _sfx_pool.size()
 	p.stream = stream
 	p.play()
+
+func play_sfx_alone(stream: AudioStream) -> void:
+	_active.stream_paused = true
+	var p := _sfx_pool[_sfx_index]
+	_sfx_index = (_sfx_index + 1) % _sfx_pool.size()
+	p.stream = stream
+	p.play()
+	await p.finished
+	_active.stream_paused = false

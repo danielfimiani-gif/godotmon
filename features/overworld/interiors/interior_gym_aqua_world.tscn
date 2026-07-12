@@ -11,10 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://q3bb7kmwxn11" path="res://assets/vendor/kenney_nature_kit/rock_largeA.glb" id="10_rockL"]
 [ext_resource type="PackedScene" uid="uid://c1giefaxlxiqo" path="res://assets/vendor/kenney_nature_kit/rock_smallA.glb" id="11_rockS"]
 [ext_resource type="PackedScene" uid="uid://ctctustfq0o62" path="res://assets/vendor/kenney_nature_kit/flower_redA.glb" id="12_flower"]
-[ext_resource type="PackedScene" uid="uid://cbhu74if5er8g" path="res://features/encounters/trainer.tscn" id="13_marina"]
 [ext_resource type="Script" uid="uid://cpttj7knnm883" path="res://features/overworld/interiors/exit_door.gd" id="14_exit"]
 [ext_resource type="PackedScene" uid="uid://caotn34rtjrbm" path="res://assets/vendor/kenney_nature_kit/ground_riverStraight.glb" id="15_river"]
+[ext_resource type="PackedScene" uid="uid://qcxv54xpf0et" path="res://features/character/character.tscn" id="15_w3dgb"]
 [ext_resource type="PackedScene" uid="uid://u8l3kxjl0h5i" path="res://features/overworld/props/obstacle.tscn" id="16_obstacle"]
+[ext_resource type="Resource" uid="uid://wh34eai0hsp0" path="res://data/characters/leaders/marina_aqua/maria_leader_aqua.tres" id="16_vrpy2"]
 
 [sub_resource type="BoxShape3D" id="Box_exit"]
 size = Vector3(2, 1, 1)
@@ -653,9 +654,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, -4.5)
 [node name="Flower_2" parent="Deco" unique_id=512389002 instance=ExtResource("12_flower")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, -4.5)
 
-[node name="Marina" parent="." unique_id=273804183 instance=ExtResource("13_marina")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-
 [node name="ExitDoor" type="Area3D" parent="." unique_id=1109308582]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 5)
 script = ExtResource("14_exit")
@@ -664,3 +662,7 @@ spawn = Vector3(25, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExitDoor" unique_id=950763686]
 shape = SubResource("Box_exit")
+
+[node name="Character" parent="." unique_id=1186980275 instance=ExtResource("15_w3dgb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5375967)
+data = ExtResource("16_vrpy2")

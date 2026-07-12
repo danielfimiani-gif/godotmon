@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="HealAction" format=3 uid="uid://iew6lnvib17w"]
+
+[ext_resource type="Script" uid="uid://cg65k3i0xm0yg" path="res://features/character/actions/heal_action.gd" id="1_8j6km"]
+
+[resource]
+script = ExtResource("1_8j6km")
+metadata/_custom_type_script = "uid://cg65k3i0xm0yg"

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://qcxv54xpf0et"]
+
+[ext_resource type="Script" uid="uid://7eqtahqsvohs" path="res://features/character/character.gd" id="1_635ec"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_635ec"]
+
+[node name="Character" type="StaticBody3D" unique_id=1186980275]
+script = ExtResource("1_635ec")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1899698737]
+layers = 2
+offset = Vector2(0, 10.05)
+pixel_size = 0.05
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1726309796]
+shape = SubResource("BoxShape3D_635ec")

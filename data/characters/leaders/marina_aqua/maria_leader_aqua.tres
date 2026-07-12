@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://wh34eai0hsp0"]
+
+[ext_resource type="Resource" uid="uid://bg1ni477mao5s" path="res://data/characters/leaders/marina_aqua/action.tres" id="1_rd4kx"]
+[ext_resource type="Script" uid="uid://csxt76s25dn7i" path="res://features/character/character_data.gd" id="1_w22v5"]
+[ext_resource type="Texture2D" uid="uid://bbow8qrw6qpe3" path="res://assets/vendor/screen_smith_trainers/WaterNPCs_Animations.png" id="3_wsvmu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bivq"]
+atlas = ExtResource("3_wsvmu")
+region = Rect2(19.876984, 5.7967234, 14.41843, 19.32367)
+
+[resource]
+script = ExtResource("1_w22v5")
+display_name = "Marina Líder Aqua"
+sprite_ow = SubResource("AtlasTexture_1bivq")
+dialogue = "¡Hola! ¡Sos una cara nueva! Quienes quieren convertirse en profesionales tienen que trazar una estrategia con sus Pokémon. ¿Cuál es tu enfoque al capturar Pokémon? El mío es una ofensiva total usando Pokémon de tipo Agua. ¡Je, je! ¡Preparate para enfrentarte a la sirena marimacho!"
+action = ExtResource("1_rd4kx")
+metadata/_custom_type_script = "uid://csxt76s25dn7i"

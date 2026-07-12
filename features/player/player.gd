@@ -9,20 +9,27 @@ const ENCOUNTER_CHANCE := 0.2
 var moving := false
 var in_grass := false
 var move_tween: Tween
+var facing = Vector3.BACK
 
 func _ready() -> void:
 	grass_detector.area_entered.connect(_on_grass_entered)
 	grass_detector.area_exited.connect(_on_grass_exited)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if moving:
+	if moving or Dialogue.is_active():
+		return
+	if event.is_action_pressed("interact"):
+		_try_interact()
 		return
 	var dir := Vector3.ZERO
 	if event.is_action_pressed("ui_up"): dir = Vector3.FORWARD
 	elif event.is_action_pressed("ui_down"): dir = Vector3.BACK
 	elif event.is_action_pressed("ui_left"): dir = Vector3.LEFT
 	elif event.is_action_pressed("ui_right"): dir = Vector3.RIGHT
-	if dir != Vector3.ZERO and _can_move(dir):
+	if dir == Vector3.ZERO:
+		return
+	facing = dir
+	if _can_move(dir):
 		_step(dir)
 
 func _step(dir: Vector3) -> void:
@@ -56,3 +63,11 @@ func teleport(pos: Vector3) -> void:
 		move_tween.kill()
 	moving = false
 	position = pos
+
+func _try_interact() -> void:
+	ray.target_position = facing * TILE
+	ray.force_raycast_update()
+	var target := ray.get_collider()
+	if target is Character:
+		get_viewport().set_input_as_handled()
+		target.interact()

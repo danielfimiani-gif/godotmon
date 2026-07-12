@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BattleAction" format=3 uid="uid://bg1ni477mao5s"]
+
+[ext_resource type="Script" uid="uid://c02imvym7kae0" path="res://features/character/actions/battle_action.gd" id="1_3cspa"]
+[ext_resource type="Resource" uid="uid://duthnrq8fxb5d" path="res://data/characters/leaders/marina_aqua/trainer_data.tres" id="2_48tli"]
+
+[resource]
+script = ExtResource("1_3cspa")
+trainer = ExtResource("2_48tli")
+metadata/_custom_type_script = "uid://c02imvym7kae0"
