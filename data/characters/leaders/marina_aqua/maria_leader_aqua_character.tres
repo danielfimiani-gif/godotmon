@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://wh34eai0hsp0"]
 
-[ext_resource type="Resource" uid="uid://bg1ni477mao5s" path="res://data/characters/leaders/marina_aqua/action.tres" id="1_rd4kx"]
+[ext_resource type="Resource" uid="uid://bg1ni477mao5s" path="res://data/characters/leaders/marina_aqua/marina_action.tres" id="1_rd4kx"]
 [ext_resource type="Script" uid="uid://csxt76s25dn7i" path="res://features/character/character_data.gd" id="1_w22v5"]
 [ext_resource type="Texture2D" uid="uid://bbow8qrw6qpe3" path="res://assets/vendor/screen_smith_trainers/WaterNPCs_Animations.png" id="3_wsvmu"]
 

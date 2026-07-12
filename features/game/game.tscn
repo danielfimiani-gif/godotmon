@@ -41,14 +41,18 @@ environment = SubResource("Env_res")
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=344783995]
 texture_filter = 1
 use_parent_material = true
-offset_right = 640.0
-offset_bottom = 360.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0012079605
 stretch = true
 stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=621478989]
 handle_input_locally = false
-size = Vector2i(320, 180)
+size = Vector2i(640, 360)
 render_target_update_mode = 4
 
 [node name="WorldMount" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1997195947]
@@ -64,15 +68,20 @@ surface_material_override/0 = SubResource("ShaderMat")
 
 [node name="SpriteViewport" type="SubViewportContainer" parent="." unique_id=802392505]
 texture_filter = 1
-offset_right = 640.0
-offset_bottom = 360.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SpriteViewport" unique_id=1836958334]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(640, 360)
+size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
 [node name="SpriteCamera" type="Camera3D" parent="SpriteViewport/SubViewport" unique_id=478701805]

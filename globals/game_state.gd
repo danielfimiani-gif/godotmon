@@ -7,6 +7,7 @@ var world_manager: Node
 var return_world_path: String = ""
 var return_pos: Vector3 = Vector3.ZERO
 var wild_pool: Array[MonSpecies] = []
+var badges: Array[BadgeData] = []
 
 func _ready() -> void:
 	if party.is_empty():
@@ -52,3 +53,7 @@ func _build_wild_pool() -> void:
 			var sp: MonSpecies = load("res://data/mon/" + f)
 			for _i in sp.spawn_weight:
 				wild_pool.append(sp)
+
+func award_badge(badge: BadgeData) -> void:
+	if badge and not badges.has(badge):
+		badges.append(badge)

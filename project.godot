@@ -24,8 +24,8 @@ Dialogue="*uid://4vy8nr7mqnn1"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
@@ -45,6 +45,15 @@ tall_grass="Group for grass_ecounters"
 
 theme/custom="res://features/ui/theme.tres"
 theme/custom_font="uid://cfog7fw3cjk4h"
+
+[importer_defaults]
+
+texture_atlas={
+"atlas_file": "res://assets/textures/pokemon-gym-badges.png",
+"crop_to_region": false,
+"import_mode": 0,
+"trim_alpha_border_from_region": true
+}
 
 [input]
 

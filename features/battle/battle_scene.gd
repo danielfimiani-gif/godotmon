@@ -104,6 +104,10 @@ func _victory() -> void:
 		_show_turn_menu()
 		return
 	await hud.show_message("¡Ganaste!")
+	if GameState.trainer and GameState.trainer.badge:
+		GameState.award_badge(GameState.trainer.badge)
+		AudioManager.play_sfx(load("res://assets/audio/badge.ogg"))
+		await hud.show_message("Obtuviste la %s!" % GameState.trainer.badge.display_name)
 	_end_battle()
 
 func _do_capture() -> void:
