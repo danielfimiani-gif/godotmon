@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BadgeData" format=3 uid="uid://cuaaq506mmsxq"]
+
+[ext_resource type="Texture2D" uid="uid://la43bt221bda" path="res://assets/textures/badges.png" id="1_0tfjy"]
+[ext_resource type="Script" uid="uid://dxg5d4hsuhqj4" path="res://features/trainer/badge_data.gd" id="1_isdvj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isdvj"]
+atlas = ExtResource("1_0tfjy")
+region = Rect2(887.72003, 1.1288986, 442.66888, 650.8716)
+
+[resource]
+script = ExtResource("1_isdvj")
+display_name = "Medalla Aqua"
+icon = SubResource("AtlasTexture_isdvj")
+metadata/_custom_type_script = "uid://dxg5d4hsuhqj4"

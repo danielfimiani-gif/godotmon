@@ -10,8 +10,6 @@ var wild_pool: Array[MonSpecies] = []
 var badges: Array[BadgeData] = []
 
 func _ready() -> void:
-	if party.is_empty():
-		add_mon(Mon.create(load("res://data/mon/emberkit.tres")))
 	_build_wild_pool()
 
 func add_mon(mon: Mon) -> void:
@@ -23,6 +21,8 @@ func heal_all() -> void:
 		mon.current_hp = mon.max_hp()
 
 func start_wild_encounter() -> void:
+	if party.is_empty():
+		return
 	trainer = null
 	_save_return()
 	wild_species = wild_pool.pick_random()
@@ -30,6 +30,8 @@ func start_wild_encounter() -> void:
 	Transition.change_scene("res://features/battle/battle.tscn")
 
 func start_trainer_battle(t: TrainerData) -> void:
+	if party.is_empty():
+		return
 	trainer = t
 	_save_return()
 	AudioManager.play_music(load("res://assets/audio/battle_leader.ogg"))
@@ -57,3 +59,6 @@ func _build_wild_pool() -> void:
 func award_badge(badge: BadgeData) -> void:
 	if badge and not badges.has(badge):
 		badges.append(badge)
+
+func player_has_party() -> bool:
+	return !party.is_empty()

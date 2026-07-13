@@ -1,0 +1,57 @@
+[gd_resource type="ShaderMaterial" format=4 uid="uid://ijkf50w0xj3k"]
+
+[ext_resource type="Shader" uid="uid://0k4s6rndu60q" path="res://assets/shaders/grass.gdshader" id="1_ayq5r"]
+[ext_resource type="Texture2D" uid="uid://c3fa3yrcn5dnv" path="res://assets/vendor/dylearn_grass/accentleaf.png" id="2_1rop1"]
+[ext_resource type="Texture2D" uid="uid://vqml4pj02ucs" path="res://assets/vendor/dylearn_grass/Albedo2Noise.tres" id="2_5md2x"]
+[ext_resource type="Texture2D" uid="uid://dyteicrqladod" path="res://assets/vendor/dylearn_grass/grassleaf.png" id="2_b18st"]
+[ext_resource type="Texture2D" uid="uid://c52v6tkx73uro" path="res://assets/vendor/dylearn_grass/Albedo3Noise.tres" id="3_ervju"]
+[ext_resource type="Texture2D" uid="uid://b6fhxncxd7b1t" path="res://assets/vendor/dylearn_grass/WindNoise.tres" id="3_xpo5p"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ayq5r")
+shader_parameter/albedo_texture = ExtResource("2_b18st")
+shader_parameter/albedo1 = Color(0.3019608, 0.54901963, 0.2509804, 1)
+shader_parameter/albedo2 = Color(0.22745098, 0.41960785, 0.1882353, 1)
+shader_parameter/albedo2_scale = 0.170000008075
+shader_parameter/albedo2_threshold = 0.604
+shader_parameter/albedo2_noise = ExtResource("2_5md2x")
+shader_parameter/albedo3 = Color(0.37254903, 0.627451, 0.28235295, 1)
+shader_parameter/albedo3_scale = 0.02800000133
+shader_parameter/albedo3_threshold = 0.661
+shader_parameter/albedo3_noise = ExtResource("3_ervju")
+shader_parameter/accent_frequency1 = 0.001
+shader_parameter/accent_texture1 = ExtResource("2_1rop1")
+shader_parameter/accent_albedo1 = Color(0.9098039, 0.84705883, 0.2901961, 1)
+shader_parameter/accent_height1 = 0.5
+shader_parameter/accent_scale1 = 1.0
+shader_parameter/accent_probability2 = 0.0249999993675
+shader_parameter/accent_texture2 = ExtResource("2_1rop1")
+shader_parameter/accent_albedo2 = Color(0.9098039, 0.84705883, 0.2901961, 1)
+shader_parameter/accent_height2 = 0.5
+shader_parameter/accent_scale2 = 1.0
+shader_parameter/framerate = 5.0
+shader_parameter/quantised = true
+shader_parameter/world_space_sway = true
+shader_parameter/debug_noise = false
+shader_parameter/world_sway_angle = 60.0
+shader_parameter/fake_perspective_scale = 0.3
+shader_parameter/wind_noise = ExtResource("3_xpo5p")
+shader_parameter/wind_noise_threshold = 0.365
+shader_parameter/wind_noise_scale = 0.071
+shader_parameter/wind_noise_speed = 0.025
+shader_parameter/wind_noise_direction = Vector2(0, 1)
+shader_parameter/noise_diverge_angle = 10.0
+shader_parameter/view_space_sway = true
+shader_parameter/view_sway_speed = 0.1
+shader_parameter/view_sway_angle = 10.0
+shader_parameter/character_displacement = true
+shader_parameter/debug_displacement = false
+shader_parameter/player_displacement_angle_z = 45.0
+shader_parameter/player_displacement_angle_x = 45.0
+shader_parameter/radius_exponent = 1.0
+shader_parameter/character_positions = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/cuts = 3
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/threshold_gradient_size = 0.2

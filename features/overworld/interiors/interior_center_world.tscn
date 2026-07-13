@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b7qkdgsb6rlr7" path="res://assets/vendor/kenney_nature_kit/plant_bush.glb" id="14_bush"]
 [ext_resource type="Script" uid="uid://cpttj7knnm883" path="res://features/overworld/interiors/exit_door.gd" id="15_1b4on"]
 [ext_resource type="PackedScene" uid="uid://qcxv54xpf0et" path="res://features/character/character.tscn" id="17_0fslq"]
-[ext_resource type="Resource" uid="uid://ynylsb0bhovv" path="res://data/characters/nurse/nurse.tres" id="18_x7hv5"]
+[ext_resource type="Resource" uid="uid://ynylsb0bhovv" path="res://data/characters/nurse/nurse_data.tres" id="18_x7hv5"]
 
 [sub_resource type="BoxShape3D" id="Box_exit"]
 size = Vector3(2, 1, 1)

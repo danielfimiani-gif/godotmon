@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c3dkmuo4opols" path="res://features/overworld/props/obstacle.gd" id="1_820ps"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_820ps"]
-size = Vector3(0.68518066, 1.6044922, 0.7044678)
+size = Vector3(1.1367188, 1.6044922, 1)
 
 [node name="Tree" type="StaticBody3D" unique_id=875842249]
 script = ExtResource("1_820ps")

@@ -48,7 +48,6 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.0012079605
 stretch = true
-stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=621478989]
 handle_input_locally = false
@@ -58,7 +57,7 @@ render_target_update_mode = 4
 [node name="WorldMount" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1997195947]
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=31870449]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 3, 2)
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 2, 1.5)
 cull_mask = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera3D" unique_id=1828808232]
@@ -81,11 +80,11 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="SpriteViewport" unique_id=1836958334]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1280, 720)
+size = Vector2i(640, 360)
 render_target_update_mode = 4
 
 [node name="SpriteCamera" type="Camera3D" parent="SpriteViewport/SubViewport" unique_id=478701805]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 3, 2)
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 0, 2, 1.5)
 cull_mask = 2
 
 [node name="Player" parent="." unique_id=1308123210 instance=ExtResource("2_player")]

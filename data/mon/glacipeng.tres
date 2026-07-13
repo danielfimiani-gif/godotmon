@@ -3,16 +3,16 @@
 [ext_resource type="Script" uid="uid://blem6o3mlwxg5" path="res://features/mon/mon_species.gd" id="1_s"]
 [ext_resource type="Texture2D" path="res://assets/vendor/mons/atlas/openmon_r0_c5.tres" id="2_spr"]
 [ext_resource type="Script" uid="uid://bf28cscow6pn7" path="res://features/mon/move_data.gd" id="3_md"]
+[ext_resource type="Resource" uid="uid://bfcl3p2e0a7w2" path="res://data/moves/roca_afilada.tres" id="3_ov26d"]
+[ext_resource type="Resource" uid="uid://d4ef1thklkjb7" path="res://data/moves/pajaro_osado.tres" id="4_002e0"]
 [ext_resource type="Resource" path="res://data/moves/placaje.tres" id="4_m0"]
-[ext_resource type="Resource" path="res://data/moves/rayo_hielo.tres" id="5_m1"]
-[ext_resource type="Resource" path="res://data/moves/chuzo.tres" id="6_m2"]
 
 [resource]
 script = ExtResource("1_s")
 display_name = "Glacipeng"
 sprite = ExtResource("2_spr")
-element = 16
-moves = Array[ExtResource("3_md")]([ExtResource("4_m0"), ExtResource("5_m1"), ExtResource("6_m2")])
+element = 8
+moves = Array[ExtResource("3_md")]([ExtResource("4_m0"), ExtResource("3_ov26d"), ExtResource("4_002e0")])
 base_hp = 54
 base_attack = 25
 base_defense = 22

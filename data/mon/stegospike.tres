@@ -2,17 +2,17 @@
 
 [ext_resource type="Script" uid="uid://blem6o3mlwxg5" path="res://features/mon/mon_species.gd" id="1_s"]
 [ext_resource type="Texture2D" path="res://assets/vendor/mons/atlas/openmon_r4_c1.tres" id="2_spr"]
+[ext_resource type="Resource" uid="uid://b2w14ygpo0oc4" path="res://data/moves/hiperrayo.tres" id="3_lonc8"]
 [ext_resource type="Script" uid="uid://bf28cscow6pn7" path="res://features/mon/move_data.gd" id="3_md"]
+[ext_resource type="Resource" uid="uid://t4erf6dh4f5d" path="res://data/moves/ataque_rapido.tres" id="4_hv7tk"]
 [ext_resource type="Resource" path="res://data/moves/placaje.tres" id="4_m0"]
-[ext_resource type="Resource" path="res://data/moves/avalancha.tres" id="5_m1"]
-[ext_resource type="Resource" path="res://data/moves/roca_afilada.tres" id="6_m2"]
 
 [resource]
 script = ExtResource("1_s")
 display_name = "Stegospike"
 sprite = ExtResource("2_spr")
-element = 8
-moves = Array[ExtResource("3_md")]([ExtResource("4_m0"), ExtResource("5_m1"), ExtResource("6_m2")])
+element = 4
+moves = Array[ExtResource("3_md")]([ExtResource("4_m0"), ExtResource("3_lonc8"), ExtResource("4_hv7tk")])
 base_hp = 54
 base_attack = 25
 base_defense = 22

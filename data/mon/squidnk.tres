@@ -4,16 +4,16 @@
 [ext_resource type="Texture2D" path="res://assets/vendor/mons/atlas/openmon_r2_c0.tres" id="2_spr"]
 [ext_resource type="Script" uid="uid://bf28cscow6pn7" path="res://features/mon/move_data.gd" id="3_md"]
 [ext_resource type="Resource" path="res://data/moves/placaje.tres" id="4_m0"]
-[ext_resource type="Resource" path="res://data/moves/hidrobomba.tres" id="5_m1"]
-[ext_resource type="Resource" path="res://data/moves/surf.tres" id="6_m2"]
-[ext_resource type="Resource" path="res://data/mon/owlumbra.tres" id="7_evo"]
+[ext_resource type="Resource" uid="uid://d4ef1thklkjb7" path="res://data/moves/pajaro_osado.tres" id="4_tjwm2"]
+[ext_resource type="Resource" uid="uid://t4erf6dh4f5d" path="res://data/moves/ataque_rapido.tres" id="5_wxqp0"]
+[ext_resource type="Resource" uid="uid://ckcl1ypdqmr60" path="res://data/mon/owlumbra.tres" id="7_evo"]
 
 [resource]
 script = ExtResource("1_s")
 display_name = "Squidnk"
 sprite = ExtResource("2_spr")
-element = 2
-moves = Array[ExtResource("3_md")]([ExtResource("4_m0"), ExtResource("5_m1"), ExtResource("6_m2")])
+element = 5
+moves = Array[ExtResource("3_md")]([ExtResource("4_m0"), ExtResource("4_tjwm2"), ExtResource("5_wxqp0")])
 base_hp = 24
 base_attack = 12
 base_defense = 11

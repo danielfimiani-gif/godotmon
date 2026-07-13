@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://bkt81jt1h6yvx"]
+
+[ext_resource type="Script" uid="uid://csxt76s25dn7i" path="res://features/character/character_data.gd" id="1_hqydc"]
+[ext_resource type="Resource" uid="uid://d2m4reihd7aeg" path="res://data/characters/profesor/profesor_starter_action.tres" id="1_ssox1"]
+[ext_resource type="Texture2D" uid="uid://bnkaf8flehma5" path="res://assets/vendor/screen_smith_trainers/Townspeople.png" id="2_rvkx1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssox1"]
+atlas = ExtResource("2_rvkx1")
+region = Rect2(271.72757, 109.597534, 14.568573, 19.065018)
+
+[resource]
+script = ExtResource("1_hqydc")
+display_name = "Profesor"
+sprite_ow = SubResource("AtlasTexture_ssox1")
+dialogue = " ¡Puedes llevarte uno de ellos! Tómate tu tiempo, míralos bien y elige el que más te guste. ¿Cuál será tu decisión?"
+action = ExtResource("1_ssox1")
+metadata/_custom_type_script = "uid://csxt76s25dn7i"

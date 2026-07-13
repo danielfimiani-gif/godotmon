@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://ynylsb0bhovv"]
 
-[ext_resource type="Resource" uid="uid://iew6lnvib17w" path="res://data/characters/nurse/action.tres" id="1_m2sd6"]
+[ext_resource type="Resource" uid="uid://iew6lnvib17w" path="res://data/characters/nurse/heal_action.tres" id="1_m2sd6"]
 [ext_resource type="Script" uid="uid://csxt76s25dn7i" path="res://features/character/character_data.gd" id="2_et5xo"]
 [ext_resource type="Texture2D" uid="uid://c3i37nlvkojsk" path="res://assets/vendor/screen_smith_trainers/Townspeople_Animations.png" id="3_0rctx"]
 

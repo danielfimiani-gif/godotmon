@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://clcr5mqr71awb" path="res://globals/dialogue.gd" id="1_bxj2j"]
 [ext_resource type="Theme" uid="uid://582em6ybfsqc" path="res://features/ui/theme.tres" id="2_eoxbp"]
 [ext_resource type="Script" uid="uid://briwsfa7jd2xs" path="res://features/ui/typewriter.gd" id="2_r7jm6"]
+[ext_resource type="Script" uid="uid://bohgcwtfhk5gy" path="res://features/ui/menu.gd" id="4_upakc"]
+[ext_resource type="AudioStream" uid="uid://dtmx1hv5hbn6t" path="res://assets/sounds/SFX_RetroSinglev2.wav" id="5_dwuim"]
 
 [node name="Dialogue" type="CanvasLayer" unique_id=2027715252]
 script = ExtResource("1_bxj2j")
@@ -12,7 +14,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -35.524994
+offset_top = -37.899994
 offset_bottom = -4.899994
 grow_horizontal = 2
 grow_vertical = 0
@@ -23,3 +25,18 @@ layout_mode = 2
 theme = ExtResource("2_eoxbp")
 autowrap_mode = 3
 script = ExtResource("2_r7jm6")
+
+[node name="ChoiceBox" type="PanelContainer" parent="." unique_id=66498915]
+visible = false
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Menu" type="GridContainer" parent="ChoiceBox" unique_id=2021919916]
+layout_mode = 2
+script = ExtResource("4_upakc")
+move_sound = ExtResource("5_dwuim")
