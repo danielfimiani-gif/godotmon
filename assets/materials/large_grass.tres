@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://boe3m33v5ebqg"]
+
+[ext_resource type="Shader" uid="uid://bgd3rwo08vjs4" path="res://assets/shaders/floor.gdshader" id="1_xms7m"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xms7m")
+shader_parameter/albedo1 = Color(0.25490198, 0.59607846, 0.039215688, 1)
+shader_parameter/albedo2 = Color(0.92941177, 0.42745098, 0.08235294, 1)
+shader_parameter/albedo2_scale = 0.54000002565
+shader_parameter/albedo2_threshold = 0.604
+shader_parameter/albedo3 = Color(0.45490196, 0.90588236, 0.07450981, 1)
+shader_parameter/albedo3_scale = 0.02800000133
+shader_parameter/albedo3_threshold = 0.661
+shader_parameter/cuts = 3
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0

@@ -7,7 +7,7 @@ size = Vector3(0.39056396, 0.14996338, 0.38671875)
 
 [node name="TallGrass" type="Area3D" unique_id=2130566705 groups=["tall_grass"]]
 
-[node name="grass_large2" parent="." unique_id=1956261277 instance=ExtResource("1_dg5n0")]
+[node name="grass_large2" parent="." unique_id=2024892010 instance=ExtResource("1_dg5n0")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=489056897]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009674072, 0.009124756, 0.0107421875)

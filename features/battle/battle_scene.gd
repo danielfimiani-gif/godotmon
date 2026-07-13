@@ -81,14 +81,15 @@ func _victory() -> void:
 		AudioManager.play_music(load("res://assets/audio/%s.ogg" % jingle))
 	var before_level := player.level
 	var before_species := player.species
+	var before_exp := player.xp
 	player.gain_xp(enemy.level * 15)
 	await hud.type_message("%s ganó %d de experiencia." % [before_species.display_name, enemy.level * 15])
-	await hud.sync_exp(true)
+	var on_level_up := func(new_level: int) -> void:
+		AudioManager.play_sfx(load("res://assets/audio/level_up.ogg"))
+		await hud.show_message("!%s subió de nivel %d!" % [player.species.display_name, new_level])
+	await hud.animate_exp_gain(before_level, before_exp, on_level_up)
 	hud.refresh_names()
 	hud.sync_hp(player, false)
-	if player.level > before_level:
-		AudioManager.play_sfx(load("res://assets/audio/level_up.ogg"))
-		await hud.show_message("¡%s subió al nivel %d!" % [player.species.display_name, player.level])
 	if player.species != before_species:
 		if final_win:
 			AudioManager.play_music(load("res://assets/audio/evolution.ogg"))

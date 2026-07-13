@@ -26,7 +26,10 @@ func is_fainted() -> bool:
 	return current_hp <= 0
 
 func xp_to_next() -> int:
-	return level * 20
+	return xp_for_level(level)
+
+func xp_for_level(lvl: int) -> int:
+	return lvl * 20
 
 func gain_xp(amount: int) -> void:
 	xp += amount

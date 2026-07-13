@@ -278,14 +278,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8000002, 0, 3.8)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 3.5)
 
 [node name="Professor" parent="." unique_id=1186980275 instance=ExtResource("17_jqcqq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.443357, -9.536743e-07, -0.88685894)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018166542, -9.536743e-07, -0.88685894)
 data = ExtResource("11_swskg")
 
 [node name="ExitDoor" type="Area3D" parent="." unique_id=406942757]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 4)
 script = ExtResource("16_n2ba5")
 world_path = "res://features/overworld/overworld_world.tscn"
-spawn = Vector3(18, 0, 0)
+spawn = Vector3(-7, 0, 6)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExitDoor" unique_id=1341823353]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.95285463)

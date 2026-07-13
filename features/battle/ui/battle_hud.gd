@@ -63,6 +63,23 @@ func sync_exp(animate: bool) -> void:
 	else:
 		player_exp.value = _player.xp
 
+func animate_exp_gain(from_level: int, from_xp: int, on_level_up: Callable) -> void:
+	player_exp.max_value = _player.xp_for_level(from_level)
+	player_exp.value = from_xp
+	var lvl := from_level
+	while lvl < _player.level:
+		player_exp.max_value = _player.xp_for_level(lvl)
+		var tw := create_tween()
+		tw.tween_property(player_exp, "value",  player_exp.max_value, 0.4)
+		await tw.finished
+		await on_level_up.call(lvl + 1)
+		player_exp.value = 0
+		lvl += 1
+	player_exp.max_value = _player.xp_to_next()
+	var tw2 := create_tween()
+	tw2.tween_property(player_exp, "value", float(_player.xp), 0.4)
+	await tw2.finished
+
 func show_message(text: String) -> void:
 	command_box.hide()
 	moves_box.hide()

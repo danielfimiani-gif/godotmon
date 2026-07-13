@@ -62,3 +62,6 @@ func award_badge(badge: BadgeData) -> void:
 
 func player_has_party() -> bool:
 	return !party.is_empty()
+
+func player_has_badge(badge: BadgeData) -> bool:
+	return badges.has(badge)
