@@ -2,6 +2,8 @@ extends Node3D
 
 @onready var grass_detector: Area3D = $GrassDetector
 @onready var ray: RayCast3D = $ObstacleRay
+@onready var sprite: CharacterSprite = $Sprite3D
+
 const TILE := 1.0
 const MOVE_TIME := 0.15
 const ENCOUNTER_CHANCE := 0.2
@@ -15,31 +17,48 @@ func _ready() -> void:
 	grass_detector.area_entered.connect(_on_grass_entered)
 	grass_detector.area_exited.connect(_on_grass_exited)
 
-func _unhandled_input(event: InputEvent) -> void:
-	if moving or Dialogue.is_active():
+func _physics_process(_delta: float) -> void:
+	if moving or Dialogue.is_active() or Transition.is_active():
 		return
-	if event.is_action_pressed("interact"):
-		_try_interact()
-		return
-	var dir := Vector3.ZERO
-	if event.is_action_pressed("ui_up"): dir = Vector3.FORWARD
-	elif event.is_action_pressed("ui_down"): dir = Vector3.BACK
-	elif event.is_action_pressed("ui_left"): dir = Vector3.LEFT
-	elif event.is_action_pressed("ui_right"): dir = Vector3.RIGHT
+	var dir := _input_dir()
 	if dir == Vector3.ZERO:
 		return
 	facing = dir
 	if _can_move(dir):
 		_step(dir)
+	else:
+		sprite.face(dir)
+
+func _input_dir() -> Vector3:
+	if Input.is_action_pressed("ui_up"): return Vector3.FORWARD
+	if Input.is_action_pressed("ui_down"): return Vector3.BACK
+	if Input.is_action_pressed("ui_left"): return Vector3.LEFT
+	if Input.is_action_pressed("ui_right"): return Vector3.RIGHT
+	return Vector3.ZERO
+
+func _unhandled_input(event: InputEvent) -> void:
+	if moving or Dialogue.is_active() or Transition.is_active():
+		return
+	if event.is_action_pressed("interact"):
+		_try_interact()
 
 func _step(dir: Vector3) -> void:
 	moving = true
+	sprite.step(dir)
 	var target := position + dir * TILE
 	move_tween = create_tween()
 	move_tween.tween_property(self, "position", target, MOVE_TIME)
 	await move_tween.finished
 	moving = false
+	if _input_dir() == Vector3.ZERO:
+		sprite.face(facing)
 	_check_encounter()
+
+func _dir_held() -> bool:
+	return Input.is_action_pressed("ui_up") or \
+		Input.is_action_pressed("ui_down") or \
+		Input.is_action_pressed("ui_left") or \
+		Input.is_action_pressed("ui_right")
 
 func _on_grass_entered(area: Area3D) -> void:
 	if area.is_in_group("tall_grass"):

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b7u45k6dvv7w4" path="res://features/player/player.gd" id="1_h1hfe"]
 [ext_resource type="Texture2D" uid="uid://c3i37nlvkojsk" path="res://assets/vendor/screen_smith_trainers/Townspeople_Animations.png" id="2_uhbth"]
+[ext_resource type="Script" uid="uid://d3yjj37l15rnp" path="res://features/character/character_sprite.gd" id="3_emvbc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h1hfe"]
 
@@ -16,8 +17,9 @@ billboard = 2
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("2_uhbth")
-region_enabled = true
 region_rect = Rect2(20.642962, 108.72905, 14.582762, 20.4897)
+script = ExtResource("3_emvbc")
+char_row = 5
 
 [node name="GrassDetector" type="Area3D" parent="." unique_id=426474296]
 

@@ -47,3 +47,6 @@ func _wipe(to: float, dur: float) -> void:
 	var tw := create_tween()
 	tw.tween_property(_veil, "material:shader_parameter/progress", to, dur)
 	await tw.finished
+
+func is_active() -> bool:
+	return _busy
