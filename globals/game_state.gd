@@ -8,13 +8,26 @@ var return_world_path: String = ""
 var return_pos: Vector3 = Vector3.ZERO
 var wild_pool: Array[MonSpecies] = []
 var badges: Array[BadgeData] = []
+var inventory: Dictionary = {}
 
 func _ready() -> void:
 	_build_wild_pool()
+	add_item(load("res://data/items/potion_item_data.tres"), 3)
+	print(inventory.size())
 
 func add_mon(mon: Mon) -> void:
 	party.append(mon)
 	print("Party: %d mon(s)" % party.size())
+
+func add_item(item: ItemData, amount: int = 1) -> void:
+	inventory[item] = inventory.get(item, 0) + amount
+
+func remove_item(item: ItemData, amount: int = 1) -> void:
+	if not inventory.has(item):
+		return
+	inventory[item] -= amount
+	if inventory[item] <= 0:
+		inventory.erase(item)
 
 func heal_all() -> void:
 	for mon in party:
