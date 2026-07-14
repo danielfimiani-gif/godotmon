@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://b8uydb6i3nqc2" path="res://features/battle/ui/battle_hud.gd" id="1_7l317"]
 [ext_resource type="Script" uid="uid://briwsfa7jd2xs" path="res://features/ui/typewriter.gd" id="1_qu8do"]
-[ext_resource type="AudioStream" uid="uid://bbxouwfeeyqnn" path="res://assets/sounds/SFX_RetroSinglev4.wav" id="2_7l317"]
 [ext_resource type="Script" uid="uid://bohgcwtfhk5gy" path="res://features/ui/menu.gd" id="3_1g8v4"]
 [ext_resource type="AudioStream" uid="uid://dtmx1hv5hbn6t" path="res://assets/sounds/SFX_RetroSinglev2.wav" id="4_ega5a"]
 
@@ -71,7 +70,6 @@ grow_vertical = 0
 layout_mode = 2
 vertical_alignment = 1
 script = ExtResource("1_qu8do")
-sound = ExtResource("2_7l317")
 
 [node name="CommandBox" type="PanelContainer" parent="." unique_id=1086314826]
 anchors_preset = 2
@@ -103,5 +101,21 @@ grow_vertical = 0
 [node name="MovesMenu" type="GridContainer" parent="MovesBox" unique_id=421791290]
 layout_mode = 2
 columns = 2
+script = ExtResource("3_1g8v4")
+move_sound = ExtResource("4_ega5a")
+
+[node name="BagBox" type="PanelContainer" parent="." unique_id=525720753]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -46.0
+offset_right = 160.0
+offset_bottom = -6.0
+grow_vertical = 0
+
+[node name="BagMenu" type="GridContainer" parent="BagBox" unique_id=1117039456]
+layout_mode = 2
 script = ExtResource("3_1g8v4")
 move_sound = ExtResource("4_ega5a")

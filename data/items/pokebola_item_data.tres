@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://d2y01m6p68icm"]
+
+[ext_resource type="Script" uid="uid://tl4jg6318yea" path="res://features/item/effects/capture_effect.gd" id="1_cap"]
+[ext_resource type="Script" uid="uid://dw68bole55kio" path="res://features/item/item_data.gd" id="2_dat"]
+[ext_resource type="Texture2D" uid="uid://bxqwi2ir4j8ay" path="res://assets/textures/pokeballs.png" id="2_x7kxv"]
+
+[sub_resource type="Resource" id="Resource_cap"]
+script = ExtResource("1_cap")
+metadata/_custom_type_script = "uid://tl4jg6318yea"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lupff"]
+atlas = ExtResource("2_x7kxv")
+region = Rect2(6.810425, 8.84267, 19.117851, 21.724823)
+
+[resource]
+script = ExtResource("2_dat")
+display_name = "Pokébola"
+icon = SubResource("AtlasTexture_lupff")
+description = "Un dispositivo para atrapar Mons salvajes. Se lanza sobre el objetivo."
+effect = SubResource("Resource_cap")
+metadata/_custom_type_script = "uid://dw68bole55kio"

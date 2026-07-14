@@ -14,3 +14,6 @@ func execute() -> void:
 	var chosen := starters[idx]
 	GameState.add_mon(Mon.create(chosen))
 	await Dialogue.say("!Elegiste a %s! Cuidalo bien." % chosen.display_name)
+	await Dialogue.say("!Toma tambien algunas pokebolas y algunas pociones")
+	GameState.add_item(load("res://data/items/potion_item_data.tres"), 3)
+	GameState.add_item(load("res://data/items/pokebola_item_data.tres"), 5)

@@ -12,8 +12,6 @@ var inventory: Dictionary = {}
 
 func _ready() -> void:
 	_build_wild_pool()
-	add_item(load("res://data/items/potion_item_data.tres"), 3)
-	print(inventory.size())
 
 func add_mon(mon: Mon) -> void:
 	party.append(mon)

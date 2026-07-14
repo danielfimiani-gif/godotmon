@@ -2,6 +2,7 @@ extends CanvasLayer
 class_name BattleHud
 
 signal command_selected(idx: int)
+signal item_selected(idx: int)
 signal move_selected(idx: int)
 
 @onready var player_name: Label = $PlayerPanel/PlayerBox/PlayerName
@@ -18,6 +19,8 @@ signal move_selected(idx: int)
 @onready var command_menu: Menu = $CommandBox/CommandMenu
 @onready var moves_box: PanelContainer = $MovesBox
 @onready var moves_menu: Menu = $MovesBox/MovesMenu
+@onready var bag_box: PanelContainer = $BagBox
+@onready var bag_menu: Menu = $BagBox/BagMenu
 
 var _player: Mon
 var _enemy: Mon
@@ -30,6 +33,8 @@ func setup(player: Mon, enemy: Mon, command_options: Array[String], move_options
 	moves_menu.set_options(move_options)
 	moves_menu.selected.connect(func(idx: int) -> void: move_selected.emit(idx))
 	moves_menu.cancelled.connect(show_commands)
+	bag_menu.selected.connect(func(idx: int) -> void: item_selected.emit(idx))
+	bag_menu.cancelled.connect(show_commands)
 	_style_exp_bar()
 	refresh_names()
 	sync_hp(player, false)
@@ -83,6 +88,7 @@ func animate_exp_gain(from_level: int, from_xp: int, on_level_up: Callable) -> v
 func show_message(text: String) -> void:
 	command_box.hide()
 	moves_box.hide()
+	bag_box.hide()
 	message_box.show()
 	await typewriter.type_text(text)
 	await get_tree().create_timer(0.4).timeout
@@ -94,15 +100,25 @@ func show_commands() -> void:
 	message_box.hide()
 	moves_box.hide()
 	command_box.show()
+	bag_box.hide()
 
 func show_moves() -> void:
 	message_box.hide()
 	command_box.hide()
 	moves_box.show()
+	bag_box.hide()
 
 func hide_menus() -> void:
 	command_box.hide()
 	moves_box.hide()
+	bag_box.hide()
+
+func show_bag(entries: Array[String]) -> void:
+	message_box.hide()
+	command_box.hide()
+	moves_box.hide()
+	bag_menu.set_options(entries)
+	bag_box.show()
 
 func _apply_hp(v: float, bar: ProgressBar, maxv: float, mon: Mon) -> void:
 	bar.value = v

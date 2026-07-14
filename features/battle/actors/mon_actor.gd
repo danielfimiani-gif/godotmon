@@ -2,6 +2,7 @@ extends Node3D
 class_name MonActor
 
 var _sprite: Sprite3D
+var _float_tween: Tween
 
 func spawn(species: MonSpecies) -> void:
 	_sprite = Sprite3D.new()
@@ -15,10 +16,10 @@ func spawn(species: MonSpecies) -> void:
 
 func _start_float() -> void:
 	var base_y := _sprite.position.y
-	var tw := create_tween().set_loops()
-	tw.tween_property(_sprite, "position:y", base_y + 0.1, 1.2) \
+	_float_tween = create_tween().set_loops()
+	_float_tween.tween_property(_sprite, "position:y", base_y + 0.1, 1.2) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tw.tween_property(_sprite, "position:y", base_y, 1.2) \
+	_float_tween.tween_property(_sprite, "position:y", base_y, 1.2) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func respawn(species: MonSpecies) -> void:
@@ -45,3 +46,21 @@ func shake() -> void:
 		tw.tween_property(self, "position:x", origin_x + dx, 0.04)
 	tw.tween_property(self, "position:x", origin_x, 0.04)
 	await tw.finished
+
+func absorb() -> void:
+	if _float_tween:
+		_float_tween.kill()
+	var tw := create_tween()
+	tw.set_parallel(true)
+	tw.tween_property(_sprite, "scale", Vector3.ZERO, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tw.tween_property(_sprite, "modulate:a", 0.0, 0.25)
+	await tw.finished
+	_sprite.visible = false
+
+func release() -> void:
+	_sprite.visible = true
+	_sprite.modulate.a = 1.0
+	var tw := create_tween()
+	tw.tween_property(_sprite, "scale", Vector3.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	await tw.finished
+	_start_float()
