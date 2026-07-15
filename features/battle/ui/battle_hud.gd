@@ -21,23 +21,21 @@ signal move_selected(idx: int)
 @onready var moves_menu: Menu = $MovesBox/MovesMenu
 @onready var bag_box: PanelContainer = $BagBox
 @onready var bag_menu: Menu = $BagBox/BagMenu
-@onready var party_box: PanelContainer = $PartyBox
-@onready var party_menu: Menu = $PartyBox/PartyMenu
+@onready var party_ui: PartyUI = $PartyUI
 
 var _player: Mon
 var _enemy: Mon
 
-func setup(player: Mon, enemy: Mon, command_options: Array[String], move_options: Array[String]) -> void:
+func setup(player: Mon, enemy: Mon, command_options: Array[String]) -> void:
 	_player = player
 	_enemy = enemy
 	command_menu.set_options(command_options)
 	command_menu.selected.connect(func(idx: int) -> void: command_selected.emit(idx))
-	moves_menu.set_options(move_options)
+	refresh_moves()
 	moves_menu.selected.connect(func(idx: int) -> void: move_selected.emit(idx))
 	moves_menu.cancelled.connect(show_commands)
 	bag_menu.selected.connect(func(idx: int) -> void: item_selected.emit(idx))
 	bag_menu.cancelled.connect(show_commands)
-	party_menu.cancelled.connect(func() -> void: party_menu.selected.emit(-1))
 	_style_exp_bar()
 	refresh_names()
 	sync_hp(player, false)
@@ -53,6 +51,12 @@ func set_player(mon: Mon) -> void:
 func refresh_names() -> void:
 	player_name.text = "%s Lv%d" % [_player.species.display_name, _player.level]
 	enemy_name.text = "%s Lv%d" % [_enemy.species.display_name, _enemy.level]
+
+func refresh_moves() -> void:
+	var names: Array[String] = []
+	for m in _player.species.moves:
+		names.append(m.display_name)
+	moves_menu.set_options(names)
 
 func sync_hp(mon: Mon, animate: bool) -> void:
 	var bar := player_hp if mon == _player else enemy_hp
@@ -126,16 +130,12 @@ func show_bag(entries: Array[String]) -> void:
 	bag_menu.set_options(entries)
 	bag_box.show()
 
-func choose_mon(entries: Array[String]) -> int:
+func choose_mon(party: Array[Mon]) -> int:
 	message_box.hide()
 	command_box.hide()
 	moves_box.hide()
 	bag_box.hide()
-	party_menu.set_options(entries)
-	party_box.show()
-	var idx: int = await party_menu.selected
-	party_box.hide()
-	return idx
+	return await party_ui.open(party)
 
 func _apply_hp(v: float, bar: ProgressBar, maxv: float, mon: Mon) -> void:
 	bar.value = v

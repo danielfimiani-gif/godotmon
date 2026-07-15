@@ -1,5 +1,7 @@
 extends Node
 
+const SAVE_PATH := "user://save.json"
+
 var party: Array[Mon] = []
 var wild_species: MonSpecies
 var trainer: TrainerData
@@ -89,3 +91,52 @@ func player_has_party() -> bool:
 
 func player_has_badge(badge: BadgeData) -> bool:
 	return badges.has(badge)
+
+func save_game() -> void:
+	var mons: Array = []
+	for m in party:
+		mons.append(m.to_dict())
+	var badge_paths: Array = []
+	for b in badges:
+		badge_paths.append(b.resource_path)
+	var items := {}
+	for item in inventory:
+		items[item.resource_path] = inventory[item]
+	var pos := Vector3.ZERO
+	var world := ""
+	if world_manager:
+		pos = world_manager.player.global_position
+		world = world_manager.current_world_path
+	var data := {
+		"party": mons,
+		"badges": badge_paths,
+		"inventory": items,
+		"world": world,
+		"pos": [pos.x, pos.y, pos.z],
+	}
+	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if file == null:
+		return
+	file.store_string(JSON.stringify(data, "\t"))
+	print("Partida guardada.")
+
+func load_game() -> bool:
+	if not FileAccess.file_exists(SAVE_PATH):
+		return false
+	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	var data = JSON.parse_string(file.get_as_text())
+	if typeof(data) != TYPE_DICTIONARY:
+		return false
+	party.clear()
+	for d in data["party"]:
+		party.append(Mon.from_dict(d))
+	badges.clear()
+	for p in data["badges"]:
+		badges.append(load(p))
+	inventory.clear()
+	for path in data["inventory"]:
+		inventory[load(path)] = int(data["inventory"][path])
+	return_world_path = data["world"]
+	var p = data["pos"]
+	return_pos = Vector3(p[0], p[1], p[2])
+	return true

@@ -51,3 +51,19 @@ func _try_evolve() -> void:
 		species = species.evolves_to
 		current_hp += max_hp() - old_max
 		print("%s evolucionó a %s!" % [old_name, species.display_name])
+
+func to_dict() -> Dictionary:
+	return {
+		"species": species.resource_path,
+		"level": level,
+		"xp": xp,
+		"current_hp": current_hp,
+	}
+
+static func from_dict(d: Dictionary) -> Mon:
+	var m := Mon.new()
+	m.species = load(d["species"])
+	m.level = int(d["level"])
+	m.xp = int(d["xp"])
+	m.current_hp = int(d["current_hp"])
+	return m

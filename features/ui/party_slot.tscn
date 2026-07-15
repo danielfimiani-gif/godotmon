@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://ctqv6albakp2s"]
+
+[ext_resource type="Script" uid="uid://dynm85hiahdem" path="res://features/ui/party_slot.gd" id="1_g1avk"]
+
+[node name="PartySlot" type="PanelContainer" unique_id=562616608]
+script = ExtResource("1_g1avk")
+
+[node name="HBox" type="HBoxContainer" parent="." unique_id=2138323461]
+layout_mode = 2
+
+[node name="Sprite" type="TextureRect" parent="HBox" unique_id=1552106935]
+texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="Info" type="VBoxContainer" parent="HBox" unique_id=1646529078]
+layout_mode = 2
+
+[node name="NameLv" type="Label" parent="HBox/Info" unique_id=1866556179]
+layout_mode = 2
+
+[node name="HPRow" type="HBoxContainer" parent="HBox/Info" unique_id=674531542]
+layout_mode = 2
+
+[node name="HPBar" type="ProgressBar" parent="HBox/Info/HPRow" unique_id=1955683987]
+custom_minimum_size = Vector2(64, 8)
+layout_mode = 2
+show_percentage = false
+
+[node name="HPText" type="Label" parent="HBox/Info/HPRow" unique_id=289567109]
+layout_mode = 2

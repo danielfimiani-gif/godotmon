@@ -15,6 +15,8 @@ func spawn(species: MonSpecies) -> void:
 	_start_float()
 
 func _start_float() -> void:
+	if _float_tween:
+		_float_tween.kill()
 	var base_y := _sprite.position.y
 	_float_tween = create_tween().set_loops()
 	_float_tween.tween_property(_sprite, "position:y", base_y + 0.1, 1.2) \

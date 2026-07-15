@@ -11,19 +11,17 @@ var prefer_moves := false
 var bag_items: Array[ItemData] = []
 
 func _ready() -> void:
-	player = GameState.party[0]
+	var living := _living_party()
+	player = living[0] if not living.is_empty() else GameState.party[0]
 	if GameState.trainer:
 		enemy = Mon.create(GameState.trainer.team[0], GameState.trainer.team_level)
 	else:
 		enemy = Mon.create(GameState.wild_species, GameState.wild_level)
 	player_actor.spawn(player.species)
 	enemy_actor.spawn(enemy.species)
-	var move_names: Array[String] = []
-	for m in player.species.moves:
-		move_names.append(m.display_name)
 	hud.command_selected.connect(_on_command_selected)
 	hud.move_selected.connect(_on_move_selected)
-	hud.setup(player, enemy, ["PELEAR", "MOCHILA", "MONS", "HUIR"], move_names)
+	hud.setup(player, enemy, ["PELEAR", "MOCHILA", "MONS", "HUIR"])
 	hud.item_selected.connect(_on_item_selected)
 	await hud.show_message("¡Un %s salvaje apareció!" % enemy.species.display_name)
 	_show_turn_menu()
@@ -73,17 +71,23 @@ func _victory() -> void:
 	if final_win:
 		var jingle := "victory_leader" if GameState.trainer else "victory_wild"
 		AudioManager.play_music(load("res://assets/audio/%s.ogg" % jingle))
+	var total_xp := enemy.level * 15
+	var living := _living_party()
+	var xp_each := maxi(1, int(total_xp / float(living.size())))
 	var before_level := player.level
 	var before_species := player.species
 	var before_exp := player.xp
-	player.gain_xp(enemy.level * 15)
-	await hud.type_message("%s ganó %d de experiencia." % [before_species.display_name, enemy.level * 15])
+	player.gain_xp(xp_each)
+	await hud.type_message("%s ganó %d de experiencia." % [before_species.display_name, xp_each])
 	var on_level_up := func(new_level: int) -> void:
 		AudioManager.play_sfx(load("res://assets/audio/level_up.ogg"))
 		await hud.show_message("¡%s subió de nivel %d!" % [player.species.display_name, new_level])
 	await hud.animate_exp_gain(before_level, before_exp, on_level_up)
 	hud.refresh_names()
 	hud.sync_hp(player, false)
+	for m in living:
+		if m != player:
+			m.gain_xp(xp_each)
 	if player.species != before_species:
 		if final_win:
 			AudioManager.play_music(load("res://assets/audio/evolution.ogg"))
@@ -197,7 +201,7 @@ func _play_capture(item: ItemData, caught: bool) -> void:
 	ball.queue_free()
 
 func _use_on_self(item: ItemData) -> void:
-	var idx := await hud.choose_mon(_party_entries())
+	var idx := await hud.choose_mon(GameState.party)
 	if idx < 0:
 		_open_bag()
 		return
@@ -216,15 +220,8 @@ func _use_on_self(item: ItemData) -> void:
 		return
 	_show_turn_menu()
 
-func _party_entries() -> Array[String]:
-	var entries: Array[String] = []
-	for m in GameState.party:
-		var mark := "  (débil)" if m.is_fainted() else ""
-		entries.append("%s Lv%d  %d/%d%s" % [m.species.display_name, m.level, m.current_hp, m.max_hp(), mark])
-	return entries
-
 func _open_party() -> void:
-	var idx := await hud.choose_mon(_party_entries())
+	var idx := await hud.choose_mon(GameState.party)
 	if idx < 0:
 		hud.show_commands()
 		return
@@ -250,6 +247,7 @@ func _switch_to(idx: int) -> void:
 	player_actor.respawn(player.species)
 	hud.set_player(player)
 	hud.refresh_names()
+	hud.refresh_moves()
 	hud.sync_hp(player, false)
 	hud.sync_exp(false)
 	await hud.show_message("¡Adelante, %s!" % player.species.display_name)
@@ -269,8 +267,15 @@ func _has_usable_mon() -> bool:
 			return true
 	return false
 
+func _living_party() -> Array[Mon]:
+	var alive: Array[Mon] = []
+	for m in GameState.party:
+		if not m.is_fainted():
+			alive.append(m)
+	return alive
+
 func _force_switch() -> void:
 	var idx := -1
 	while idx < 0 or GameState.party[idx].is_fainted():
-		idx = await hud.choose_mon(_party_entries())
+		idx = await hud.choose_mon(GameState.party)
 	await _switch_to(idx)

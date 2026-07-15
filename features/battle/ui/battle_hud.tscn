@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://briwsfa7jd2xs" path="res://features/ui/typewriter.gd" id="1_qu8do"]
 [ext_resource type="Script" uid="uid://bohgcwtfhk5gy" path="res://features/ui/menu.gd" id="3_1g8v4"]
 [ext_resource type="AudioStream" uid="uid://dtmx1hv5hbn6t" path="res://assets/sounds/SFX_RetroSinglev2.wav" id="4_ega5a"]
+[ext_resource type="PackedScene" path="res://features/ui/party_ui.tscn" id="5_7l317"]
 
 [node name="UI" type="CanvasLayer" unique_id=496048587]
 script = ExtResource("1_7l317")
@@ -120,18 +121,5 @@ layout_mode = 2
 script = ExtResource("3_1g8v4")
 move_sound = ExtResource("4_ega5a")
 
-[node name="PartyBox" type="PanelContainer" parent="." unique_id=123194185]
+[node name="PartyUI" parent="." unique_id=301680636 instance=ExtResource("5_7l317")]
 visible = false
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -46.0
-offset_right = 160.0
-offset_bottom = -6.0
-grow_vertical = 0
-
-[node name="PartyMenu" type="GridContainer" parent="PartyBox" unique_id=2110651413]
-layout_mode = 2
-script = ExtResource("3_1g8v4")
-move_sound = ExtResource("4_ega5a")
