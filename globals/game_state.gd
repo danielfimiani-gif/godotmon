@@ -140,3 +140,11 @@ func load_game() -> bool:
 	var p = data["pos"]
 	return_pos = Vector3(p[0], p[1], p[2])
 	return true
+
+func new_game() -> void:
+	party.clear()
+	badges.clear()
+	inventory.clear()
+	trainer = null
+	return_world_path = ""
+	return_pos = Vector3.ZERO

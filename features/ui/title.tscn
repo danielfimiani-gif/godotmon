@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://dwtq8ie2xk5l8"]
+
+[ext_resource type="Script" uid="uid://35put7fusr3r" path="res://features/title/title.gd" id="1_pef55"]
+[ext_resource type="Texture2D" uid="uid://by0g5uxc2wdcw" path="res://assets/textures/backgroudnhd.png" id="2_ap0oc"]
+[ext_resource type="Texture2D" uid="uid://do01twftcqoax" path="res://assets/textures/logo.png" id="3_aludk"]
+[ext_resource type="Script" uid="uid://bohgcwtfhk5gy" path="res://features/ui/menu.gd" id="3_hi1gx"]
+[ext_resource type="AudioStream" uid="uid://dtmx1hv5hbn6t" path="res://assets/sounds/SFX_RetroSinglev2.wav" id="5_ap0oc"]
+
+[node name="Title" type="Control" unique_id=1283816625]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pef55")
+
+[node name="BackGround" type="TextureRect" parent="." unique_id=1250173185]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ap0oc")
+expand_mode = 1
+
+[node name="Logo" type="TextureRect" parent="." unique_id=2019343430]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 127.0
+offset_top = 56.0
+offset_right = -118.0
+offset_bottom = -231.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_aludk")
+expand_mode = 1
+
+[node name="Menu" type="GridContainer" parent="." unique_id=1913205562]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 3.0
+offset_right = 20.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0123664625
+script = ExtResource("3_hi1gx")
+move_sound = ExtResource("5_ap0oc")
+outline_size = 3
+
+[node name="PressStart" type="Label" parent="." unique_id=657024561]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.5
+offset_top = 7.0
+offset_right = 65.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 27
+text = "\"PRESS START\""
+
+[node name="Copy" type="Label" parent="." unique_id=795481586]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.5
+offset_top = -45.0
+offset_right = 96.5
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 27
+text = "©2026 FAN MADE - GODOT "

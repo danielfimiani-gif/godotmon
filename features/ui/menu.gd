@@ -5,6 +5,7 @@ signal selected(index: int)
 signal cancelled
 
 @export var move_sound: AudioStream
+@export var outline_size: int = 0
 
 var options: Array[String] = []
 var index := 0
@@ -25,6 +26,9 @@ func set_options(opts: Array[String]) -> void:
 	labels.clear()
 	for _o in options:
 		var l := Label.new()
+		if outline_size > 0:
+			l.add_theme_color_override("font_outline_color", Color.BLACK)
+			l.add_theme_constant_override("outline_size", outline_size)
 		add_child(l)
 		labels.append(l)
 	_refresh()
