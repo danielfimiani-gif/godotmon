@@ -9,6 +9,7 @@ var return_pos: Vector3 = Vector3.ZERO
 var wild_pool: Array[MonSpecies] = []
 var badges: Array[BadgeData] = []
 var inventory: Dictionary = {}
+var wild_level: int = 5
 
 func _ready() -> void:
 	_build_wild_pool()
@@ -37,6 +38,7 @@ func start_wild_encounter() -> void:
 	trainer = null
 	_save_return()
 	wild_species = wild_pool.pick_random()
+	wild_level = _wild_level()
 	AudioManager.play_music(load("res://assets/audio/battle_wild.ogg"))
 	Transition.change_scene("res://features/battle/battle.tscn")
 
@@ -56,6 +58,17 @@ func _save_return() -> void:
 	if world_manager:
 		return_world_path = world_manager.current_world_path
 		return_pos = world_manager.player.global_position
+
+func party_level() -> int:
+	if party.is_empty():
+		return 1
+	var total := 0
+	for m in party:
+		total += m.level
+	return int(round(float(total) / party.size()))
+
+func _wild_level() -> int:
+	return maxi(2, party_level() + randi_range(-1, 1))
 
 func _build_wild_pool() -> void:
 	var dir := DirAccess.open("res://data/mon")

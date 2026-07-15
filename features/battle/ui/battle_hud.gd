@@ -21,6 +21,8 @@ signal move_selected(idx: int)
 @onready var moves_menu: Menu = $MovesBox/MovesMenu
 @onready var bag_box: PanelContainer = $BagBox
 @onready var bag_menu: Menu = $BagBox/BagMenu
+@onready var party_box: PanelContainer = $PartyBox
+@onready var party_menu: Menu = $PartyBox/PartyMenu
 
 var _player: Mon
 var _enemy: Mon
@@ -35,6 +37,7 @@ func setup(player: Mon, enemy: Mon, command_options: Array[String], move_options
 	moves_menu.cancelled.connect(show_commands)
 	bag_menu.selected.connect(func(idx: int) -> void: item_selected.emit(idx))
 	bag_menu.cancelled.connect(show_commands)
+	party_menu.cancelled.connect(func() -> void: party_menu.selected.emit(-1))
 	_style_exp_bar()
 	refresh_names()
 	sync_hp(player, false)
@@ -43,6 +46,9 @@ func setup(player: Mon, enemy: Mon, command_options: Array[String], move_options
 
 func set_enemy(enemy: Mon) -> void:
 	_enemy = enemy
+
+func set_player(mon: Mon) -> void:
+	_player = mon
 
 func refresh_names() -> void:
 	player_name.text = "%s Lv%d" % [_player.species.display_name, _player.level]
@@ -119,6 +125,17 @@ func show_bag(entries: Array[String]) -> void:
 	moves_box.hide()
 	bag_menu.set_options(entries)
 	bag_box.show()
+
+func choose_mon(entries: Array[String]) -> int:
+	message_box.hide()
+	command_box.hide()
+	moves_box.hide()
+	bag_box.hide()
+	party_menu.set_options(entries)
+	party_box.show()
+	var idx: int = await party_menu.selected
+	party_box.hide()
+	return idx
 
 func _apply_hp(v: float, bar: ProgressBar, maxv: float, mon: Mon) -> void:
 	bar.value = v

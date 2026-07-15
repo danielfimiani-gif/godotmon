@@ -119,3 +119,19 @@ grow_vertical = 0
 layout_mode = 2
 script = ExtResource("3_1g8v4")
 move_sound = ExtResource("4_ega5a")
+
+[node name="PartyBox" type="PanelContainer" parent="." unique_id=123194185]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -46.0
+offset_right = 160.0
+offset_bottom = -6.0
+grow_vertical = 0
+
+[node name="PartyMenu" type="GridContainer" parent="PartyBox" unique_id=2110651413]
+layout_mode = 2
+script = ExtResource("3_1g8v4")
+move_sound = ExtResource("4_ega5a")

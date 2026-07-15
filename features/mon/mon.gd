@@ -14,7 +14,7 @@ static func create (from_species: MonSpecies, at_level:int = 5) -> Mon:
 	return m
 
 func max_hp() -> int:
-	return int(2.0 * species.base_hp * level / 100.0) + level + 10
+	return int(4.0 * species.base_hp * level / 100.0) + level + 20
 
 func attack() -> int:
 	return int(2.0 * species.base_attack * level / 100.0) + 5

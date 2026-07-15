@@ -13,9 +13,9 @@ var bag_items: Array[ItemData] = []
 func _ready() -> void:
 	player = GameState.party[0]
 	if GameState.trainer:
-		enemy = Mon.create(GameState.trainer.team[0])
+		enemy = Mon.create(GameState.trainer.team[0], GameState.trainer.team_level)
 	else:
-		enemy = Mon.create(GameState.wild_species)
+		enemy = Mon.create(GameState.wild_species, GameState.wild_level)
 	player_actor.spawn(player.species)
 	enemy_actor.spawn(enemy.species)
 	var move_names: Array[String] = []
@@ -42,8 +42,7 @@ func _on_command_selected(idx: int) -> void:
 		1:
 			_open_bag()
 		2:
-			await hud.show_message("¡Todavía no podés cambiar de Mons!")
-			hud.show_commands()
+			await _open_party()
 		3:
 			if GameState.trainer:
 				await hud.show_message("¡No podés escapar de un combate de Líder!")
@@ -64,8 +63,7 @@ func _player_turn(move: MoveData) -> void:
 		return
 	await _do_turn(enemy, _enemy_best_move(), player)
 	if player.is_fainted():
-		await hud.show_message("¡%s se debilitó! Perdiste..." % player.species.display_name)
-		_end_battle()
+		await _handle_player_fainted()
 		return
 	_show_turn_menu()
 
@@ -92,7 +90,7 @@ func _victory() -> void:
 		await hud.show_message("¡%s evolucionó a %s!" % [before_species.display_name, player.species.display_name])
 	if not final_win:
 		enemy_index += 1
-		enemy = Mon.create(GameState.trainer.team[enemy_index])
+		enemy = Mon.create(GameState.trainer.team[enemy_index], GameState.trainer.team_level)
 		enemy_actor.respawn(enemy.species)
 		hud.set_enemy(enemy)
 		hud.refresh_names()
@@ -176,8 +174,7 @@ func _throw_ball(item: ItemData) -> void:
 	await hud.show_message("¡%s se escapó!" % enemy.species.display_name)
 	await _do_turn(enemy, _enemy_best_move(), player)
 	if player.is_fainted():
-		await hud.show_message("¡%s se debilitó! Perdiste..." % player.species.display_name)
-		_end_battle()
+		await _handle_player_fainted()
 		return
 	_show_turn_menu()
 
@@ -200,16 +197,80 @@ func _play_capture(item: ItemData, caught: bool) -> void:
 	ball.queue_free()
 
 func _use_on_self(item: ItemData) -> void:
-	if not item.effect.use(player):
+	var idx := await hud.choose_mon(_party_entries())
+	if idx < 0:
+		_open_bag()
+		return
+	var target := GameState.party[idx]
+	if not item.effect.use(target):
 		await hud.show_message("No tendría ningún efecto.")
 		_open_bag()
 		return
 	GameState.remove_item(item)
-	await hud.show_message("%s usó %s." % [player.species.display_name, item.display_name])
-	await hud.sync_hp(player, true)
+	await hud.show_message("¡%s recuperó salud con %s!" % [target.species.display_name, item.display_name])
+	if target == player:
+		await hud.sync_hp(player, true)
 	await _do_turn(enemy, _enemy_best_move(), player)
 	if player.is_fainted():
-		await hud.show_message("¡%s se debilitó! Perdiste..." % player.species.display_name)
-		_end_battle()
+		await _handle_player_fainted()
 		return
 	_show_turn_menu()
+
+func _party_entries() -> Array[String]:
+	var entries: Array[String] = []
+	for m in GameState.party:
+		var mark := "  (débil)" if m.is_fainted() else ""
+		entries.append("%s Lv%d  %d/%d%s" % [m.species.display_name, m.level, m.current_hp, m.max_hp(), mark])
+	return entries
+
+func _open_party() -> void:
+	var idx := await hud.choose_mon(_party_entries())
+	if idx < 0:
+		hud.show_commands()
+		return
+	var chosen := GameState.party[idx]
+	if chosen == player:
+		await hud.show_message("¡%s ya está en batalla!" % chosen.species.display_name)
+		hud.show_commands()
+		return
+	if chosen.is_fainted():
+		await hud.show_message("¡%s no puede pelear!" % chosen.species.display_name)
+		hud.show_commands()
+		return
+	hud.hide_menus()
+	await _switch_to(idx)
+	await _do_turn(enemy, _enemy_best_move(), player)
+	if player.is_fainted():
+		await _handle_player_fainted()
+		return
+	_show_turn_menu()
+
+func _switch_to(idx: int) -> void:
+	player = GameState.party[idx]
+	player_actor.respawn(player.species)
+	hud.set_player(player)
+	hud.refresh_names()
+	hud.sync_hp(player, false)
+	hud.sync_exp(false)
+	await hud.show_message("¡Adelante, %s!" % player.species.display_name)
+
+func _handle_player_fainted() -> void:
+	await hud.show_message("¡%s se debilitó!" % player.species.display_name)
+	if not _has_usable_mon():
+		await hud.show_message("¡Te quedaste sin Mons! Perdiste...")
+		_end_battle()
+		return
+	await _force_switch()
+	_show_turn_menu()
+
+func _has_usable_mon() -> bool:
+	for m in GameState.party:
+		if not m.is_fainted():
+			return true
+	return false
+
+func _force_switch() -> void:
+	var idx := -1
+	while idx < 0 or GameState.party[idx].is_fainted():
+		idx = await hud.choose_mon(_party_entries())
+	await _switch_to(idx)

@@ -9,5 +9,7 @@
 script = ExtResource("1_cbvnn")
 display_name = "Marina Lider de Agua"
 team = Array[ExtResource("2_vhhy2")]([ExtResource("3_vhhy2")])
+team_level = 12
+min_level = 11
 badge = ExtResource("1_ab0ma")
 metadata/_custom_type_script = "uid://dqkbdi8r2bxu7"
