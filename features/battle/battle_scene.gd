@@ -255,7 +255,8 @@ func _switch_to(idx: int) -> void:
 func _handle_player_fainted() -> void:
 	await hud.show_message("¡%s se debilitó!" % player.species.display_name)
 	if not _has_usable_mon():
-		await hud.show_message("¡Te quedaste sin Mons! Perdiste...")
+		await hud.show_message("¡Te quedaste sin fuerzas!")
+		GameState.whiteout()
 		_end_battle()
 		return
 	await _force_switch()

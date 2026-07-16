@@ -8,6 +8,8 @@ var trainer: TrainerData
 var world_manager: Node
 var return_world_path: String = ""
 var return_pos: Vector3 = Vector3.ZERO
+var respawn_world: String = ""
+var respawn_pos: Vector3 = Vector3.ZERO
 var wild_pool: Array[MonSpecies] = []
 var badges: Array[BadgeData] = []
 var inventory: Dictionary = {}
@@ -61,6 +63,16 @@ func _save_return() -> void:
 		return_world_path = world_manager.current_world_path
 		return_pos = world_manager.player.global_position
 
+func set_respawn() -> void:
+	if world_manager:
+		respawn_world = world_manager.current_world_path
+		respawn_pos = world_manager.player.global_position
+
+func whiteout() -> void:
+	heal_all()
+	return_world_path = respawn_world
+	return_pos = respawn_pos
+
 func party_level() -> int:
 	if party.is_empty():
 		return 1
@@ -113,6 +125,8 @@ func save_game() -> void:
 		"inventory": items,
 		"world": world,
 		"pos": [pos.x, pos.y, pos.z],
+		"respawn_world": respawn_world,
+		"respawn_pos": [respawn_pos.x, respawn_pos.y, respawn_pos.z],
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:
@@ -139,6 +153,9 @@ func load_game() -> bool:
 	return_world_path = data["world"]
 	var p = data["pos"]
 	return_pos = Vector3(p[0], p[1], p[2])
+	respawn_world = data.get("respawn_world", "")
+	var rp = data.get("respawn_pos", [0, 0, 0])
+	respawn_pos = Vector3(rp[0], rp[1], rp[2])
 	return true
 
 func new_game() -> void:
@@ -148,3 +165,5 @@ func new_game() -> void:
 	trainer = null
 	return_world_path = ""
 	return_pos = Vector3.ZERO
+	respawn_world = ""
+	respawn_pos = Vector3.ZERO
