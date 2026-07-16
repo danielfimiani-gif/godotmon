@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bafa6agnvq4sf" path="res://features/overworld/overworld_world.tscn" id="2_03bmb"]
 [ext_resource type="PackedScene" uid="uid://jnsdfipm83m5" path="res://features/player/player.tscn" id="2_player"]
 [ext_resource type="Shader" uid="uid://dbykrib4tooku" path="res://assets/shaders/edge_detection.gdshader" id="3_shader"]
+[ext_resource type="PackedScene" uid="uid://b2nt1rpk3d2ea" path="res://features/ui/pause_menu.tscn" id="5_tripy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="Sky_mat"]
 
@@ -88,3 +89,5 @@ transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.70710
 cull_mask = 2
 
 [node name="Player" parent="." unique_id=1308123210 instance=ExtResource("2_player")]
+
+[node name="PauseMenu" parent="." unique_id=1382524310 instance=ExtResource("5_tripy")]

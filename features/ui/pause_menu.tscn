@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://b2nt1rpk3d2ea"]
+
+[ext_resource type="Script" uid="uid://d3m3nkjj8prvp" path="res://features/game/pause_menu.gd" id="1_8svn8"]
+[ext_resource type="Script" uid="uid://bohgcwtfhk5gy" path="res://features/ui/menu.gd" id="2_y50xd"]
+[ext_resource type="PackedScene" path="res://features/ui/party_ui.tscn" id="3_nj1n6"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1382524310]
+process_mode = 3
+script = ExtResource("1_8svn8")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=382120445]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 24.0
+grow_vertical = 2
+
+[node name="Menu" type="GridContainer" parent="Panel" unique_id=998722908]
+layout_mode = 2
+script = ExtResource("2_y50xd")
+
+[node name="PartyUI" parent="." unique_id=1834082267 instance=ExtResource("3_nj1n6")]
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1073838142]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -118.0
+offset_top = -33.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Message" type="Label" parent="PanelContainer" unique_id=286868110]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Partida Guardada"

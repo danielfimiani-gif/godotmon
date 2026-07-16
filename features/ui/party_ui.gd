@@ -11,6 +11,8 @@ var _slots: Array[PartySlot] = []
 var _index := 0
 
 func open(party: Array[Mon]) -> int:
+	if party.is_empty():
+		return -1
 	_populate(party)
 	show()
 	var idx: int = await chosen

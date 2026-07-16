@@ -14,9 +14,11 @@ func _ready() -> void:
 	_blink_press_start()
 
 func _build_menu() -> void:
-	var options: Array[String] = ["NUEVO JUEGO"]
+	var options: Array[String]
 	if FileAccess.file_exists(GameState.SAVE_PATH):
-		options.append("CONTINUAR")
+		options = ["CONTINUAR", "NUEVO JUEGO"]
+	else:
+		options = ["NUEVO JUEGO"]
 	menu.set_options(options)
 	menu.selected.connect(_on_selected)
 

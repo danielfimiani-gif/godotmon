@@ -25,15 +25,6 @@ func _process(_delta: float) -> void:
 	world_camera.global_position = pos
 	sprite_camera.global_position = pos
 
-func _input(event: InputEvent) -> void:
-	if not (event is InputEventKey and event.pressed and not event.echo):
-		return
-	if event.physical_keycode == KEY_K:
-		GameState.save_game()
-	elif event.physical_keycode == KEY_L:
-		if GameState.load_game():
-			Transition.change_scene("res://features/game/game.tscn")
-
 func load_world(scene: PackedScene, spawn: Vector3) -> void:
 	if current_world:
 		current_world.queue_free()
