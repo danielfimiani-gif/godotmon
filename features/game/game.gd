@@ -5,7 +5,6 @@ const CAM_OFFSET := Vector3(0, 3, 3)
 @onready var world_mount: Node3D = $SubViewportContainer/SubViewport/WorldMount
 @onready var player: Node3D = $Player
 @onready var world_camera: Camera3D = $SubViewportContainer/SubViewport/Camera3D
-@onready var sprite_camera: Camera3D = $SpriteViewport/SubViewport/SpriteCamera
 
 @export var initial_world: PackedScene
 
@@ -27,7 +26,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var pos := player.global_position + CAM_OFFSET
 	world_camera.global_position = pos
-	sprite_camera.global_position = pos
 
 func load_world(scene: PackedScene, spawn: Vector3) -> void:
 	if current_world:

@@ -61,7 +61,7 @@ func _make_alert() -> Label3D:
 	l.outline_size = 20
 	l.outline_modulate = Color.BLACK
 	l.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	l.no_depth_test = true
+	l.alpha_cut = Label3D.ALPHA_CUT_DISCARD
 	l.layers = 2
 	l.position = Vector3(0, 1.15, 0)
 	l.visible = false
@@ -73,13 +73,13 @@ func _process(_delta: float) -> void:
 		return
 	if _triggered or Dialogue.is_active() or Transition.is_active():
 		return
-	if not trainer or GameState.is_trainer_defeated(_battle_id()):
+	if not trainer or GameState.is_trainer_defeated(_battle_id()) or GameState.party.is_empty():
 		return
 	if _sees_player():
 		_challenge()
 
 func _battle_id() -> String:
-	return id if id != "" else name
+	return id if id != "" else String(name)
 
 func _sees_player() -> bool:
 	var wm := GameState.world_manager

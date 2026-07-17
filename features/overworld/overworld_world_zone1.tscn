@@ -3549,11 +3549,10 @@ wander = false
 [node name="Trainers" type="Node3D" parent="NPC`s" unique_id=1073276639]
 
 [node name="TrainerNPC" parent="NPC`s/Trainers" unique_id=1756691058 instance=ExtResource("21_ax2fy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, -3)
 trainer = ExtResource("22_ka347")
 char_col = 2
 char_row = 2
-look = 1
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=485776427]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2631645, -0.08433342, 0.5596914)

@@ -48,6 +48,7 @@ void fragment() {
 	} if (albedo3_noise_tex > albedo3_threshold) {
 		ALBEDO = albedo3.rgb;
 	}
+	ROUGHNESS = 0.0;
 }
 
 void light() {

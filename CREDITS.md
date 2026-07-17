@@ -41,9 +41,8 @@ Las secciones de audio tienen `[COMPLETAR]` — llenar al reemplazar por assets 
 | victory_wild.ogg | [COMPLETAR] | | |
 | victory_leader.ogg | [COMPLETAR] | | |
 | evolution.ogg | [COMPLETAR] | | |
-| level_up.ogg | [COMPLETAR / generado con Bfxr] | | |
-| badge.ogg | [COMPLETAR / generado con Bfxr] | | |
-| heal.ogg | [COMPLETAR] | | |
-| ball_shake.mp3 | [COMPLETAR] | | |
+| evolution.ogg | [COMPLETAR — verificar origen] | | |
+| heal.ogg | [COMPLETAR — verificar origen] | | |
+| level_up.ogg | [COMPLETAR — verificar origen] | | |
 | SFX_RetroSinglev2.wav | [COMPLETAR — verificar origen] | | |
 | SFX_RetroSinglev4.wav | [COMPLETAR — verificar origen] | | |

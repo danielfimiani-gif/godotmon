@@ -81,7 +81,7 @@ func teleport(pos: Vector3) -> void:
 	if move_tween and move_tween.is_valid():
 		move_tween.kill()
 	moving = false
-	position = pos
+	position = Vector3(roundf(pos.x), pos.y, roundf(pos.z))
 
 func _try_interact() -> void:
 	ray.target_position = facing * TILE
