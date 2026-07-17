@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelRegistry" format=3]
+
+[ext_resource type="Script" path="res://features/level/level_data.gd" id="1_v7pp4"]
+[ext_resource type="Resource" path="res://data/levels/zone_01.tres" id="2_muxgk"]
+[ext_resource type="Resource" path="res://data/levels/zone_02.tres" id="3_fqhll"]
+[ext_resource type="Script" path="res://data/level_registry.gd" id="4_5eex5"]
+
+[resource]
+script = ExtResource("4_5eex5")
+levels = Array[ExtResource("1_v7pp4")]([ExtResource("2_muxgk"), ExtResource("3_fqhll")])

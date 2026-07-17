@@ -1,6 +1,8 @@
 extends Node
 
 const SAVE_PATH := "user://save.json"
+const MON_REGISTRY := preload("res://data/mon_registry.tres")
+const LEVEL_REGISTRY := preload("res://data/level_registry.tres")
 
 var party: Array[Mon] = []
 var wild_species: MonSpecies
@@ -103,16 +105,11 @@ func _wild_level() -> int:
 
 func levels() -> Array[LevelData]:
 	if _levels.is_empty():
-		_scan_levels()
+		_build_levels()
 	return _levels
 
-func _scan_levels() -> void:
-	var dir := DirAccess.open("res://data/levels")
-	if dir == null:
-		return
-	for f in dir.get_files():
-		if f.ends_with(".tres"):
-			_levels.append(load("res://data/levels/" + f))
+func _build_levels() -> void:
+	_levels.assign(LEVEL_REGISTRY.levels)
 	_levels.sort_custom(func(a: LevelData, b: LevelData) -> bool: return a.order < b.order)
 
 func _current_wild_cap() -> int:
@@ -125,24 +122,10 @@ func _current_wild_cap() -> int:
 	return 100
 
 func _build_wild_pool() -> void:
-	_scan_mons("res://data/mon")
-
-func _scan_mons(path: String) -> void:
-	var dir := DirAccess.open(path)
-	if dir == null:
-		return
-	dir.list_dir_begin()
-	var entry := dir.get_next()
-	while entry != "":
-		var full := path + "/" + entry
-		if dir.current_is_dir():
-			_scan_mons(full)
-		elif entry.ends_with(".tres"):
-			var sp: MonSpecies = load(full)
-			for _i in sp.spawn_weight:
-				wild_pool.append(sp)
-		entry = dir.get_next()
-	dir.list_dir_end()
+	wild_pool.clear()
+	for sp in MON_REGISTRY.species:
+		for _i in sp.spawn_weight:
+			wild_pool.append(sp)
 
 func award_badge(badge: BadgeData) -> void:
 	if badge and not badges.has(badge):

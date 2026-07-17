@@ -10,7 +10,7 @@ func execute() -> void:
 	var names: Array[String] = []
 	for s in starters:
 		names.append(s.display_name)
-	var idx := await Dialogue.choose(names)
+	var idx: int = await Dialogue.choose(names)
 	var chosen := starters[idx]
 	GameState.add_mon(Mon.create(chosen))
 	await Dialogue.say("!Elegiste a %s! Cuidalo bien." % chosen.display_name)
