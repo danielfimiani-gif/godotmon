@@ -164,6 +164,8 @@ func save_game() -> void:
 		"respawn_world": respawn_world,
 		"respawn_pos": [respawn_pos.x, respawn_pos.y, respawn_pos.z],
 		"defeated_trainers": defeated_trainers,
+		"overworld": overworld_scene.resource_path if overworld_scene else "",
+		"overworld_pos": [overworld_pos.x, overworld_pos.y, overworld_pos.z],
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:
@@ -194,6 +196,10 @@ func load_game() -> bool:
 	var rp = data.get("respawn_pos", [0, 0, 0])
 	respawn_pos = Vector3(rp[0], rp[1], rp[2])
 	defeated_trainers.assign(data.get("defeated_trainers", []))
+	var ow = data.get("overworld", "")
+	overworld_scene = load(ow) if ow != "" else null
+	var owp = data.get("overworld_pos", [0, 0, 0])
+	overworld_pos = Vector3(owp[0], owp[1], owp[2])
 	return true
 
 func new_game() -> void:
@@ -205,4 +211,6 @@ func new_game() -> void:
 	return_pos = Vector3.ZERO
 	respawn_world = ""
 	respawn_pos = Vector3.ZERO
+	overworld_scene = null
+	overworld_pos = Vector3.ZERO
 	defeated_trainers.clear()
