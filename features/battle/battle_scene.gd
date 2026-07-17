@@ -116,7 +116,6 @@ func _victory() -> void:
 	await hud.show_message("¡Ganaste!")
 	if GameState.trainer and GameState.trainer.badge:
 		GameState.award_badge(GameState.trainer.badge)
-		AudioManager.play_sfx(load("res://assets/audio/badge.ogg"))
 		await hud.show_message("Obtuviste la %s!" % GameState.trainer.badge.display_name)
 	if GameState.trainer:
 		GameState.mark_trainer_defeated(GameState.trainer_battle_id)
@@ -210,7 +209,6 @@ func _play_capture(item: ItemData, caught: bool) -> void:
 	var shakes := 3 if caught else randi_range(1, 3)
 	for i in shakes:
 		await get_tree().create_timer(0.35).timeout
-		AudioManager.play_sfx(load("res://assets/sounds/ball_shake.mp3"))
 		await ball.wobble(1 if i % 2 == 0 else -1)
 	await get_tree().create_timer(0.35).timeout
 	if caught:

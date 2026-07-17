@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://gx1yhix8lcnq"]
 
 [ext_resource type="Script" uid="uid://dn72jjak72cjc" path="res://features/overworld/zone_music.gd" id="1_yp68p"]
-[ext_resource type="AudioStream" uid="uid://p5wg7yuf3dn" path="res://assets/audio/professor_interior.mp3" id="2_swskg"]
+[ext_resource type="AudioStream" uid="uid://p5wg7yuf3dn" path="res://assets/audio/professor_interior.ogg" id="2_swskg"]
 [ext_resource type="PackedScene" uid="uid://dykjskka64cob" path="res://assets/vendor/kenney_center/floor.glb" id="3_6t6k0"]
 [ext_resource type="PackedScene" uid="uid://bm2pn81vuxmbu" path="res://assets/vendor/kenney_center/wall.glb" id="4_a7so4"]
 [ext_resource type="PackedScene" uid="uid://oh57cu2s6kpt" path="res://assets/vendor/kenney_center/wall-door-rotate.glb" id="5_x2nqs"]
