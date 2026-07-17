@@ -1,23 +1,22 @@
-[gd_resource type="Resource" script_class="MonSpecies" format=3 uid="uid://c50fqi3ec4qws"]
+[gd_resource type="Resource" script_class="MonSpecies" format=3 uid="uid://gf06hcvasowg"]
 
 [ext_resource type="Script" uid="uid://blem6o3mlwxg5" path="res://features/mon/mon_species.gd" id="1_s"]
-[ext_resource type="Texture2D" path="res://assets/vendor/mons/atlas/openmon_r1_c0.tres" id="2_spr"]
+[ext_resource type="Texture2D" path="res://assets/vendor/mons/atlas/openmon_r5_c0.tres" id="2_spr"]
 [ext_resource type="Script" uid="uid://bf28cscow6pn7" path="res://features/mon/move_data.gd" id="3_md"]
 [ext_resource type="Resource" path="res://data/moves/placaje.tres" id="4_m0"]
-[ext_resource type="Resource" path="res://data/moves/tijera_x.tres" id="5_m1"]
-[ext_resource type="Resource" path="res://data/moves/ida_y_vuelta.tres" id="6_m2"]
-[ext_resource type="Resource" uid="uid://dy2dxwxbbi7th" path="res://data/mon/slikmantis.tres" id="7_evo"]
+[ext_resource type="Resource" uid="uid://d3bjuvvn53g31" path="res://data/moves/lanzallamas.tres" id="5_m1"]
+[ext_resource type="Resource" uid="uid://dvjpxtwdd2aly" path="res://data/moves/envite_igneo.tres" id="6_m2"]
+[ext_resource type="Resource" uid="uid://qhl3v1l7ofru" path="res://data/mon/main/cindwing.tres" id="7_evo"]
 
 [resource]
 script = ExtResource("1_s")
-display_name = "Grubling"
+display_name = "Emberkit"
 sprite = ExtResource("2_spr")
-element = 6
+element = 1
 moves = Array[ExtResource("3_md")]([ExtResource("4_m0"), ExtResource("5_m1"), ExtResource("6_m2")])
 base_hp = 24
 base_attack = 12
 base_defense = 11
 evolves_to = ExtResource("7_evo")
 evolves_at_level = 16
-spawn_weight = 10
 metadata/_custom_type_script = "uid://blem6o3mlwxg5"

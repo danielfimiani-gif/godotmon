@@ -53,8 +53,10 @@ func _try_evolve() -> void:
 		print("%s evolucionó a %s!" % [old_name, species.display_name])
 
 func to_dict() -> Dictionary:
+	var uid := ResourceLoader.get_resource_uid(species.resource_path)
+	var ref := ResourceUID.id_to_text(uid) if uid != ResourceUID.INVALID_ID else species.resource_path
 	return {
-		"species": species.resource_path,
+		"species": ref,
 		"level": level,
 		"xp": xp,
 		"current_hp": current_hp,

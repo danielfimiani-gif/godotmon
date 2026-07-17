@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TrainerData" format=3 uid="uid://j43tk8524pix"]
+
+[ext_resource type="Script" uid="uid://dqkbdi8r2bxu7" path="res://features/trainer/trainer_data.gd" id="1_ddvp8"]
+[ext_resource type="Script" uid="uid://blem6o3mlwxg5" path="res://features/mon/mon_species.gd" id="2_f2pbr"]
+[ext_resource type="Resource" path="res://data/mon/normal/yipbark.tres" id="3_kyqbe"]
+[ext_resource type="Resource" uid="uid://bf6qkj0n7jb3f" path="res://data/mon/normal/chrysalux.tres" id="4_d3gva"]
+
+[resource]
+script = ExtResource("1_ddvp8")
+display_name = "Henry"
+team = Array[ExtResource("2_f2pbr")]([ExtResource("3_kyqbe"), ExtResource("4_d3gva")])
+metadata/_custom_type_script = "uid://dqkbdi8r2bxu7"

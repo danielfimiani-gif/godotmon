@@ -43,7 +43,7 @@ func _on_command_selected(idx: int) -> void:
 			await _open_party()
 		3:
 			if GameState.trainer:
-				await hud.show_message("¡No podés escapar de un combate de Líder!")
+				await hud.show_message("¡No podés escapar de un combate de entrenador!")
 				hud.show_commands()
 			else:
 				hud.hide_menus()
@@ -107,6 +107,8 @@ func _victory() -> void:
 		GameState.award_badge(GameState.trainer.badge)
 		AudioManager.play_sfx(load("res://assets/audio/badge.ogg"))
 		await hud.show_message("Obtuviste la %s!" % GameState.trainer.badge.display_name)
+	if GameState.trainer:
+		GameState.mark_trainer_defeated(GameState.trainer.resource_path)
 	_end_battle()
 
 func _do_turn(attacker: Mon, move: MoveData, defender: Mon) -> void:

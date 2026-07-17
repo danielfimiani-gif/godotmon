@@ -1,15 +1,26 @@
+@tool
 extends Sprite3D
 class_name CharacterSprite
 
 const CELL := Vector2(18, 26)
 
-@export var char_col: int = 0
-@export var char_row: int = 1
+@export var char_col: int = 0: set = set_char_col
+@export var char_row: int = 1: set = set_char_row
 
 var _dir: int = 0
 var _step_parity: int = 0
 
 func _ready() -> void:
+	region_enabled = true
+	_apply(1)
+
+func set_char_col(v: int) -> void:
+	char_col = v
+	region_enabled = true
+	_apply(1)
+
+func set_char_row(v: int) -> void:
+	char_row = v
 	region_enabled = true
 	_apply(1)
 

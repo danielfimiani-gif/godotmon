@@ -87,6 +87,6 @@ func _try_interact() -> void:
 	ray.target_position = facing * TILE
 	ray.force_raycast_update()
 	var target := ray.get_collider()
-	if target is Character:
+	if target and target.has_method("interact"):
 		get_viewport().set_input_as_handled()
 		target.interact()

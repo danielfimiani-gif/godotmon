@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" path="res://assets/vendor/mons/atlas/openmon_r5_c1.tres" id="2_spr"]
 [ext_resource type="Script" uid="uid://bf28cscow6pn7" path="res://features/mon/move_data.gd" id="3_md"]
 [ext_resource type="Resource" path="res://data/moves/placaje.tres" id="4_m0"]
-[ext_resource type="Resource" path="res://data/moves/lanzallamas.tres" id="5_m1"]
-[ext_resource type="Resource" path="res://data/moves/envite_igneo.tres" id="6_m2"]
-[ext_resource type="Resource" uid="uid://ork677jnvith" path="res://data/mon/infernbat.tres" id="7_evo"]
+[ext_resource type="Resource" uid="uid://d3bjuvvn53g31" path="res://data/moves/lanzallamas.tres" id="5_m1"]
+[ext_resource type="Resource" uid="uid://dvjpxtwdd2aly" path="res://data/moves/envite_igneo.tres" id="6_m2"]
+[ext_resource type="Resource" uid="uid://ork677jnvith" path="res://data/mon/main/infernbat.tres" id="7_evo"]
 
 [resource]
 script = ExtResource("1_s")

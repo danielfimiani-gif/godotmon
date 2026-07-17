@@ -10,6 +10,7 @@ var return_world_path: String = ""
 var return_pos: Vector3 = Vector3.ZERO
 var respawn_world: String = ""
 var respawn_pos: Vector3 = Vector3.ZERO
+var defeated_trainers: Array[String] = []
 var wild_pool: Array[MonSpecies] = []
 var badges: Array[BadgeData] = []
 var inventory: Dictionary = {}
@@ -85,14 +86,24 @@ func _wild_level() -> int:
 	return maxi(2, party_level() + randi_range(-1, 1))
 
 func _build_wild_pool() -> void:
-	var dir := DirAccess.open("res://data/mon")
+	_scan_mons("res://data/mon")
+
+func _scan_mons(path: String) -> void:
+	var dir := DirAccess.open(path)
 	if dir == null:
 		return
-	for f in dir.get_files():
-		if f.ends_with(".tres"):
-			var sp: MonSpecies = load("res://data/mon/" + f)
+	dir.list_dir_begin()
+	var entry := dir.get_next()
+	while entry != "":
+		var full := path + "/" + entry
+		if dir.current_is_dir():
+			_scan_mons(full)
+		elif entry.ends_with(".tres"):
+			var sp: MonSpecies = load(full)
 			for _i in sp.spawn_weight:
 				wild_pool.append(sp)
+		entry = dir.get_next()
+	dir.list_dir_end()
 
 func award_badge(badge: BadgeData) -> void:
 	if badge and not badges.has(badge):
@@ -103,6 +114,13 @@ func player_has_party() -> bool:
 
 func player_has_badge(badge: BadgeData) -> bool:
 	return badges.has(badge)
+
+func is_trainer_defeated(id: String) -> bool:
+	return defeated_trainers.has(id)
+
+func mark_trainer_defeated(id: String) -> void:
+	if id != "" and not defeated_trainers.has(id):
+		defeated_trainers.append(id)
 
 func save_game() -> void:
 	var mons: Array = []
@@ -127,6 +145,7 @@ func save_game() -> void:
 		"pos": [pos.x, pos.y, pos.z],
 		"respawn_world": respawn_world,
 		"respawn_pos": [respawn_pos.x, respawn_pos.y, respawn_pos.z],
+		"defeated_trainers": defeated_trainers,
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:
@@ -156,6 +175,7 @@ func load_game() -> bool:
 	respawn_world = data.get("respawn_world", "")
 	var rp = data.get("respawn_pos", [0, 0, 0])
 	respawn_pos = Vector3(rp[0], rp[1], rp[2])
+	defeated_trainers.assign(data.get("defeated_trainers", []))
 	return true
 
 func new_game() -> void:
@@ -167,3 +187,4 @@ func new_game() -> void:
 	return_pos = Vector3.ZERO
 	respawn_world = ""
 	respawn_pos = Vector3.ZERO
+	defeated_trainers.clear()

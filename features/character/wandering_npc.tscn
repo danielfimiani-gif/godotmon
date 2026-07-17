@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" uid="uid://dm5v1dcn71na3" path="res://features/character/wandering_npc.gd" id="1_npc"]
+[ext_resource type="Texture2D" uid="uid://c3i37nlvkojsk" path="res://assets/vendor/screen_smith_trainers/Townspeople_Animations.png" id="2_tex"]
+[ext_resource type="Script" uid="uid://d3yjj37l15rnp" path="res://features/character/character_sprite.gd" id="3_spr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_npc"]
+
+[node name="WanderingNPC" type="StaticBody3D"]
+script = ExtResource("1_npc")
+
+[node name="CharacterSprite" type="Sprite3D" parent="."]
+layers = 2
+offset = Vector2(0, 10.05)
+pixel_size = 0.05
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("2_tex")
+script = ExtResource("3_spr")
+char_col = 1
+char_row = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_npc")
+
+[node name="ObstacleRay" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0.5, 0)

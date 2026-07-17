@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cdcc2ff008aav" path="res://features/character/actions/give_starter_action.gd" id="1_20n38"]
 [ext_resource type="Script" uid="uid://blem6o3mlwxg5" path="res://features/mon/mon_species.gd" id="2_3v8pu"]
-[ext_resource type="Resource" uid="uid://gf06hcvasowg" path="res://data/mon/emberkit.tres" id="3_2j73o"]
-[ext_resource type="Resource" uid="uid://bx8gncprs67fx" path="res://data/mon/leafhop.tres" id="4_2m2pu"]
-[ext_resource type="Resource" uid="uid://bve5tefa7a1b1" path="res://data/mon/finsplash.tres" id="5_cbyqb"]
+[ext_resource type="Resource" uid="uid://gf06hcvasowg" path="res://data/mon/main/emberkit.tres" id="3_2j73o"]
+[ext_resource type="Resource" uid="uid://bx8gncprs67fx" path="res://data/mon/main/leafhop.tres" id="4_2m2pu"]
+[ext_resource type="Resource" uid="uid://bve5tefa7a1b1" path="res://data/mon/main/finsplash.tres" id="5_cbyqb"]
 
 [resource]
 script = ExtResource("1_20n38")

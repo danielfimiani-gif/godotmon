@@ -18,10 +18,14 @@
 [ext_resource type="PackedScene" uid="uid://dcgileaj1kc0v" path="res://assets/vendor/kenney_nature_kit/log_large.glb" id="17_log"]
 [ext_resource type="PackedScene" uid="uid://21k3wyqvjhu2" path="res://features/overworld/props/tall_grass.tscn" id="18_8upjf"]
 [ext_resource type="PackedScene" uid="uid://cgcahn4224jm2" path="res://assets/vendor/kenney_nature_kit/sign.glb" id="18_sign"]
+[ext_resource type="PackedScene" path="res://features/character/wandering_npc.tscn" id="19_u7aek"]
 [ext_resource type="Material" uid="uid://ijkf50w0xj3k" path="res://assets/materials/grass_material.tres" id="20_1xqdg"]
 [ext_resource type="Shader" uid="uid://bgd3rwo08vjs4" path="res://assets/shaders/floor.gdshader" id="20_nhvyy"]
+[ext_resource type="Resource" uid="uid://c8w1vx8u77vme" path="res://features/character/npcs/npc_diaogue_1.tres" id="20_vbwwb"]
+[ext_resource type="PackedScene" uid="uid://cctea3rl0o5e" path="res://features/character/trainer_npc.tscn" id="21_ax2fy"]
 [ext_resource type="Script" uid="uid://ckbi4olmhgnv6" path="res://features/overworld/grass/grass_seeder.gd" id="21_nhvyy"]
 [ext_resource type="Texture2D" uid="uid://vqml4pj02ucs" path="res://assets/vendor/dylearn_grass/Albedo2Noise.tres" id="21_prlvy"]
+[ext_resource type="Resource" uid="uid://j43tk8524pix" path="res://data/characters/trainers/trainer_data_01.tres" id="22_ka347"]
 [ext_resource type="Texture2D" uid="uid://c52v6tkx73uro" path="res://assets/vendor/dylearn_grass/Albedo3Noise.tres" id="22_prlvy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_prlvy"]
@@ -1526,6 +1530,454 @@ model = ExtResource("11_prlvy")
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 10, 0, 13)
 model = ExtResource("11_prlvy")
 
+[node name="TreeS_329" parent="Props" unique_id=452810491 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 11, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_330" parent="Props" unique_id=755218039 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 11, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_331" parent="Props" unique_id=927826767 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 11, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_332" parent="Props" unique_id=870167857 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 11, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_333" parent="Props" unique_id=1218083153 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 12, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_334" parent="Props" unique_id=394115450 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 12, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_335" parent="Props" unique_id=369986649 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 12, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_336" parent="Props" unique_id=212876086 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 12, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_337" parent="Props" unique_id=1680602007 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 13, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_338" parent="Props" unique_id=1447054754 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 13, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_339" parent="Props" unique_id=226513230 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 13, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_340" parent="Props" unique_id=1034988443 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 13, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_341" parent="Props" unique_id=207116108 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 14, 0, 9)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_342" parent="Props" unique_id=1069889858 instance=ExtResource("2_tree")]
+transform = Transform3D(1.7999834, 0.0010747344, 0.007601542, -0.0010483107, 1.7999887, -0.006246591, -0.007605232, 0.006242099, 1.799973, 14, 0, 8)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_343" parent="Props" unique_id=365348150 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 14, 0, 7)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_344" parent="Props" unique_id=1323539512 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 14, 0, 6)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_345" parent="Props" unique_id=1740696316 instance=ExtResource("2_tree")]
+transform = Transform3D(1.7999834, 0.0010747344, 0.007601542, -0.0010483107, 1.7999887, -0.006246591, -0.007605232, 0.006242099, 1.799973, 14, 0, 5)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_346" parent="Props" unique_id=2076360453 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 14, 0, 4)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_347" parent="Props" unique_id=1108747318 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 14, 0, 3)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_348" parent="Props" unique_id=1140630187 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 14, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_349" parent="Props" unique_id=836487869 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 14, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_350" parent="Props" unique_id=130657294 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 14, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_351" parent="Props" unique_id=2118775186 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 14, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_352" parent="Props" unique_id=1783021609 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 15, 0, 9)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_353" parent="Props" unique_id=1254986156 instance=ExtResource("2_tree")]
+transform = Transform3D(1.7999834, 0.0010747344, 0.007601542, -0.0010483107, 1.7999887, -0.006246591, -0.007605232, 0.006242099, 1.799973, 15, 0, 8)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_354" parent="Props" unique_id=1249334974 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 15, 0, 7)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_355" parent="Props" unique_id=1779859459 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 15, 0, 6)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_356" parent="Props" unique_id=1118922338 instance=ExtResource("2_tree")]
+transform = Transform3D(1.7999834, 0.0010747344, 0.007601542, -0.0010483107, 1.7999887, -0.006246591, -0.007605232, 0.006242099, 1.799973, 15, 0, 5)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_357" parent="Props" unique_id=1034665959 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 15, 0, 4)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_358" parent="Props" unique_id=1249186296 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 15, 0, 3)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_359" parent="Props" unique_id=469382481 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 15, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_360" parent="Props" unique_id=553512454 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 15, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_361" parent="Props" unique_id=785081300 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 15, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_362" parent="Props" unique_id=1333668155 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 15, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_363" parent="Props" unique_id=1859181360 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 16, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_364" parent="Props" unique_id=1546089817 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 17, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_365" parent="Props" unique_id=507909734 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 18, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_366" parent="Props" unique_id=1186012487 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 19, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_367" parent="Props" unique_id=1195220777 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 20, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_368" parent="Props" unique_id=340755682 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 21, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_369" parent="Props" unique_id=1372623744 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 16, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_370" parent="Props" unique_id=1243636140 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 17, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_371" parent="Props" unique_id=965948602 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 18, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_372" parent="Props" unique_id=1632909589 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 19, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_373" parent="Props" unique_id=1663310407 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 20, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_374" parent="Props" unique_id=1954771110 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 21, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_375" parent="Props" unique_id=333167345 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 22, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_376" parent="Props" unique_id=1083233843 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 23, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_377" parent="Props" unique_id=374096143 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 24, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_378" parent="Props" unique_id=2026001518 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 25, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_379" parent="Props" unique_id=2103577428 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 26, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_380" parent="Props" unique_id=210506475 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 27, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_381" parent="Props" unique_id=1726459454 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 22, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_382" parent="Props" unique_id=906482778 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 23, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_383" parent="Props" unique_id=643852471 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 24, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_384" parent="Props" unique_id=960664459 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 25, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_385" parent="Props" unique_id=599881520 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 26, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_386" parent="Props" unique_id=1430221967 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 27, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_387" parent="Props" unique_id=147863303 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 22, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_388" parent="Props" unique_id=1593743001 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 23, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_389" parent="Props" unique_id=1828632947 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 24, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_390" parent="Props" unique_id=1167647300 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 25, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_391" parent="Props" unique_id=925726204 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 26, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_392" parent="Props" unique_id=1219739259 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 27, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_393" parent="Props" unique_id=1571094776 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 28, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_394" parent="Props" unique_id=884382202 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 29, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_395" parent="Props" unique_id=1136349994 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 30, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_396" parent="Props" unique_id=629122611 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 31, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_397" parent="Props" unique_id=1509440509 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 32, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_398" parent="Props" unique_id=1132777141 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 33, 0, 13)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_399" parent="Props" unique_id=667606182 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 28, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_400" parent="Props" unique_id=1269557472 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 29, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_401" parent="Props" unique_id=1059193496 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 30, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_402" parent="Props" unique_id=731639995 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 31, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_403" parent="Props" unique_id=1543118327 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 32, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_404" parent="Props" unique_id=869002269 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 33, 0, 12)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_405" parent="Props" unique_id=2130378414 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 28, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_406" parent="Props" unique_id=945032966 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 29, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_407" parent="Props" unique_id=548894670 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 30, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_408" parent="Props" unique_id=1257093800 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 31, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_409" parent="Props" unique_id=749075221 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 32, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_410" parent="Props" unique_id=121369174 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 33, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_411" parent="Props" unique_id=134414789 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 22, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_412" parent="Props" unique_id=169855464 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 23, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_413" parent="Props" unique_id=1076250795 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 24, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_414" parent="Props" unique_id=190834331 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 25, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_415" parent="Props" unique_id=725169510 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 26, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_416" parent="Props" unique_id=471647882 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 27, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_417" parent="Props" unique_id=474601172 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 16, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_418" parent="Props" unique_id=1420302763 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 17, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_419" parent="Props" unique_id=1781800281 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 18, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_420" parent="Props" unique_id=117018209 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 19, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_421" parent="Props" unique_id=139592907 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 20, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_422" parent="Props" unique_id=703410173 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 21, 0, 11)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_423" parent="Props" unique_id=2033577335 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 16, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_424" parent="Props" unique_id=182469992 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 17, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_425" parent="Props" unique_id=1249146514 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 18, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_426" parent="Props" unique_id=1805214157 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 19, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_427" parent="Props" unique_id=2049273679 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 20, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_428" parent="Props" unique_id=1300706785 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 21, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_429" parent="Props" unique_id=831526451 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 22, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_430" parent="Props" unique_id=426278380 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 23, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_431" parent="Props" unique_id=1409578407 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 24, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_432" parent="Props" unique_id=1116552203 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 25, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_433" parent="Props" unique_id=1641546630 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 26, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_434" parent="Props" unique_id=619107370 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 27, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_435" parent="Props" unique_id=77194937 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 28, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_436" parent="Props" unique_id=370722260 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 29, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_437" parent="Props" unique_id=365360785 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 30, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_438" parent="Props" unique_id=1758046115 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 31, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_439" parent="Props" unique_id=121057831 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 32, 0, 10)
+model = ExtResource("11_prlvy")
+
+[node name="TreeS_440" parent="Props" unique_id=1267121336 instance=ExtResource("2_tree")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 33, 0, 10)
+model = ExtResource("11_prlvy")
+
 [node name="TreeS_178" parent="Props" unique_id=1899153733 instance=ExtResource("2_tree")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 7, 0, 13)
 model = ExtResource("11_prlvy")
@@ -1825,6 +2277,29 @@ transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 14, 0, -1.5028263)
 
 [node name="TallGrass96" parent="HighGrass" unique_id=837835495 instance=ExtResource("18_8upjf")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 14, 0, -0.50282633)
+
+[node name="NPC`s" type="Node3D" parent="." unique_id=999600692]
+
+[node name="Misc" type="Node3D" parent="NPC`s" unique_id=1572730581]
+
+[node name="WanderingNPC" parent="NPC`s/Misc" unique_id=1996585955 instance=ExtResource("19_u7aek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 6)
+data = ExtResource("20_vbwwb")
+char_row = 0
+
+[node name="WanderingNPC2" parent="NPC`s/Misc" unique_id=1165258727 instance=ExtResource("19_u7aek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2)
+data = ExtResource("20_vbwwb")
+char_col = 3
+
+[node name="Trainers" type="Node3D" parent="NPC`s" unique_id=1073276639]
+
+[node name="TrainerNPC" parent="NPC`s/Trainers" unique_id=1756691058 instance=ExtResource("21_ax2fy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 2)
+trainer = ExtResource("22_ka347")
+char_col = 2
+char_row = 2
+look = 1
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=485776427]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2631645, -0.08433342, 0.5596914)

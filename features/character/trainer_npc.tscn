@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cctea3rl0o5e"]
+
+[ext_resource type="Script" uid="uid://efskywco0uc4" path="res://features/character/trainer_npc.gd" id="1_trn"]
+[ext_resource type="Texture2D" uid="uid://c3i37nlvkojsk" path="res://assets/vendor/screen_smith_trainers/Townspeople_Animations.png" id="2_tex"]
+[ext_resource type="Script" uid="uid://d3yjj37l15rnp" path="res://features/character/character_sprite.gd" id="3_spr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trn"]
+
+[node name="TrainerNPC" type="StaticBody3D" unique_id=529923025]
+script = ExtResource("1_trn")
+debug_sight = true
+
+[node name="CharacterSprite" type="Sprite3D" parent="." unique_id=1636143429]
+layers = 2
+offset = Vector2(0, 10.05)
+pixel_size = 0.05
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("2_tex")
+region_enabled = true
+region_rect = Rect2(18, 104, 18, 26)
+script = ExtResource("3_spr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=95970663]
+shape = SubResource("BoxShape3D_trn")

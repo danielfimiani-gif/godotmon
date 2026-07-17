@@ -1,23 +1,22 @@
-[gd_resource type="Resource" script_class="MonSpecies" format=3 uid="uid://b6derk2wbouxv"]
+[gd_resource type="Resource" script_class="MonSpecies" format=3 uid="uid://bve5tefa7a1b1"]
 
 [ext_resource type="Script" uid="uid://blem6o3mlwxg5" path="res://features/mon/mon_species.gd" id="1_s"]
-[ext_resource type="Texture2D" path="res://assets/vendor/mons/atlas/openmon_r0_c4.tres" id="2_spr"]
+[ext_resource type="Texture2D" path="res://assets/vendor/mons/atlas/openmon_r0_c0.tres" id="2_spr"]
 [ext_resource type="Script" uid="uid://bf28cscow6pn7" path="res://features/mon/move_data.gd" id="3_md"]
 [ext_resource type="Resource" path="res://data/moves/placaje.tres" id="4_m0"]
-[ext_resource type="Resource" path="res://data/moves/rayo_hielo.tres" id="5_m1"]
-[ext_resource type="Resource" path="res://data/moves/chuzo.tres" id="6_m2"]
-[ext_resource type="Resource" uid="uid://p25jyokdcl4m" path="res://data/mon/glacipeng.tres" id="7_evo"]
+[ext_resource type="Resource" uid="uid://b2nqvxuu0cmb" path="res://data/moves/hidrobomba.tres" id="5_m1"]
+[ext_resource type="Resource" uid="uid://cpp86a1ag1y5v" path="res://data/moves/surf.tres" id="6_m2"]
+[ext_resource type="Resource" uid="uid://b0xlniu64o0aa" path="res://data/mon/main/gnawfin.tres" id="7_evo"]
 
 [resource]
 script = ExtResource("1_s")
-display_name = "Chillwaddle"
+display_name = "Finsplash"
 sprite = ExtResource("2_spr")
-element = 16
+element = 2
 moves = Array[ExtResource("3_md")]([ExtResource("4_m0"), ExtResource("5_m1"), ExtResource("6_m2")])
 base_hp = 24
 base_attack = 12
 base_defense = 11
 evolves_to = ExtResource("7_evo")
 evolves_at_level = 16
-spawn_weight = 10
 metadata/_custom_type_script = "uid://blem6o3mlwxg5"

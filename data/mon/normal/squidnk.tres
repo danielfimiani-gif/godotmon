@@ -6,7 +6,7 @@
 [ext_resource type="Resource" path="res://data/moves/placaje.tres" id="4_m0"]
 [ext_resource type="Resource" uid="uid://d4ef1thklkjb7" path="res://data/moves/pajaro_osado.tres" id="4_tjwm2"]
 [ext_resource type="Resource" uid="uid://t4erf6dh4f5d" path="res://data/moves/ataque_rapido.tres" id="5_wxqp0"]
-[ext_resource type="Resource" uid="uid://ckcl1ypdqmr60" path="res://data/mon/owlumbra.tres" id="7_evo"]
+[ext_resource type="Resource" uid="uid://ckcl1ypdqmr60" path="res://data/mon/normal/evolves/owlumbra.tres" id="7_evo"]
 
 [resource]
 script = ExtResource("1_s")

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ctqv6albakp2s"]
 
-[ext_resource type="Script" uid="uid://dynm85hiahdem" path="res://features/ui/party_slot.gd" id="1_g1avk"]
+[ext_resource type="Script" path="res://features/ui/party_slot.gd" id="1_g1avk"]
 
 [node name="PartySlot" type="PanelContainer" unique_id=562616608]
 script = ExtResource("1_g1avk")

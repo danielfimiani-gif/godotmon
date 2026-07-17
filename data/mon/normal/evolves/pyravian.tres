@@ -6,7 +6,7 @@
 [ext_resource type="Resource" path="res://data/moves/placaje.tres" id="4_m0"]
 [ext_resource type="Resource" uid="uid://ccox3nhkiyilv" path="res://data/moves/tajo_aereo.tres" id="4_rk07n"]
 [ext_resource type="Resource" path="res://data/moves/garra_umbria.tres" id="5_pvwpq"]
-[ext_resource type="Resource" uid="uid://bl1qgfyp0n30d" path="res://data/mon/azuregale.tres" id="7_evo"]
+[ext_resource type="Resource" uid="uid://bl1qgfyp0n30d" path="res://data/mon/normal/evolves/azuregale.tres" id="7_evo"]
 
 [resource]
 script = ExtResource("1_s")

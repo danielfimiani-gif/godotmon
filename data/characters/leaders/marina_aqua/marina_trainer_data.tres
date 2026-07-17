@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://cuaaq506mmsxq" path="res://data/badges/marina_aqua_badge.tres" id="1_ab0ma"]
 [ext_resource type="Script" uid="uid://dqkbdi8r2bxu7" path="res://features/trainer/trainer_data.gd" id="1_cbvnn"]
 [ext_resource type="Script" uid="uid://blem6o3mlwxg5" path="res://features/mon/mon_species.gd" id="2_vhhy2"]
-[ext_resource type="Resource" uid="uid://bve5tefa7a1b1" path="res://data/mon/finsplash.tres" id="3_vhhy2"]
+[ext_resource type="Resource" uid="uid://bve5tefa7a1b1" path="res://data/mon/main/finsplash.tres" id="3_vhhy2"]
 
 [resource]
 script = ExtResource("1_cbvnn")
