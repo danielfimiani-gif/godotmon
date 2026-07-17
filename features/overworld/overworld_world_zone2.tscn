@@ -68,12 +68,13 @@ music = ExtResource("2_x2018")
 [node name="Centers" type="Node3D" parent="Buildings" unique_id=1998750332]
 
 [node name="Center" parent="Buildings/Centers" unique_id=736169726 instance=ExtResource("3_0fvv8")]
-transform = Transform3D(-3, 0, -2.6226832e-07, 0, 3, 0, 2.6226832e-07, 0, -3, 4.1586304, 4.7683716e-07, -6.5697823)
+transform = Transform3D(-3, 0, -2.6226832e-07, 0, 3, 0, 2.6226832e-07, 0, -3, 3.6774216, 4.7683716e-07, -6.5697823)
+spawn = Vector3(1, 0, 3)
 
 [node name="Gyms" type="Node3D" parent="Buildings" unique_id=1911889235]
 
 [node name="Gym" parent="Buildings/Gyms" unique_id=816974788 instance=ExtResource("5_sknok")]
-transform = Transform3D(-3, 0, -2.6226832e-07, 0, 3, 0, 2.6226832e-07, 0, -3, -5.0437717, 0, -6.330524)
+transform = Transform3D(-3, 0, -2.6226832e-07, 0, 3, 0, 2.6226832e-07, 0, -3, -4.495597, 0, -6.330524)
 interior = ExtResource("5_75pj0")
 
 [node name="Misc" type="Node3D" parent="Buildings" unique_id=965599588]

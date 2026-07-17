@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BattleAction" format=3 uid="uid://ce60jfevod4yo"]
+
+[ext_resource type="Script" uid="uid://c02imvym7kae0" path="res://features/character/actions/battle_action.gd" id="1_cyy50"]
+[ext_resource type="Resource" uid="uid://n75jw17hpil7" path="res://data/characters/leaders/eliseo_fly/eliseo_fly_trainer_data.tres" id="2_ln1n7"]
+
+[resource]
+script = ExtResource("1_cyy50")
+trainer = ExtResource("2_ln1n7")
+metadata/_custom_type_script = "uid://c02imvym7kae0"

@@ -9,10 +9,12 @@ var enemy: Mon
 var enemy_index := 0
 var prefer_moves := false
 var bag_items: Array[ItemData] = []
+var _participants: Array[Mon] = []
 
 func _ready() -> void:
 	var living := _living_party()
 	player = living[0] if not living.is_empty() else GameState.party[0]
+	_mark_participant(player)
 	if GameState.trainer:
 		enemy = Mon.create(GameState.trainer.team[0], GameState.trainer.team_level)
 	else:
@@ -72,8 +74,9 @@ func _victory() -> void:
 		var jingle := "victory_leader" if GameState.trainer else "victory_wild"
 		AudioManager.play_music(load("res://assets/audio/%s.ogg" % jingle))
 	var total_xp := enemy.level * 15
-	var living := _living_party()
-	var xp_each := maxi(1, int(total_xp / float(living.size())))
+	var recipients := _xp_recipients()
+	var count := maxi(1, recipients.size())
+	var xp_each := maxi(1, int(total_xp / float(count)))
 	var before_level := player.level
 	var before_species := player.species
 	var before_exp := player.xp
@@ -85,13 +88,21 @@ func _victory() -> void:
 	await hud.animate_exp_gain(before_level, before_exp, on_level_up)
 	hud.refresh_names()
 	hud.sync_hp(player, false)
-	for m in living:
+	var bench_before := {}
+	for m in recipients:
 		if m != player:
+			bench_before[m] = m.species
 			m.gain_xp(xp_each)
+	var evolved: Array = []
 	if player.species != before_species:
-		if final_win:
-			AudioManager.play_music(load("res://assets/audio/evolution.ogg"))
-		await hud.show_message("¡%s evolucionó a %s!" % [before_species.display_name, player.species.display_name])
+		evolved.append([before_species.display_name, player.species.display_name])
+	for m in bench_before:
+		if m.species != bench_before[m]:
+			evolved.append([bench_before[m].display_name, m.species.display_name])
+	if not evolved.is_empty() and final_win:
+		AudioManager.play_music(load("res://assets/audio/evolution.ogg"))
+	for e in evolved:
+		await hud.show_message("¡%s evolucionó a %s!" % [e[0], e[1]])
 	if not final_win:
 		enemy_index += 1
 		enemy = Mon.create(GameState.trainer.team[enemy_index], GameState.trainer.team_level)
@@ -251,6 +262,7 @@ func _open_party() -> void:
 
 func _switch_to(idx: int) -> void:
 	player = GameState.party[idx]
+	_mark_participant(player)
 	player_actor.respawn(player.species)
 	hud.set_player(player)
 	hud.refresh_names()
@@ -274,6 +286,17 @@ func _has_usable_mon() -> bool:
 		if not m.is_fainted():
 			return true
 	return false
+
+func _mark_participant(m: Mon) -> void:
+	if m and not _participants.has(m):
+		_participants.append(m)
+
+func _xp_recipients() -> Array[Mon]:
+	var out: Array[Mon] = []
+	for m in _participants:
+		if not m.is_fainted():
+			out.append(m)
+	return out
 
 func _living_party() -> Array[Mon]:
 	var alive: Array[Mon] = []

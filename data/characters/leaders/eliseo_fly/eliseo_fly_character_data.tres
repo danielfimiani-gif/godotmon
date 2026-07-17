@@ -1,15 +1,17 @@
 [gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://bqntdmhqwjusc"]
 
-[ext_resource type="Script" uid="uid://csxt76s25dn7i" path="res://features/character/character_data.gd" id="1_yqr78"]
-[ext_resource type="Texture2D" uid="uid://c3i37nlvkojsk" path="res://assets/vendor/screen_smith_trainers/Townspeople_Animations.png" id="2_8ntwd"]
+[ext_resource type="Resource" uid="uid://ce60jfevod4yo" path="res://data/characters/leaders/eliseo_fly/eliseo_action.tres" id="1_ujtms"]
+[ext_resource type="Script" uid="uid://csxt76s25dn7i" path="res://features/character/character_data.gd" id="2_crc38"]
+[ext_resource type="Texture2D" uid="uid://c3i37nlvkojsk" path="res://assets/vendor/screen_smith_trainers/Townspeople_Animations.png" id="3_m6s85"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4joy0"]
-atlas = ExtResource("2_8ntwd")
+atlas = ExtResource("3_m6s85")
 region = Rect2(127.091324, 5.1204495, 15.879623, 19.62416)
 
 [resource]
-script = ExtResource("1_yqr78")
+script = ExtResource("2_crc38")
 display_name = "Eliseo Líder Vuelo"
 sprite_ow = SubResource("AtlasTexture_4joy0")
 dialogue = "El viento de este gimnasio sopla a favor de quienes se atreven a despegar! Mis Pokémon y yo dominamos las corrientes de aire. ¡Demostrame si tus alas son lo suficientemente fuertes para no caer en picada!"
+action = ExtResource("1_ujtms")
 metadata/_custom_type_script = "uid://csxt76s25dn7i"
