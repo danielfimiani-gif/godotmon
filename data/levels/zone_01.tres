@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://dn0w5svcwc766"]
+
+[ext_resource type="PackedScene" uid="uid://bafa6agnvq4sf" path="res://features/overworld/overworld_world_zone1.tscn" id="1_cpx21"]
+[ext_resource type="Script" uid="uid://cdnpdrwoid8xe" path="res://features/level/level_data.gd" id="1_rqptc"]
+[ext_resource type="Resource" uid="uid://cuaaq506mmsxq" path="res://data/badges/marina_aqua_badge.tres" id="3_mqtfx"]
+
+[resource]
+script = ExtResource("1_rqptc")
+display_name = "Pueblo Brisaverde"
+scene = ExtResource("1_cpx21")
+own_badge = ExtResource("3_mqtfx")
+map_position = Vector2(117, 256)
+metadata/_custom_type_script = "uid://cdnpdrwoid8xe"

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cmqurwn327ax3"]
 
 [ext_resource type="Script" uid="uid://b8xpok4gknghf" path="res://features/game/game.gd" id="1_game"]
-[ext_resource type="PackedScene" uid="uid://bafa6agnvq4sf" path="res://features/overworld/overworld_world.tscn" id="2_03bmb"]
+[ext_resource type="PackedScene" uid="uid://bafa6agnvq4sf" path="res://features/overworld/overworld_world_zone1.tscn" id="2_03bmb"]
 [ext_resource type="PackedScene" uid="uid://jnsdfipm83m5" path="res://features/player/player.tscn" id="2_player"]
 [ext_resource type="Shader" uid="uid://dbykrib4tooku" path="res://assets/shaders/edge_detection.gdshader" id="3_shader"]
 [ext_resource type="PackedScene" uid="uid://b2nt1rpk3d2ea" path="res://features/ui/pause_menu.tscn" id="5_tripy"]

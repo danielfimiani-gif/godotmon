@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="TravelAction" format=3 uid="uid://dcjqv4tm0e0hl"]
+
+[ext_resource type="Script" uid="uid://cjl1f8cf4l2bb" path="res://features/character/actions/travel_action.gd" id="1_t7vey"]
+
+[resource]
+script = ExtResource("1_t7vey")
+metadata/_custom_type_script = "uid://cjl1f8cf4l2bb"

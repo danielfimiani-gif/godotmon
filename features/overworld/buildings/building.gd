@@ -12,4 +12,4 @@ func _ready() -> void:
 
 func _on_door_entered(_area: Area3D) -> void:
 	if interior:
-		GameState.goto(interior, spawn)
+		GameState.enter_interior(interior, spawn)

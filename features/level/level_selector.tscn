@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bwljxqjccqa4o"]
+
+[ext_resource type="Script" uid="uid://dxi3j00knfcq4" path="res://features/level/level_selector.gd" id="1_0j3xq"]
+[ext_resource type="Texture2D" uid="uid://cplvxy80xm0ap" path="res://assets/textures/level_selector_bg.png" id="2_rl45k"]
+
+[node name="LevelSelector" type="CanvasLayer" unique_id=1084209527]
+process_mode = 3
+script = ExtResource("1_0j3xq")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=287780911]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rl45k")
+expand_mode = 1
+
+[node name="NameLevel" type="Label" parent="." unique_id=208463907]
+offset_right = 40.0
+offset_bottom = 17.0

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://b1f3xhvm71daa"]
+
+[ext_resource type="Resource" uid="uid://dcjqv4tm0e0hl" path="res://data/characters/motorman/level_selector_action.tres" id="1_42o2w"]
+[ext_resource type="Script" uid="uid://csxt76s25dn7i" path="res://features/character/character_data.gd" id="2_dn3vi"]
+[ext_resource type="Texture2D" uid="uid://c3i37nlvkojsk" path="res://assets/vendor/screen_smith_trainers/Townspeople_Animations.png" id="3_f41yi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bhgm"]
+atlas = ExtResource("3_f41yi")
+region = Rect2(73.95056, 214.45746, 14.388702, 18.312897)
+
+[resource]
+script = ExtResource("2_dn3vi")
+display_name = "Rober - Conductor del Tren"
+sprite_ow = SubResource("AtlasTexture_3bhgm")
+dialogue = "Estás listo para viajar al mundo?"
+action = ExtResource("1_42o2w")
+metadata/_custom_type_script = "uid://csxt76s25dn7i"

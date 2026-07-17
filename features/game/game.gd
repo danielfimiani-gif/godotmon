@@ -11,6 +11,7 @@ const CAM_OFFSET := Vector3(0, 3, 3)
 
 var current_world: Node3D
 var current_world_path: String = ""
+var current_world_scene: PackedScene
 
 func _ready() -> void:
 	GameState.world_manager = self
@@ -30,5 +31,6 @@ func load_world(scene: PackedScene, spawn: Vector3) -> void:
 		current_world.queue_free()
 	current_world = scene.instantiate()
 	current_world_path = scene.resource_path
+	current_world_scene = scene
 	world_mount.add_child(current_world)
 	player.teleport(spawn)

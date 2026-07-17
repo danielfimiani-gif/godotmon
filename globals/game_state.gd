@@ -10,6 +10,8 @@ var return_world_path: String = ""
 var return_pos: Vector3 = Vector3.ZERO
 var respawn_world: String = ""
 var respawn_pos: Vector3 = Vector3.ZERO
+var overworld_scene: PackedScene
+var overworld_pos: Vector3 = Vector3.ZERO
 var defeated_trainers: Array[String] = []
 var wild_pool: Array[MonSpecies] = []
 var badges: Array[BadgeData] = []
@@ -58,6 +60,16 @@ func start_trainer_battle(t: TrainerData) -> void:
 func goto(world: PackedScene, spawn: Vector3) -> void:
 	if world_manager:
 		Transition.change_world(func() -> void: world_manager.load_world(world, spawn))
+
+func enter_interior(interior: PackedScene, spawn: Vector3) -> void:
+	if world_manager:
+		overworld_scene = world_manager.current_world_scene
+		overworld_pos = world_manager.player.global_position
+	goto(interior, spawn)
+
+func exit_interior() -> void:
+	if overworld_scene:
+		goto(overworld_scene, overworld_pos)
 
 func _save_return() -> void:
 	if world_manager:
@@ -114,6 +126,12 @@ func player_has_party() -> bool:
 
 func player_has_badge(badge: BadgeData) -> bool:
 	return badges.has(badge)
+
+func is_level_unlocked(level: LevelData) -> bool:
+	return level.unlock_badge == null or player_has_badge(level.unlock_badge)
+
+func is_level_completed(level: LevelData) -> bool:
+	return level.own_badge != null and player_has_badge(level.own_badge)
 
 func is_trainer_defeated(id: String) -> bool:
 	return defeated_trainers.has(id)

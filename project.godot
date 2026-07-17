@@ -21,6 +21,7 @@ GameState="*uid://cdse84ao8pj2p"
 AudioManager="*res://globals/audio_manager.gd"
 Transition="*res://globals/transition.gd"
 Dialogue="*uid://4vy8nr7mqnn1"
+LevelSelector="*uid://bwljxqjccqa4o"
 
 [display]
 
