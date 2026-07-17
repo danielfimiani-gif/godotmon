@@ -7,6 +7,7 @@ const TILE := 1.0
 enum Look { DOWN, UP, LEFT, RIGHT }
 
 @export var trainer: TrainerData
+@export var id: String
 @export var dialogue := "¡Te desafío!"
 @export var char_col := 0: set = _set_col
 @export var char_row := 1: set = _set_row
@@ -72,10 +73,13 @@ func _process(_delta: float) -> void:
 		return
 	if _triggered or Dialogue.is_active() or Transition.is_active():
 		return
-	if not trainer or GameState.is_trainer_defeated(trainer.resource_path):
+	if not trainer or GameState.is_trainer_defeated(_battle_id()):
 		return
 	if _sees_player():
 		_challenge()
+
+func _battle_id() -> String:
+	return id if id != "" else name
 
 func _sees_player() -> bool:
 	var wm := GameState.world_manager
@@ -93,7 +97,7 @@ func _challenge() -> void:
 	_triggered = true
 	await _show_alert()
 	await Dialogue.say(dialogue)
-	GameState.start_trainer_battle(trainer)
+	GameState.start_trainer_battle(trainer, _battle_id())
 
 func _show_alert() -> void:
 	_alert.visible = true

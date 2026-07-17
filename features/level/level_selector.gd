@@ -101,11 +101,4 @@ func _make_node(lvl: LevelData) -> Panel:
 	return p
 
 func _load_levels() -> Array[LevelData]:
-	var out: Array[LevelData] = []
-	var dir := DirAccess.open("res://data/levels")
-	if dir:
-		for f in dir.get_files():
-			if f.ends_with(".tres"):
-				out.append(load("res://data/levels/" + f))
-	out.sort_custom(func(a: LevelData, b: LevelData) -> bool: return a.order < b.order)
-	return out
+	return GameState.levels()

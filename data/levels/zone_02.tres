@@ -1,14 +1,18 @@
 [gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://hf83krcp4loj"]
 
+[ext_resource type="Resource" uid="uid://cdfmo186657ya" path="res://data/badges/fly_badge.tres" id="1_k4358"]
 [ext_resource type="Resource" uid="uid://cuaaq506mmsxq" path="res://data/badges/marina_aqua_badge.tres" id="1_tbq0q"]
-[ext_resource type="PackedScene" uid="uid://bafa6agnvq4sf" path="res://features/overworld/overworld_world_zone1.tscn" id="2_k4358"]
+[ext_resource type="PackedScene" uid="uid://bhubrby8cf6km" path="res://features/overworld/overworld_world_zone2.tscn" id="2_k4358"]
 [ext_resource type="Script" uid="uid://cdnpdrwoid8xe" path="res://features/level/level_data.gd" id="3_2kmgh"]
 
 [resource]
 script = ExtResource("3_2kmgh")
 display_name = "Ciudad Arrecife"
 scene = ExtResource("2_k4358")
+spawn = Vector3(33, 0, 0)
 unlock_badge = ExtResource("1_tbq0q")
+own_badge = ExtResource("1_k4358")
 map_position = Vector2(364, 275)
 order = 1
+max_wild_level = 20
 metadata/_custom_type_script = "uid://cdnpdrwoid8xe"

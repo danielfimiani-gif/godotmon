@@ -20,6 +20,9 @@ func _ready() -> void:
 		GameState.return_world_path = ""
 	elif initial_world:
 		load_world(initial_world, Vector3.ZERO)
+	if GameState.autosave_pending:
+		GameState.autosave_pending = false
+		GameState.save_game()
 
 func _process(_delta: float) -> void:
 	var pos := player.global_position + CAM_OFFSET

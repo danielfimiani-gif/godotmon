@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TrainerData" format=3 uid="uid://n75jw17hpil7"]
+
+[ext_resource type="Script" uid="uid://dqkbdi8r2bxu7" path="res://features/trainer/trainer_data.gd" id="1_6aiol"]
+[ext_resource type="Resource" uid="uid://cdfmo186657ya" path="res://data/badges/fly_badge.tres" id="1_qp2l7"]
+[ext_resource type="Script" uid="uid://blem6o3mlwxg5" path="res://features/mon/mon_species.gd" id="2_qp2l7"]
+[ext_resource type="Resource" uid="uid://ckcl1ypdqmr60" path="res://data/mon/normal/evolves/owlumbra.tres" id="5_3mti1"]
+[ext_resource type="Resource" uid="uid://yfldleidwltj" path="res://data/mon/normal/ripplet.tres" id="5_8boa5"]
+
+[resource]
+script = ExtResource("1_6aiol")
+display_name = "Eliseo Líder Vuelo"
+team = Array[ExtResource("2_qp2l7")]([ExtResource("5_8boa5"), ExtResource("5_3mti1")])
+team_level = 20
+min_level = 19
+badge = ExtResource("1_qp2l7")
+metadata/_custom_type_script = "uid://dqkbdi8r2bxu7"

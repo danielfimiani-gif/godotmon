@@ -108,7 +108,12 @@ func _victory() -> void:
 		AudioManager.play_sfx(load("res://assets/audio/badge.ogg"))
 		await hud.show_message("Obtuviste la %s!" % GameState.trainer.badge.display_name)
 	if GameState.trainer:
-		GameState.mark_trainer_defeated(GameState.trainer.resource_path)
+		GameState.mark_trainer_defeated(GameState.trainer_battle_id)
+	if GameState.all_badges_collected():
+		GameState.trainer = null
+		Transition.change_scene("res://features/ui/credits.tscn")
+		return
+	GameState.autosave_pending = true
 	_end_battle()
 
 func _do_turn(attacker: Mon, move: MoveData, defender: Mon) -> void:

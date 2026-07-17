@@ -14,9 +14,12 @@ var overworld_scene: PackedScene
 var overworld_pos: Vector3 = Vector3.ZERO
 var defeated_trainers: Array[String] = []
 var wild_pool: Array[MonSpecies] = []
+var _levels: Array[LevelData] = []
 var badges: Array[BadgeData] = []
 var inventory: Dictionary = {}
 var wild_level: int = 5
+var autosave_pending := false
+var trainer_battle_id := ""
 
 func _ready() -> void:
 	_build_wild_pool()
@@ -49,10 +52,11 @@ func start_wild_encounter() -> void:
 	AudioManager.play_music(load("res://assets/audio/battle_wild.ogg"))
 	Transition.change_scene("res://features/battle/battle.tscn")
 
-func start_trainer_battle(t: TrainerData) -> void:
+func start_trainer_battle(t: TrainerData, battle_id := "") -> void:
 	if party.is_empty():
 		return
 	trainer = t
+	trainer_battle_id = battle_id if battle_id != "" else t.resource_path
 	_save_return()
 	AudioManager.play_music(load("res://assets/audio/battle_leader.ogg"))
 	Transition.change_scene("res://features/battle/battle.tscn")
@@ -95,7 +99,30 @@ func party_level() -> int:
 	return int(round(float(total) / party.size()))
 
 func _wild_level() -> int:
-	return maxi(2, party_level() + randi_range(-1, 1))
+	return clampi(party_level() + randi_range(-1, 1), 2, _current_wild_cap())
+
+func levels() -> Array[LevelData]:
+	if _levels.is_empty():
+		_scan_levels()
+	return _levels
+
+func _scan_levels() -> void:
+	var dir := DirAccess.open("res://data/levels")
+	if dir == null:
+		return
+	for f in dir.get_files():
+		if f.ends_with(".tres"):
+			_levels.append(load("res://data/levels/" + f))
+	_levels.sort_custom(func(a: LevelData, b: LevelData) -> bool: return a.order < b.order)
+
+func _current_wild_cap() -> int:
+	if world_manager == null or world_manager.current_world_scene == null:
+		return 100
+	var path: String = world_manager.current_world_scene.resource_path
+	for lvl in levels():
+		if lvl.scene and lvl.scene.resource_path == path:
+			return lvl.max_wild_level
+	return 100
 
 func _build_wild_pool() -> void:
 	_scan_mons("res://data/mon")
@@ -126,6 +153,18 @@ func player_has_party() -> bool:
 
 func player_has_badge(badge: BadgeData) -> bool:
 	return badges.has(badge)
+
+func all_badges_collected() -> bool:
+	var required: Array[BadgeData] = []
+	for lvl in levels():
+		if lvl.own_badge and not required.has(lvl.own_badge):
+			required.append(lvl.own_badge)
+	if required.is_empty():
+		return false
+	for b in required:
+		if not player_has_badge(b):
+			return false
+	return true
 
 func is_level_unlocked(level: LevelData) -> bool:
 	return level.unlock_badge == null or player_has_badge(level.unlock_badge)

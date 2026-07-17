@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BadgeData" format=3 uid="uid://cdfmo186657ya"]
+
+[ext_resource type="Script" uid="uid://dxg5d4hsuhqj4" path="res://features/trainer/badge_data.gd" id="1_x4bbk"]
+[ext_resource type="Texture2D" uid="uid://la43bt221bda" path="res://assets/textures/badges.png" id="1_xsirv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gblxx"]
+atlas = ExtResource("1_xsirv")
+region = Rect2(1549.0432, 10.3654785, 660.0056, 651.6511)
+
+[resource]
+script = ExtResource("1_x4bbk")
+display_name = "Medall Vuelo"
+icon = SubResource("AtlasTexture_gblxx")
+metadata/_custom_type_script = "uid://dxg5d4hsuhqj4"

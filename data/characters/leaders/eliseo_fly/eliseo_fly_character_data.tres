@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://bqntdmhqwjusc"]
+
+[ext_resource type="Script" uid="uid://csxt76s25dn7i" path="res://features/character/character_data.gd" id="1_yqr78"]
+[ext_resource type="Texture2D" uid="uid://c3i37nlvkojsk" path="res://assets/vendor/screen_smith_trainers/Townspeople_Animations.png" id="2_8ntwd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4joy0"]
+atlas = ExtResource("2_8ntwd")
+region = Rect2(127.091324, 5.1204495, 15.879623, 19.62416)
+
+[resource]
+script = ExtResource("1_yqr78")
+display_name = "Eliseo Líder Vuelo"
+sprite_ow = SubResource("AtlasTexture_4joy0")
+dialogue = "El viento de este gimnasio sopla a favor de quienes se atreven a despegar! Mis Pokémon y yo dominamos las corrientes de aire. ¡Demostrame si tus alas son lo suficientemente fuertes para no caer en picada!"
+metadata/_custom_type_script = "uid://csxt76s25dn7i"

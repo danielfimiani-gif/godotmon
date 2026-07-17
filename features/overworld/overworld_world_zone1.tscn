@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dcgileaj1kc0v" path="res://assets/vendor/kenney_nature_kit/log_large.glb" id="17_log"]
 [ext_resource type="PackedScene" uid="uid://21k3wyqvjhu2" path="res://features/overworld/props/tall_grass.tscn" id="18_8upjf"]
 [ext_resource type="PackedScene" uid="uid://cgcahn4224jm2" path="res://assets/vendor/kenney_nature_kit/sign.glb" id="18_sign"]
-[ext_resource type="PackedScene" path="res://features/character/wandering_npc.tscn" id="19_u7aek"]
+[ext_resource type="PackedScene" uid="uid://crgqvk83nkdss" path="res://features/character/wandering_npc.tscn" id="19_u7aek"]
 [ext_resource type="Material" uid="uid://ijkf50w0xj3k" path="res://assets/materials/grass_material.tres" id="20_1xqdg"]
 [ext_resource type="Shader" uid="uid://bgd3rwo08vjs4" path="res://assets/shaders/floor.gdshader" id="20_nhvyy"]
 [ext_resource type="Resource" uid="uid://c8w1vx8u77vme" path="res://features/character/npcs/npc_diaogue_1.tres" id="20_vbwwb"]
