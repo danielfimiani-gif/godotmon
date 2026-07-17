@@ -3551,6 +3551,7 @@ wander = false
 [node name="TrainerNPC" parent="NPC`s/Trainers" unique_id=1756691058 instance=ExtResource("21_ax2fy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, -3)
 trainer = ExtResource("22_ka347")
+id = "trainer_zone1"
 char_col = 2
 char_row = 2
 
