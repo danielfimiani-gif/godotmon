@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bwljxqjccqa4o"]
 
 [ext_resource type="Script" uid="uid://dxi3j00knfcq4" path="res://features/level/level_selector.gd" id="1_0j3xq"]
-[ext_resource type="Texture2D" uid="uid://cplvxy80xm0ap" path="res://assets/textures/level_selector_bg.png" id="2_rl45k"]
+[ext_resource type="Texture2D" uid="uid://cplvxy80xm0ap" path="res://assets/textures/level_selector_bg.jpg" id="2_rl45k"]
 
 [node name="LevelSelector" type="CanvasLayer" unique_id=1084209527]
 process_mode = 3
